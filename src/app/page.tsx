@@ -37,9 +37,9 @@ export default function Home() {
   return (
     <main className="relative min-h-screen bg-primary">
       {/* 1. Opening Screen (Scroll locked) */}
-      <OpeningScreen 
-        guestName={guestName} 
-        onOpen={() => setIsOpened(true)} 
+      <OpeningScreen
+        guestName={guestName}
+        onOpen={() => setIsOpened(true)}
       />
 
       {/* Main Content (Revealed after opening) */}
@@ -47,11 +47,11 @@ export default function Home() {
         {/* 2. Hero Section */}
         <Hero />
 
-        {/* 3. Bride & Groom Section */}
+        {/* 3. Rifki & Jeni Section */}
         <BrideGroom />
 
         {/* 4. Countdown Section */}
-        <Countdown targetDate="2026-12-20T08:00:00" />
+        <Countdown targetDate="2026-07-11T08:00:00" />
 
         {/* 5. Event Details Section */}
         <EventDetails />
@@ -77,9 +77,9 @@ export default function Home() {
 
       {/* Global Music Player */}
       {isOpened && (
-        <MusicPlayer 
-          isPlaying={true} 
-          url="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" 
+        <MusicPlayer
+          isPlaying={true}
+          url="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
         />
       )}
     </main>

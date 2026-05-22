@@ -13,7 +13,7 @@ This project is a premium, cinematic wedding invitation platform built with Next
 ## 📁 Project Structure
 
 - `src/app`: Routes and Layouts
-- `src/sections`: Main content sections (Hero, Bride & Groom, etc.)
+- `src/sections`: Main content sections (Hero, Rifki & Jeni, etc.)
 - `src/components`: Reusable UI and Animation components
 - `src/lib`: Utilities and Supabase client
 - `supabase/`: SQL schema for database setup

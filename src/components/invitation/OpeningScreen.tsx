@@ -47,7 +47,7 @@ export const OpeningScreen = ({
             </p>
 
             <h1 className="font-serif text-5xl md:text-7xl mb-6 text-dark leading-tight">
-              Bride <span className="text-gold">&</span> Groom
+              Rifki <span className="text-gold">&</span> Jeni
             </h1>
 
             <div className="mt-12 mb-8">

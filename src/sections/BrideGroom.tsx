@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 // import { Instagram } from "lucide-react";
 import Image from "next/image";
 
-const PersonCard = ({ name, parents, role, image, ig }: any) => (
+const PersonCard = ({ name, parents, role, image, ig, relation }: any) => (
   <motion.div
     whileInView={{ opacity: 1, y: 0 }}
     initial={{ opacity: 0, y: 50 }}
@@ -29,7 +29,7 @@ const PersonCard = ({ name, parents, role, image, ig }: any) => (
 
     <div className="space-y-1 mb-6">
       <p className="font-sans text-sm text-dark/60 italic leading-relaxed">
-        The beloved daughter of
+        {relation}
       </p>
       <p className="font-serif text-lg text-dark">
         Mr. {parents.father} & Mrs. {parents.mother}
@@ -70,22 +70,24 @@ export const BrideGroom = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-start max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-12 md:gap-8 items-start max-w-5xl mx-auto">
           <PersonCard
             name="Sarah J. Bride"
             role="The Bride"
+            relation="The beloved daughter of"
             parents={{ father: "John Doe", mother: "Jane Doe" }}
             image="https://images.unsplash.com/photo-1549333341-a1288c387f65?auto=format&fit=crop&q=80"
             ig="sarah_bride"
           />
 
           <div className="flex justify-center md:pt-40">
-            <span className="font-serif text-6xl text-gold/30">&</span>
+            <span className="font-serif text-6xl text-gold/30">&amp;</span>
           </div>
 
           <PersonCard
             name="Michael K. Groom"
             role="The Groom"
+            relation="The beloved son of"
             parents={{ father: "Robert Smith", mother: "Mary Smith" }}
             image="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80"
             ig="michael_groom"

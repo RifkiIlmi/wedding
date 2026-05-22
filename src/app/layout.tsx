@@ -21,10 +21,10 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "The Wedding of Bride & Groom | Official Invitation",
-  description: "Join us in celebrating the love and union of Bride & Groom. A premium cinematic wedding experience.",
+  title: "The Wedding of Rifki & Jeni | Official Invitation",
+  description: "Join us in celebrating the love and union of Rifki & Jeni. A premium cinematic wedding experience.",
   openGraph: {
-    title: "The Wedding of Bride & Groom",
+    title: "The Wedding of Rifki & Jeni",
     description: "You are cordially invited to our wedding celebration.",
     type: "website",
     url: "https://wedding.example.com",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "The Wedding of Bride & Groom",
+    title: "The Wedding of Rifki & Jeni",
     description: "Join us in celebrating our special day.",
     images: ["/og-image.jpg"],
   },

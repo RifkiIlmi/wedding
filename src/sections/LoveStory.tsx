@@ -8,13 +8,13 @@ const StoryItem = ({ year, title, description, index }: any) => (
     whileInView={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.8, delay: 0.2 }}
     viewport={{ once: true }}
-    className={`flex items-center justify-between w-full mb-16 ${
-      index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
+    className={`flex flex-col md:flex-row items-center justify-between w-full mb-12 md:mb-16 ${
+      index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
     }`}
   >
     <div className="hidden md:block w-5/12" />
     
-    <div className="z-20 flex items-center justify-center w-12 h-12 rounded-full bg-gold shadow-lg border-4 border-primary">
+    <div className="z-20 flex items-center justify-center w-12 h-12 rounded-full bg-gold shadow-lg border-4 border-primary mb-4 md:mb-0 shrink-0">
        <span className="text-primary text-xs font-bold">{year}</span>
     </div>
 

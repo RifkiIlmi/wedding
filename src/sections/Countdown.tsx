@@ -5,17 +5,17 @@ import { motion } from 'framer-motion'
 
 const TimeUnit = ({ value, label }: { value: number; label: string }) => (
   <div className="flex flex-col items-center">
-    <div className="w-20 h-20 md:w-24 md:h-24 glass rounded-xl flex items-center justify-center mb-3 border border-gold/20 shadow-xl">
+    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 glass rounded-xl flex items-center justify-center mb-3 border border-gold/20 shadow-xl">
       <motion.span 
         key={value}
         initial={{ y: 10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="font-serif text-3xl md:text-4xl text-gold"
+        className="font-serif text-2xl sm:text-3xl md:text-4xl text-gold"
       >
         {value.toString().padStart(2, '0')}
       </motion.span>
     </div>
-    <span className="font-sans text-[10px] uppercase tracking-[0.3em] text-dark/60">{label}</span>
+    <span className="font-sans text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-dark/60">{label}</span>
   </div>
 )
 
@@ -57,7 +57,7 @@ export const Countdown = ({ targetDate }: { targetDate: string }) => {
            <h2 className="font-serif text-3xl text-dark mb-4 italic tracking-wide">The Countdown</h2>
         </div>
 
-        <div className="flex justify-center gap-4 md:gap-8 max-w-2xl mx-auto">
+        <div className="flex justify-center gap-2 sm:gap-4 md:gap-8 max-w-2xl mx-auto">
           <TimeUnit value={timeLeft.days} label="Days" />
           <TimeUnit value={timeLeft.hours} label="Hours" />
           <TimeUnit value={timeLeft.minutes} label="Minutes" />
