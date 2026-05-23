@@ -3,29 +3,34 @@
 @theme inline {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
-  
-  --color-primary: #F8F5F2;
-  --color-gold: #D4AF37;
-  --color-gold-light: #F1E5AC;
-  --color-gold-dark: #A68926;
-  --color-dark: #1C1C1C;
-  --color-secondary: #EAE3DC;
-  
+
+  --color-primary: #f8f5f2;
+  --color-gold: #d4af37;
+  --color-gold-light: #f1e5ac;
+  --color-gold-dark: #a68926;
+  --color-dark: #1c1c1c;
+  --color-secondary: #eae3dc;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 }
 
 :root {
-  --background: #F8F5F2;
-  --foreground: #1C1C1C;
+  --background: #f8f5f2;
+  --foreground: #1c1c1c;
 }
 
 @layer base {
   body {
     @apply selection:bg-gold/30 selection:text-dark overflow-x-hidden;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-serif;
   }
 }
@@ -40,12 +45,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D4AF37;
+  background: #d4af37;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #A68926;
+  background: #a68926;
 }
 
 /* Smooth Scrolling */
@@ -62,7 +67,395 @@ html {
 }
 
 .text-gradient-gold {
-  background: linear-gradient(to right, #D4AF37, #F1E5AC, #D4AF37);
+  background: linear-gradient(to right, #d4af37, #f1e5ac, #d4af37);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+}
+
+/* ======= CINEMATIC ANIMATIONS ======= */
+
+/* Shimmer sweep effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.shimmer-line {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.15) 25%,
+    rgba(241, 229, 172, 0.3) 50%,
+    rgba(212, 175, 55, 0.15) 75%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+/* Gold glow pulse */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 20px rgba(212, 175, 55, 0.1),
+      0 0 60px rgba(212, 175, 55, 0.05);
+  }
+  50% {
+    box-shadow:
+      0 0 40px rgba(212, 175, 55, 0.25),
+      0 0 80px rgba(212, 175, 55, 0.1);
+  }
+}
+
+.glow-gold {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes glitter {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.animate-glitter {
+  animation: glitter 1.8s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.85) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15) rotate(16deg);
+  }
+}
+
+.animate-sparkle {
+  animation: sparkle 1.8s ease-in-out infinite;
+}
+
+.sparkle-dot {
+  position: absolute;
+  border-radius: 9999px;
+  background: rgba(212, 175, 55, 0.9);
+  box-shadow: 0 0 18px rgba(212, 175, 55, 0.35);
+}
+
+.sparkle-line {
+  position: absolute;
+  width: 40%;
+  height: 1px;
+  background: rgba(212, 175, 55, 0.25);
+  filter: blur(1px);
+  opacity: 0.8;
+}
+
+/* Subtle film grain overlay */
+@keyframes grain {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-2%, -3%);
+  }
+  20% {
+    transform: translate(3%, 1%);
+  }
+  30% {
+    transform: translate(-1%, 2%);
+  }
+  40% {
+    transform: translate(2%, -2%);
+  }
+  50% {
+    transform: translate(-3%, 3%);
+  }
+  60% {
+    transform: translate(1%, -1%);
+  }
+  70% {
+    transform: translate(-2%, 2%);
+  }
+  80% {
+    transform: translate(3%, -3%);
+  }
+  90% {
+    transform: translate(-1%, 1%);
+  }
+}
+
+.film-grain::after {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  animation: grain 8s steps(10) infinite;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.5;
+}
+
+/* Bokeh circles */
+@keyframes bokeh-drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(10px, -15px) scale(1.1);
+  }
+  66% {
+    transform: translate(-8px, 8px) scale(0.95);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+.bokeh-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(212, 175, 55, 0.15) 0%,
+    transparent 70%
+  );
+  animation: bokeh-drift 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Shimmer text animation */
+@keyframes shimmer-text {
+  0% {
+    background-position: -100% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.text-shimmer-gold {
+  background: linear-gradient(
+    90deg,
+    #d4af37 0%,
+    #f1e5ac 25%,
+    #d4af37 50%,
+    #f1e5ac 75%,
+    #d4af37 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-text 5s linear infinite;
+}
+
+/* Ornamental corner */
+.ornament-corner {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  pointer-events: none;
+}
+
+.ornament-corner::before,
+.ornament-corner::after {
+  content: "";
+  position: absolute;
+  background: rgba(212, 175, 55, 0.3);
+}
+
+.ornament-corner--tl {
+  top: 0;
+  left: 0;
+}
+.ornament-corner--tl::before {
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+}
+.ornament-corner--tl::after {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+}
+
+.ornament-corner--tr {
+  top: 0;
+  right: 0;
+}
+.ornament-corner--tr::before {
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 100%;
+}
+.ornament-corner--tr::after {
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 1px;
+}
+
+.ornament-corner--bl {
+  bottom: 0;
+  left: 0;
+}
+.ornament-corner--bl::before {
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+}
+.ornament-corner--bl::after {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+}
+
+.ornament-corner--br {
+  bottom: 0;
+  right: 0;
+}
+.ornament-corner--br::before {
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  height: 100%;
+}
+.ornament-corner--br::after {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 1px;
+}
+
+/* Gradient border animation */
+@keyframes gradient-border {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-border-gold {
+  background: linear-gradient(
+    90deg,
+    rgba(212, 175, 55, 0.1),
+    rgba(241, 229, 172, 0.3),
+    rgba(212, 175, 55, 0.1),
+    rgba(241, 229, 172, 0.3)
+  );
+  background-size: 300% 100%;
+  animation: gradient-border 4s ease infinite;
+}
+
+/* Holographic shimmer for cards */
+@keyframes holo-shimmer {
+  0% {
+    transform: translateX(-100%) rotate(25deg);
+  }
+  100% {
+    transform: translateX(200%) rotate(25deg);
+  }
+}
+
+.holo-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(212, 175, 55, 0.06) 45%,
+    rgba(241, 229, 172, 0.12) 50%,
+    rgba(212, 175, 55, 0.06) 55%,
+    transparent 60%
+  );
+  animation: holo-shimmer 5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Pulsing heart */
+@keyframes heart-beat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.2);
+  }
+  30% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.15);
+  }
+  60% {
+    transform: scale(1);
+  }
+}
+
+.animate-heartbeat {
+  animation: heart-beat 2s ease-in-out infinite;
+}
+
+/* Background ornamental pattern */
+.pattern-ornament {
+  background-image:
+    radial-gradient(
+      circle at 25% 25%,
+      rgba(212, 175, 55, 0.03) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(212, 175, 55, 0.03) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(212, 175, 55, 0.02) 0%,
+      transparent 60%
+    );
 }

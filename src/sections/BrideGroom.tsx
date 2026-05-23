@@ -1,30 +1,108 @@
 "use client";
 
-import { motion } from "framer-motion";
-// import { Instagram } from "lucide-react";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { FloatingParticles } from "@/components/shared/FloatingParticles";
 
-const PersonCard = ({ name, parents, role, image, ig, relation }: any) => (
+const FloralAccent = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 120 120"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <circle cx="20" cy="20" r="18" fill="rgba(212,175,55,0.14)" />
+    <path
+      d="M20 4C24 10 22 18 16 22C10 26 2 24 0 18C-2 12 4 6 10 4C16 2 20 4 20 4Z"
+      fill="rgba(255,255,255,0.8)"
+    />
+    <path
+      d="M33 22C40 24 48 22 52 16C56 10 54 2 48 0C42 -2 34 4 33 11C32 18 33 22 33 22Z"
+      fill="rgba(212,175,55,0.22)"
+    />
+    <ellipse cx="70" cy="70" rx="18" ry="12" fill="rgba(212,175,55,0.08)" />
+    <path
+      d="M72 52C68 56 66 62 70 66C74 70 80 68 84 64C88 60 90 54 86 50C82 46 76 48 72 52Z"
+      fill="rgba(255,255,255,0.65)"
+    />
+    <path
+      d="M84 80C78 84 72 86 66 82C60 78 58 70 62 64C66 58 74 56 80 58C86 60 88 72 84 80Z"
+      fill="rgba(212,175,55,0.22)"
+    />
+  </svg>
+);
+
+const GlitterSparkle = ({ className }: { className?: string }) => (
+  <div
+    className={`absolute rounded-full bg-gold/80 shadow-[0_0_18px_rgba(212,175,55,0.45)] ${className}`}
+  />
+);
+
+const SparkleGlint = ({ className }: { className?: string }) => (
+  <div
+    className={`absolute rounded-full bg-white/80 shadow-[0_0_18px_rgba(255,255,255,0.35)] ${className}`}
+  />
+);
+
+interface PersonCardProps {
+  name: string;
+  parents: {
+    father: string;
+    mother: string;
+  };
+  role: string;
+  image: string;
+  ig: string;
+  relation: string;
+}
+
+const PersonCard = ({
+  name,
+  parents,
+  role,
+  image,
+  ig,
+  relation,
+}: PersonCardProps) => (
   <motion.div
-    whileInView={{ opacity: 1, y: 0 }}
-    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+    initial={{ opacity: 0, y: 50, scale: 0.98 }}
     transition={{ duration: 0.8 }}
     viewport={{ once: true }}
-    className="flex flex-col items-center text-center group"
+    whileHover={{ y: -6, transition: { duration: 0.25 } }}
+    className="relative flex flex-col items-center text-center group bg-white/90 border border-gold/10 rounded-[40px] shadow-[0_24px_80px_rgba(28,28,28,0.12)] p-8"
   >
-    <div className="relative w-64 h-80 mb-8 overflow-hidden rounded-t-full border-4 border-gold/20 p-2">
-      <div className="relative w-full h-full overflow-hidden rounded-t-full">
-        <img
+    <div className="absolute inset-x-8 -top-6 h-14 bg-linear-to-b from-gold/20 to-transparent rounded-b-full opacity-70 pointer-events-none" />
+    <div className="absolute inset-0 pointer-events-none">
+      <GlitterSparkle className="-left-4 top-10 h-4 w-4 animate-glitter" />
+      <GlitterSparkle className="right-6 top-20 h-3 w-3 animate-glitter delay-150" />
+      <GlitterSparkle className="left-1/2 top-16 h-2 w-2 animate-glitter delay-300" />
+    </div>
+    <div className="relative w-64 h-80 mb-8 overflow-hidden rounded-t-full border-4 border-gold/20 p-2 bg-white/80">
+      {/* Gold glow behind photo */}
+      <div className="absolute inset-0 rounded-t-full bg-gold/10 blur-xl scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+      <div className="relative w-full h-full overflow-hidden rounded-t-full glow-gold">
+        <Image
           src={image}
           alt={name}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          unoptimized
         />
+        {/* Subtle golden overlay on hover */}
+        <div className="absolute inset-0 bg-linear-to-t from-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
     </div>
 
-    <span className="font-sans text-xs uppercase tracking-[0.3em] text-gold mb-3">
+    <motion.span
+      initial={{ opacity: 0, letterSpacing: "0.1em" }}
+      whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
+      transition={{ duration: 1 }}
+      viewport={{ once: true }}
+      className="font-sans text-xs uppercase tracking-[0.3em] text-gold mb-3"
+    >
       {role}
-    </span>
+    </motion.span>
     <h3 className="font-serif text-4xl mb-4 text-dark">{name}</h3>
 
     <div className="space-y-1 mb-6">
@@ -32,7 +110,7 @@ const PersonCard = ({ name, parents, role, image, ig, relation }: any) => (
         {relation}
       </p>
       <p className="font-serif text-lg text-dark">
-        Mr. {parents.father} & Mrs. {parents.mother}
+        Bapak {parents.father} & Ibu {parents.mother}
       </p>
     </div>
 
@@ -52,47 +130,90 @@ const PersonCard = ({ name, parents, role, image, ig, relation }: any) => (
 
 export const BrideGroom = () => {
   return (
-    <section className="py-24 md:py-32 bg-primary overflow-hidden">
-      <div className="container mx-auto px-6">
+    <section className="py-24 md:py-32 bg-primary overflow-hidden relative border-y border-gold/10">
+      <FloralAccent className="absolute top-12 left-10 w-28 h-28 opacity-70 animate-float" />
+      <FloralAccent className="absolute bottom-14 right-8 w-24 h-24 opacity-55 animate-float" />
+      <div className="absolute inset-x-0 top-0 h-24 bg-linear-to-b from-gold/10 to-transparent pointer-events-none" />
+
+      {/* Subtle particles */}
+      <FloatingParticles count={20} speed={0.15} opacity={0.15} maxSize={2} />
+
+      {/* Decorative ornamental divider top */}
+      <div className="absolute top-0 left-0 right-0 flex justify-center">
+        <div className="w-64 h-px bg-linear-to-r from-transparent via-gold/40 to-transparent" />
+      </div>
+
+      {/* Background pattern */}
+      <div className="absolute inset-0 pattern-ornament pointer-events-none" />
+
+      <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-20">
           <motion.h2
             whileInView={{ opacity: 1, scale: 1 }}
             initial={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 1 }}
-            className="font-serif text-5xl md:text-6xl text-dark mb-6"
+            className="font-serif text-5xl md:text-6xl text-dark mb-6 tracking-[0.04em]"
           >
-            The Happy Couple
+            Pasangan Pengantin
           </motion.h2>
-          <div className="w-24 h-px bg-gold mx-auto mb-8" />
-          <p className="max-w-2xl mx-auto font-sans text-dark/60 leading-relaxed tracking-wide">
-            Assalamu’alaikum Warahmatullahi Wabarakatuh. With the grace of Allah
-            SWT, we are pleased to invite you to the wedding of:
+          <div className="flex items-center justify-center gap-3 mx-auto mb-8">
+            <div className="h-px w-16 bg-gold/30" />
+            <div className="w-10 h-10 rounded-full border border-gold/20 bg-gold/10 flex items-center justify-center text-gold shadow-[0_0_20px_rgba(212,175,55,0.1)]">
+              <span className="text-lg">✿</span>
+            </div>
+            <div className="h-px w-16 bg-gold/30" />
+          </div>
+          <p className="max-w-2xl mx-auto font-sans text-dark/70 leading-relaxed tracking-wide">
+            Assalamu&lsquo;alaikum Warahmatullahi Wabarakatuh. Dengan rahmat
+            Allah SWT, kami mengundang Anda untuk menghadiri pernikahan dari:
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-12 md:gap-8 items-start max-w-5xl mx-auto">
           <PersonCard
             name="Sarah J. Bride"
-            role="The Bride"
-            relation="The beloved daughter of"
+            role="Mempelai Wanita"
+            relation="Putri tercinta dari"
             parents={{ father: "John Doe", mother: "Jane Doe" }}
             image="https://images.unsplash.com/photo-1549333341-a1288c387f65?auto=format&fit=crop&q=80"
             ig="sarah_bride"
           />
 
-          <div className="flex justify-center md:pt-40">
-            <span className="font-serif text-6xl text-gold/30">&amp;</span>
+          <div className="relative flex justify-center md:pt-40">
+            <div className="absolute inset-x-0 top-12 h-20 rounded-full bg-gold/10 blur-2xl opacity-50" />
+            <SparkleGlint className="-left-7 top-5 h-2 w-2 animate-glitter" />
+            <SparkleGlint className="right-12 top-8 h-2 w-2 animate-glitter delay-150" />
+            <SparkleGlint className="left-10 top-24 h-1.5 w-1.5 animate-glitter delay-300" />
+            <SparkleGlint className="right-16 top-24 h-1.5 w-1.5 animate-glitter delay-450" />
+            <motion.span
+              animate={{
+                textShadow: [
+                  "0 0 20px rgba(212,175,55,0)",
+                  "0 0 40px rgba(212,175,55,0.3)",
+                  "0 0 20px rgba(212,175,55,0)",
+                ],
+              }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="relative font-serif text-6xl text-shimmer-gold"
+            >
+              &amp;
+            </motion.span>
           </div>
 
           <PersonCard
             name="Michael K. Groom"
-            role="The Groom"
-            relation="The beloved son of"
+            role="Mempelai Pria"
+            relation="Putra tercinta dari"
             parents={{ father: "Robert Smith", mother: "Mary Smith" }}
             image="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80"
             ig="michael_groom"
           />
         </div>
+      </div>
+
+      {/* Decorative ornamental divider bottom */}
+      <div className="absolute bottom-0 left-0 right-0 flex justify-center">
+        <div className="w-64 h-px bg-linear-to-r from-transparent via-gold/30 to-transparent" />
       </div>
     </section>
   );

@@ -16,7 +16,7 @@ import { Footer } from '@/sections/Footer'
 
 export default function Home() {
   const [isOpened, setIsOpened] = useState(false)
-  const [guestName, setGuestName] = useState("Our Guest")
+  const [guestName, setGuestName] = useState("Tamu Undangan")
 
   useEffect(() => {
     // Lock scroll when not opened
