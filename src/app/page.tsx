@@ -1,49 +1,47 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { OpeningScreen } from '@/components/invitation/OpeningScreen'
-import { MusicPlayer } from '@/components/shared/MusicPlayer'
-import { Hero } from '@/sections/Hero'
-import { BrideGroom } from '@/sections/BrideGroom'
-import { Countdown } from '@/sections/Countdown'
-import { EventDetails } from '@/sections/EventDetails'
-import { LoveStory } from '@/sections/LoveStory'
-import { Gallery } from '@/sections/Gallery'
-import { RSVP } from '@/sections/RSVP'
-import { DigitalGift } from '@/sections/DigitalGift'
-import { Wishes } from '@/sections/Wishes'
-import { Footer } from '@/sections/Footer'
+import { useState, useEffect } from "react";
+import { OpeningScreen } from "@/components/invitation/OpeningScreen";
+import { MusicPlayer } from "@/components/shared/MusicPlayer";
+import { Hero } from "@/sections/Hero";
+import { BrideGroom } from "@/sections/BrideGroom";
+import { Countdown } from "@/sections/Countdown";
+import { EventDetails } from "@/sections/EventDetails";
+import { LoveStory } from "@/sections/LoveStory";
+import { Gallery } from "@/sections/Gallery";
+import { RSVP } from "@/sections/RSVP";
+import { DigitalGift } from "@/sections/DigitalGift";
+import { Wishes } from "@/sections/Wishes";
+import { Footer } from "@/sections/Footer";
 
 export default function Home() {
-  const [isOpened, setIsOpened] = useState(false)
-  const [guestName, setGuestName] = useState("Tamu Undangan")
+  const [isOpened, setIsOpened] = useState(false);
+  const [guestName, setGuestName] = useState("Tamu Undangan");
 
   useEffect(() => {
     // Lock scroll when not opened
     if (!isOpened) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = "unset";
     }
 
     // Get guest name from URL params if available
-    const params = new URLSearchParams(window.location.search)
-    const to = params.get('to')
+    const params = new URLSearchParams(window.location.search);
+    const to = params.get("to");
     if (to) {
-      setGuestName(decodeURIComponent(to))
+      const decodedName = decodeURIComponent(to);
+      requestAnimationFrame(() => setGuestName(decodedName));
     }
-  }, [isOpened])
+  }, [isOpened]);
 
   return (
     <main className="relative min-h-screen bg-primary">
       {/* 1. Opening Screen (Scroll locked) */}
-      <OpeningScreen
-        guestName={guestName}
-        onOpen={() => setIsOpened(true)}
-      />
+      <OpeningScreen guestName={guestName} onOpen={() => setIsOpened(true)} />
 
       {/* Main Content (Revealed after opening) */}
-      <div className={`${!isOpened ? 'h-screen overflow-hidden' : ''}`}>
+      <div className={`${!isOpened ? "h-screen overflow-hidden" : ""}`}>
         {/* 2. Hero Section */}
         <Hero />
 
@@ -79,9 +77,9 @@ export default function Home() {
       {isOpened && (
         <MusicPlayer
           isPlaying={true}
-          url="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+          url="https://open.spotify.com/embed/track/3AAAGS7iM1ekDywqdYMJG2?utm_source=generator"
         />
       )}
     </main>
-  )
+  );
 }
