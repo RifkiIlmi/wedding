@@ -137,9 +137,9 @@ export const EventDetails = () => {
 
           <div className="grid md:grid-cols-2 gap-12 lg:gap-20 relative z-10">
             <EventCard
-              title="Pemberkatan Pernikahan"
-              date="Minggu, 20 Desember 2026"
-              time="08:00 AM - 10:00 AM"
+              title="Akad Pernikahan"
+              date="Jum'at, 10 Juli 2026"
+              time="19:00 PM - 21:00 PM"
               venue="St. Patrick Cathedral"
               address="123 Wedding Street, New York, NY 10001"
               mapUrl="https://maps.google.com"

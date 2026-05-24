@@ -4,34 +4,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { FloatingParticles } from "@/components/shared/FloatingParticles";
 
-const FloralAccent = ({ className }: { className?: string }) => (
-  <svg
-    viewBox="0 0 120 120"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-  >
-    <circle cx="20" cy="20" r="18" fill="rgba(212,175,55,0.14)" />
-    <path
-      d="M20 4C24 10 22 18 16 22C10 26 2 24 0 18C-2 12 4 6 10 4C16 2 20 4 20 4Z"
-      fill="rgba(255,255,255,0.8)"
-    />
-    <path
-      d="M33 22C40 24 48 22 52 16C56 10 54 2 48 0C42 -2 34 4 33 11C32 18 33 22 33 22Z"
-      fill="rgba(212,175,55,0.22)"
-    />
-    <ellipse cx="70" cy="70" rx="18" ry="12" fill="rgba(212,175,55,0.08)" />
-    <path
-      d="M72 52C68 56 66 62 70 66C74 70 80 68 84 64C88 60 90 54 86 50C82 46 76 48 72 52Z"
-      fill="rgba(255,255,255,0.65)"
-    />
-    <path
-      d="M84 80C78 84 72 86 66 82C60 78 58 70 62 64C66 58 74 56 80 58C86 60 88 72 84 80Z"
-      fill="rgba(212,175,55,0.22)"
-    />
-  </svg>
-);
-
 const GlitterSparkle = ({ className }: { className?: string }) => (
   <div
     className={`absolute rounded-full bg-gold/80 shadow-[0_0_18px_rgba(212,175,55,0.45)] ${className}`}
@@ -74,6 +46,17 @@ const PersonCard = ({
     whileHover={{ y: -6, transition: { duration: 0.25 } }}
     className="relative flex flex-col items-center text-center group bg-white/90 border border-gold/10 rounded-[40px] shadow-[0_24px_80px_rgba(28,28,28,0.12)] p-8"
   >
+    {/* Decorative Gold Flowers */}
+    <img
+      src="/assets/graphics/Gold-Flower.svg"
+      alt="gold flower decor"
+      className="absolute -top-10 -right-10 w-28 h-28 pointer-events-none opacity-90 animate-float z-20 drop-shadow-md"
+    />
+    <img
+      src="/assets/graphics/Gold-Flower.svg"
+      alt="gold flower decor"
+      className="absolute -bottom-8 -left-8 w-24 h-24 pointer-events-none opacity-90 animate-float delay-300 z-20 rotate-180 drop-shadow-md"
+    />
     <div className="absolute inset-x-8 -top-6 h-14 bg-linear-to-b from-gold/20 to-transparent rounded-b-full opacity-70 pointer-events-none" />
     <div className="absolute inset-0 pointer-events-none">
       <GlitterSparkle className="-left-4 top-10 h-4 w-4 animate-glitter" />
@@ -105,9 +88,7 @@ const PersonCard = ({
     >
       {role}
     </motion.span>
-    <h3 className={`font-serif mb-4 text-dark ${nameClassName}`}>
-      {name}
-    </h3>
+    <h3 className={`font-serif mb-4 text-dark ${nameClassName}`}>{name}</h3>
 
     <div className="space-y-1 mb-6">
       <p className="font-sans text-sm text-dark/60 italic leading-relaxed">
@@ -135,22 +116,34 @@ const PersonCard = ({
 export const BrideGroom = () => {
   return (
     <section className="py-24 md:py-32 bg-primary overflow-hidden relative border-y border-gold/10">
-      <FloralAccent className="absolute top-12 left-10 w-28 h-28 opacity-70 animate-float" />
-      <FloralAccent className="absolute bottom-14 right-8 w-24 h-24 opacity-55 animate-float" />
+      <Image
+        src="/assets/graphics/Floral-Corner-Decor.svg"
+        alt="corner decor top left"
+        width={300}
+        height={300}
+        className="absolute top-0 left-0 w-32 h-32 md:w-48 md:h-48 opacity-80 animate-float pointer-events-none"
+      />
+      <Image
+        src="/assets/graphics/Floral-Corner-Decor.svg"
+        alt="corner decor bottom right"
+        width={300}
+        height={300}
+        className="absolute bottom-0 right-0 w-32 h-32 md:w-48 md:h-48 opacity-80 animate-float pointer-events-none rotate-180"
+      />
       <div className="absolute inset-x-0 top-0 h-24 bg-linear-to-b from-gold/10 to-transparent pointer-events-none" />
 
       {/* Subtle particles */}
       <FloatingParticles count={20} speed={0.15} opacity={0.15} maxSize={2} />
 
       {/* Decorative ornamental divider top */}
-      <div className="absolute top-0 left-0 right-0 flex justify-center">
-        <div className="w-64 h-px bg-linear-to-r from-transparent via-gold/40 to-transparent" />
+      <div className="absolute top-[-45px] left-0 right-0 flex justify-center pointer-events-none z-10 h-24 items-center overflow-hidden">
+        <img src="/assets/graphics/Wedding-Invitation-separator.svg" alt="separator top" className="w-[400px] max-w-none opacity-80 rotate-90" />
       </div>
 
       {/* Background pattern */}
       <div className="absolute inset-0 pattern-ornament pointer-events-none" />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mb-10 mx-auto px-6 relative z-10">
         <div className="text-center mb-20">
           <motion.h2
             whileInView={{ opacity: 1, scale: 1 }}
@@ -160,12 +153,12 @@ export const BrideGroom = () => {
           >
             Pasangan Pengantin
           </motion.h2>
-          <div className="flex items-center justify-center gap-3 mx-auto mb-8">
-            <div className="h-px w-16 bg-gold/30" />
-            <div className="w-10 h-10 rounded-full border border-gold/20 bg-gold/10 flex items-center justify-center text-gold shadow-[0_0_20px_rgba(212,175,55,0.1)]">
-              <span className="text-lg">✿</span>
-            </div>
-            <div className="h-px w-16 bg-gold/30" />
+          <div className="flex justify-center mb-6 pointer-events-none h-30 items-center overflow-hidden">
+            <img
+              src="/assets/graphics/Decorative-Mandala.svg"
+              alt="floral accent"
+              className="w-[600px] max-w-none opacity-80 animate-[spin_20s_linear_infinite]"
+            />
           </div>
           <p className="max-w-2xl mx-auto font-sans text-dark/70 leading-relaxed tracking-wide">
             Assalamu&lsquo;alaikum Warahmatullahi Wabarakatuh. Dengan rahmat
@@ -217,8 +210,8 @@ export const BrideGroom = () => {
       </div>
 
       {/* Decorative ornamental divider bottom */}
-      <div className="absolute bottom-0 left-0 right-0 flex justify-center">
-        <div className="w-64 h-px bg-linear-to-r from-transparent via-gold/30 to-transparent" />
+      <div className="absolute bottom-[-30px] left-0 right-0 flex justify-center pointer-events-none z-10 h-24 items-center overflow-hidden">
+        <img src="/assets/graphics/Wedding-Invitation-separator.svg" alt="separator bottom" className="w-[400px] max-w-none opacity-80 rotate-90" />
       </div>
     </section>
   );
