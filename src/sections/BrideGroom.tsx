@@ -43,7 +43,11 @@ const PersonCard = ({
     initial={{ opacity: 0, y: 50, scale: 0.98 }}
     transition={{ duration: 0.8 }}
     viewport={{ once: true }}
-    whileHover={{ y: -10, scale: 1.02, transition: { duration: 0.4, ease: "easeOut" } }}
+    whileHover={{
+      y: -10,
+      scale: 1.02,
+      transition: { duration: 0.4, ease: "easeOut" },
+    }}
     className="relative flex flex-col items-center text-center group bg-white/90 border border-gold/10 rounded-[40px] shadow-[0_24px_80px_rgba(28,28,28,0.12)] p-8 holo-card"
   >
     {/* Decorative Gold Flowers */}
@@ -88,7 +92,9 @@ const PersonCard = ({
     >
       {role}
     </motion.span>
-    <h3 className={`relative z-10 font-serif mb-4 text-dark ${nameClassName}`}>{name}</h3>
+    <h3 className={`relative z-10 font-serif mb-4 text-dark ${nameClassName}`}>
+      {name}
+    </h3>
 
     <div className="relative z-10 space-y-1 mb-6">
       <p className="font-sans text-sm text-dark/60 italic leading-relaxed">
@@ -137,7 +143,11 @@ export const BrideGroom = () => {
 
       {/* Decorative ornamental divider top */}
       <div className="absolute top-[-45px] left-0 right-0 flex justify-center pointer-events-none z-10 h-24 items-center overflow-hidden">
-        <img src="/assets/graphics/Wedding-Invitation-separator.svg" alt="separator top" className="w-[400px] max-w-none opacity-80 rotate-90" />
+        <img
+          src="/assets/graphics/Wedding-Invitation-separator.svg"
+          alt="separator top"
+          className="w-[400px] max-w-none opacity-80 rotate-90"
+        />
       </div>
 
       {/* Background pattern */}
@@ -211,7 +221,11 @@ export const BrideGroom = () => {
 
       {/* Decorative ornamental divider bottom */}
       <div className="absolute bottom-[-30px] left-0 right-0 flex justify-center pointer-events-none z-10 h-24 items-center overflow-hidden">
-        <img src="/assets/graphics/Wedding-Invitation-separator.svg" alt="separator bottom" className="w-[400px] max-w-none opacity-80 rotate-90" />
+        <img
+          src="/assets/graphics/Wedding-Invitation-separator.svg"
+          alt="separator bottom"
+          className="w-[400px] max-w-none opacity-80 rotate-90"
+        />
       </div>
     </section>
   );
