@@ -34,6 +34,17 @@ export const OpeningScreen = ({
           {/* Floating Particles */}
           <FloatingParticles count={30} speed={0.2} opacity={0.3} maxSize={2} />
 
+          {/* PERUBAHAN DI SINI: Top-middle logo */}
+          {/* Menggunakan inset-x-0 mx-auto untuk menengahkan secara horizontal */}
+          <div className="absolute top-16 inset-x-0 mx-auto z-20 flex justify-center">
+            <img
+              src="/assets/graphics/RJ-Logo-Fix.svg"
+              alt="Rifki & Jeni logo"
+              // Sedikit penyesuaian ukuran jika diperlukan, tapi ini tetap sama
+              className="w-32 h-32 md:w-32 md:h-32 object-contain"
+            />
+          </div>
+
           {/* Background Decorative Elements */}
           <div className="absolute inset-0 pointer-events-none">
             {/* Ornamental corners */}
@@ -56,22 +67,29 @@ export const OpeningScreen = ({
 
             {/* Bokeh glow circles */}
             <div className="bokeh-circle w-64 h-64 top-10 -left-20 opacity-40" />
-            <div className="bokeh-circle w-48 h-48 bottom-20 -right-10 opacity-30" style={{ animationDelay: '3s' }} />
-            <div className="bokeh-circle w-32 h-32 top-1/3 right-1/4 opacity-20" style={{ animationDelay: '5s' }} />
+            <div
+              className="bokeh-circle w-48 h-48 bottom-20 -right-10 opacity-30"
+              style={{ animationDelay: "3s" }}
+            />
+            <div
+              className="bokeh-circle w-32 h-32 top-1/3 right-1/4 opacity-20"
+              style={{ animationDelay: "5s" }}
+            />
           </div>
 
           {/* Pulsing gold glow behind names */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-gold/5 blur-[100px] glow-gold pointer-events-none" />
 
+          {/* Menambahkan mt-24 ke container teks agar tidak bertabrakan dengan logo yang baru */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1 }}
-            className="text-center z-10 px-6"
+            className="text-center z-10 px-6 mt-24"
           >
             <motion.p
-              initial={{ opacity: 0, letterSpacing: '0.1em' }}
-              animate={{ opacity: 1, letterSpacing: '0.3em' }}
+              initial={{ opacity: 0, letterSpacing: "0.1em" }}
+              animate={{ opacity: 1, letterSpacing: "0.3em" }}
               transition={{ delay: 0.3, duration: 1.5 }}
               className="font-sans uppercase text-xs mb-8 text-gold-dark"
             >

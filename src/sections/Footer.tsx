@@ -38,7 +38,7 @@ export const Footer = () => {
           </h2>
 
           <p className="font-sans text-sm text-primary/60 max-w-xl mx-auto leading-relaxed mb-12 italic">
-            "Dua jiwa namun satu pikiran, dua hati yang berdenyut selaras."
+            &ldquo;Dua jiwa namun satu pikiran, dua hati yang berdenyut selaras.&rdquo;
             <br />
             Kami sangat menantikan kehadiran Anda untuk merayakan hari istimewa
             ini bersama kami.

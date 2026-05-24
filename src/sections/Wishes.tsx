@@ -38,7 +38,7 @@ export const Wishes = () => {
       .channel("wishes-channel")
       .on(
         "postgres_changes",
-        { event: "INSERT", table: "wishes" },
+        { event: "INSERT", schema: "public", table: "wishes" },
         (payload) => {
           setWishes((prev) => [payload.new as Wish, ...prev]);
         },
@@ -102,13 +102,13 @@ export const Wishes = () => {
                 <div className="absolute top-6 right-6 w-2 h-2 rounded-full bg-gold/80 shadow-[0_0_14px_rgba(212,175,55,0.35)] animate-sparkle" />
                 <div className="absolute inset-0 bg-linear-to-b from-transparent via-gold/10 to-transparent opacity-60 pointer-events-none" />
                 <div className="absolute top-4 right-6 opacity-5 font-serif text-6xl">
-                  "
+                  &ldquo;
                 </div>
                 <h4 className="font-serif text-xl text-dark mb-4">
                   {wish.name}
                 </h4>
                 <p className="font-sans text-sm text-dark/60 leading-relaxed italic">
-                  "{wish.message}"
+                  &ldquo;{wish.message}&rdquo;
                 </p>
               </motion.div>
             ))}

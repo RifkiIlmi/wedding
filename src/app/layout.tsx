@@ -13,6 +13,9 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const rjLogo = "/assets/graphics/RJ-Logo-Fix.svg";
+const rjIconVersion = "rj-logo-fill";
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -21,8 +24,47 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://wedding.example.com"),
   title: "The Wedding of Rifki & Jeni | Official Invitation",
-  description: "Join us in celebrating the love and union of Rifki & Jeni. A premium cinematic wedding experience.",
+  description:
+    "Join us in celebrating the love and union of Rifki & Jeni. A premium cinematic wedding experience.",
+  applicationName: "Rifki & Jeni Wedding",
+  icons: {
+    icon: [
+      {
+        url: `/icon-rounded.svg?v=${rjIconVersion}`,
+        type: "image/svg+xml",
+        sizes: "any",
+      },
+      {
+        url: `/favicon.ico?v=${rjIconVersion}`,
+        sizes: "any",
+      },
+      {
+        url: `/icon.png?v=${rjIconVersion}`,
+        type: "image/png",
+        sizes: "512x512",
+      },
+    ],
+    shortcut: [
+      {
+        url: `/icon-rounded.svg?v=${rjIconVersion}`,
+        type: "image/svg+xml",
+        sizes: "any",
+      },
+      {
+        url: `/favicon.ico?v=${rjIconVersion}`,
+        sizes: "any",
+      },
+    ],
+    apple: [
+      {
+        url: `/apple-icon.png?v=${rjIconVersion}`,
+        type: "image/png",
+        sizes: "180x180",
+      },
+    ],
+  },
   openGraph: {
     title: "The Wedding of Rifki & Jeni",
     description: "You are cordially invited to our wedding celebration.",
@@ -30,10 +72,10 @@ export const metadata: Metadata = {
     url: "https://wedding.example.com",
     images: [
       {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Wedding Invitation",
+        url: rjLogo,
+        width: 1440,
+        height: 810,
+        alt: "Rifki & Jeni Wedding Logo",
       },
     ],
   },
@@ -41,7 +83,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "The Wedding of Rifki & Jeni",
     description: "Join us in celebrating our special day.",
-    images: ["/og-image.jpg"],
+    images: [rjLogo],
   },
 };
 

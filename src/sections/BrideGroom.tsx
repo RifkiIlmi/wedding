@@ -46,6 +46,7 @@ const SparkleGlint = ({ className }: { className?: string }) => (
 
 interface PersonCardProps {
   name: string;
+  nameClassName?: string;
   parents: {
     father: string;
     mother: string;
@@ -58,6 +59,7 @@ interface PersonCardProps {
 
 const PersonCard = ({
   name,
+  nameClassName = "text-4xl",
   parents,
   role,
   image,
@@ -103,7 +105,9 @@ const PersonCard = ({
     >
       {role}
     </motion.span>
-    <h3 className="font-serif text-4xl mb-4 text-dark">{name}</h3>
+    <h3 className={`font-serif mb-4 text-dark ${nameClassName}`}>
+      {name}
+    </h3>
 
     <div className="space-y-1 mb-6">
       <p className="font-sans text-sm text-dark/60 italic leading-relaxed">
@@ -171,10 +175,11 @@ export const BrideGroom = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-12 md:gap-8 items-start max-w-5xl mx-auto">
           <PersonCard
-            name="Sarah J. Bride"
+            name="Jeni Adhiva, S.Kom., M.Kom"
+            nameClassName="text-3xl leading-tight"
             role="Mempelai Wanita"
             relation="Putri tercinta dari"
-            parents={{ father: "John Doe", mother: "Jane Doe" }}
+            parents={{ father: "Zamri", mother: "Desliana" }}
             image="https://images.unsplash.com/photo-1549333341-a1288c387f65?auto=format&fit=crop&q=80"
             ig="sarah_bride"
           />
@@ -201,10 +206,10 @@ export const BrideGroom = () => {
           </div>
 
           <PersonCard
-            name="Michael K. Groom"
+            name="M. Rifki Ilmi, S.T."
             role="Mempelai Pria"
             relation="Putra tercinta dari"
-            parents={{ father: "Robert Smith", mother: "Mary Smith" }}
+            parents={{ father: "Raflizar", mother: "Jusnaini, S.Pd.I" }}
             image="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80"
             ig="michael_groom"
           />

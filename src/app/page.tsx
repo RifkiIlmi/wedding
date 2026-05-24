@@ -1,49 +1,46 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { OpeningScreen } from '@/components/invitation/OpeningScreen'
-import { MusicPlayer } from '@/components/shared/MusicPlayer'
-import { Hero } from '@/sections/Hero'
-import { BrideGroom } from '@/sections/BrideGroom'
-import { Countdown } from '@/sections/Countdown'
-import { EventDetails } from '@/sections/EventDetails'
-import { LoveStory } from '@/sections/LoveStory'
-import { Gallery } from '@/sections/Gallery'
-import { RSVP } from '@/sections/RSVP'
-import { DigitalGift } from '@/sections/DigitalGift'
-import { Wishes } from '@/sections/Wishes'
-import { Footer } from '@/sections/Footer'
+import { useState, useEffect } from "react";
+import { OpeningScreen } from "@/components/invitation/OpeningScreen";
+import { MusicPlayer } from "@/components/shared/MusicPlayer";
+import { Hero } from "@/sections/Hero";
+import { BrideGroom } from "@/sections/BrideGroom";
+import { Countdown } from "@/sections/Countdown";
+import { EventDetails } from "@/sections/EventDetails";
+import { LoveStory } from "@/sections/LoveStory";
+import { Gallery } from "@/sections/Gallery";
+import { RSVP } from "@/sections/RSVP";
+import { DigitalGift } from "@/sections/DigitalGift";
+import { Wishes } from "@/sections/Wishes";
+import { Footer } from "@/sections/Footer";
 
 export default function Home() {
-  const [isOpened, setIsOpened] = useState(false)
-  const [guestName, setGuestName] = useState("Tamu Undangan")
+  const [isOpened, setIsOpened] = useState(false);
+  const [guestName, setGuestName] = useState("Tamu Undangan");
 
   useEffect(() => {
     // Lock scroll when not opened
     if (!isOpened) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = "unset";
     }
 
     // Get guest name from URL params if available
-    const params = new URLSearchParams(window.location.search)
-    const to = params.get('to')
+    const params = new URLSearchParams(window.location.search);
+    const to = params.get("to");
     if (to) {
-      setGuestName(decodeURIComponent(to))
+      setGuestName(decodeURIComponent(to));
     }
-  }, [isOpened])
+  }, [isOpened]);
 
   return (
     <main className="relative min-h-screen bg-primary">
       {/* 1. Opening Screen (Scroll locked) */}
-      <OpeningScreen
-        guestName={guestName}
-        onOpen={() => setIsOpened(true)}
-      />
+      <OpeningScreen guestName={guestName} onOpen={() => setIsOpened(true)} />
 
       {/* Main Content (Revealed after opening) */}
-      <div className={`${!isOpened ? 'h-screen overflow-hidden' : ''}`}>
+      <div className={`${!isOpened ? "h-screen overflow-hidden" : ""}`}>
         {/* 2. Hero Section */}
         <Hero />
 
@@ -76,12 +73,10 @@ export default function Home() {
       </div>
 
       {/* Global Music Player */}
-      {isOpened && (
-        <MusicPlayer
-          isPlaying={true}
-          url="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-        />
-      )}
+      <MusicPlayer
+        isPlaying={isOpened}
+        url="https://archive.org/download/payung-teduh-akad-official-music-video-payung-teduh-official/Payung%20Teduh%20-%20Akad%20%28Official%20Music%20Video%29%20-%20Payung%20Teduh%20Official.mp3"
+      />
     </main>
-  )
+  );
 }
