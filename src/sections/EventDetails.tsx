@@ -16,12 +16,12 @@ const EventCard = ({
   isAkad,
 }: any) => (
   <motion.div
-    whileInView={{ opacity: 1, y: 0 }}
-    initial={{ opacity: 0, y: 50 }}
-    transition={{ duration: 0.8 }}
+    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+    initial={{ opacity: 0, y: 50, scale: 0.95 }}
+    transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
     viewport={{ once: true }}
-    whileHover={{ y: -5, transition: { duration: 0.3 } }}
-    className="bg-white p-8 md:p-12 border border-gold/10 shadow-2xl relative overflow-hidden group"
+    whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.4, ease: "easeOut" } }}
+    className="bg-white p-8 md:p-12 border border-gold/10 shadow-2xl relative overflow-hidden group holo-card"
   >
     {/* Animated ornamental corners */}
     <div className="absolute top-4 left-4 w-8 h-8 opacity-0 group-hover:opacity-100 transition-all duration-700">

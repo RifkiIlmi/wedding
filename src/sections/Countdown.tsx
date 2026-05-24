@@ -7,7 +7,10 @@ import { GoldSparkle } from "@/components/shared/GoldSparkle";
 
 const TimeUnit = ({ value, label }: { value: number; label: string }) => (
   <div className="flex flex-col items-center">
-    <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 glass rounded-xl flex items-center justify-center mb-3 border border-gold/20 shadow-xl glow-gold overflow-hidden">
+    <motion.div
+      whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(212,175,55,0.4)" }}
+      className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 glass rounded-xl flex items-center justify-center mb-3 border border-gold/20 shadow-xl glow-gold overflow-hidden"
+    >
       <div className="absolute top-3 right-3 h-2 w-2 rounded-full bg-gold/80 shadow-[0_0_14px_rgba(212,175,55,0.35)] animate-sparkle" />
       {/* Shimmer sweep on the box */}
       <div className="absolute inset-0 shimmer-line pointer-events-none" />
@@ -23,7 +26,7 @@ const TimeUnit = ({ value, label }: { value: number; label: string }) => (
           {value.toString().padStart(2, "0")}
         </motion.span>
       </AnimatePresence>
-    </div>
+    </motion.div>
     <span className="font-sans text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-dark/60">
       {label}
     </span>
