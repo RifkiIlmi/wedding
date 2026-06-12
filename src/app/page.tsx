@@ -13,6 +13,7 @@ import { Gallery } from "@/sections/Gallery";
 import { RSVP } from "@/sections/RSVP";
 import { DigitalGift } from "@/sections/DigitalGift";
 import { Wishes } from "@/sections/Wishes";
+import { FAQ } from "@/sections/FAQ";
 import { Footer } from "@/sections/Footer";
 
 function LazySection({ children }: { children: React.ReactNode }) {
@@ -92,6 +93,11 @@ export default function Home() {
           {/* 10. Wishes Section */}
           <LazySection>
             <Wishes />
+          </LazySection>
+
+          {/* 10.5. FAQ Section */}
+          <LazySection>
+            <FAQ />
           </LazySection>
 
           {/* 11. Footer Section */}

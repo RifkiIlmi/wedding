@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { FloatingParticles } from "@/components/shared/FloatingParticles";
 import { GoldSparkle } from "@/components/shared/GoldSparkle";
@@ -16,39 +17,35 @@ interface Wish {
 export const Wishes = () => {
   const [wishes, setWishes] = useState<Wish[]>([]);
   const [loading, setLoading] = useState(true);
-  const [hasMore, setHasMore] = useState(true);
-  const [page, setPage] = useState(0);
-  const [newWishIds, setNewWishIds] = useState<Set<string>>(new Set());
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const ITEMS_PER_PAGE = 6;
+  const ITEMS_TO_LOAD = 15;
 
-  const fetchWishes = async (pageNum: number) => {
-    const from = pageNum * ITEMS_PER_PAGE;
-    const to = from + ITEMS_PER_PAGE - 1;
-
+  const fetchWishes = async () => {
     const { data, error } = await supabase
       .from("wishes")
       .select("*")
       .order("created_at", { ascending: false })
-      .range(from, to);
+      .limit(ITEMS_TO_LOAD);
 
     if (!error && data) {
-      if (data.length < ITEMS_PER_PAGE) {
-        setHasMore(false);
-      }
-      setWishes((prev) => {
-        const existingIds = new Set(prev.map((w) => w.id));
-        const filteredNew = data.filter((w) => !existingIds.has(w.id));
-        return [...prev, ...filteredNew];
-      });
+      setWishes(data);
     }
     setLoading(false);
   };
 
   useEffect(() => {
-    fetchWishes(0);
+    fetchWishes();
 
-    // Realtime subscription
+    // Detect screen size for 1 vs 2 columns layout
+    const media = window.matchMedia("(min-width: 768px)");
+    setIsDesktop(media.matches);
+    const listener = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    media.addEventListener("change", listener);
+
+    // Realtime subscription to automatically prepend new wishes
     const channel = supabase
       .channel("wishes-channel")
       .on(
@@ -58,18 +55,52 @@ export const Wishes = () => {
           const newWish = payload.new as Wish;
           setWishes((prev) => {
             if (prev.some((w) => w.id === newWish.id)) return prev;
-            // Prepend new wishes (unshift)
-            return [newWish, ...prev];
+            return [newWish, ...prev.slice(0, ITEMS_TO_LOAD - 1)];
           });
-          setNewWishIds((prevNew) => new Set([...prevNew, newWish.id]));
+          setCurrentIndex(0); // Show the new wish immediately
         },
       )
       .subscribe();
 
     return () => {
+      media.removeEventListener("change", listener);
       supabase.removeChannel(channel);
     };
   }, []);
+
+  // Setup autoplay carousel
+  useEffect(() => {
+    if (wishes.length <= 1) return;
+
+    const startAutoPlay = () => {
+      autoPlayRef.current = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % wishes.length);
+      }, 7000); // Rotate every 7 seconds
+    };
+
+    startAutoPlay();
+
+    return () => {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current);
+      }
+    };
+  }, [wishes.length]);
+
+  const handlePrev = () => {
+    if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+    setCurrentIndex((prev) => (prev - 1 + wishes.length) % wishes.length);
+  };
+
+  const handleNext = () => {
+    if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+    setCurrentIndex((prev) => (prev + 1) % wishes.length);
+  };
+
+  const handleDotClick = (index: number) => {
+    if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+    setCurrentIndex(index);
+  };
 
   const getRelativeTime = (dateString: string) => {
     const now = new Date();
@@ -107,7 +138,6 @@ export const Wishes = () => {
         attendance = status;
       }
     } else {
-      // Deterministic fallback for old wishes
       const hash = wish.id.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
       const mod = hash % 3;
       if (mod === 0) attendance = "attending";
@@ -122,21 +152,21 @@ export const Wishes = () => {
     switch (status) {
       case "attending":
         return (
-          <span className="inline-flex items-center gap-1.5 bg-amber-50 text-amber-700 border border-amber-200/60 text-[10px] uppercase font-semibold tracking-wider px-2.5 py-0.5 rounded-full">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+          <span className="inline-flex items-center gap-1.5 bg-amber-50/80 text-amber-700 border border-amber-200/40 text-[9px] uppercase font-semibold tracking-wider px-2 py-0.5 rounded-full">
+            <span className="w-1 h-1 rounded-full bg-amber-500 animate-pulse" />
             Hadir
           </span>
         );
       case "maybe":
         return (
-          <span className="inline-flex items-center gap-1.5 bg-orange-50 text-orange-700 border border-orange-200/60 text-[10px] uppercase font-semibold tracking-wider px-2.5 py-0.5 rounded-full">
+          <span className="inline-flex items-center gap-1.5 bg-orange-50/80 text-orange-700 border border-orange-200/40 text-[9px] uppercase font-semibold tracking-wider px-2 py-0.5 rounded-full">
             <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
             Ragu-ragu
           </span>
         );
       case "not_attending":
         return (
-          <span className="inline-flex items-center gap-1.5 bg-stone-50 text-stone-500 border border-stone-200/60 text-[10px] uppercase font-semibold tracking-wider px-2.5 py-0.5 rounded-full">
+          <span className="inline-flex items-center gap-1.5 bg-stone-50/80 text-stone-500 border border-stone-200/40 text-[9px] uppercase font-semibold tracking-wider px-2 py-0.5 rounded-full">
             <span className="w-1.5 h-1.5 rounded-full bg-stone-400" />
             Absen
           </span>
@@ -144,33 +174,22 @@ export const Wishes = () => {
     }
   };
 
-  if (loading && page === 0) return null;
+  const getVisibleWishes = () => {
+    if (wishes.length === 0) return [];
+    if (wishes.length === 1) return [wishes[0]];
+
+    if (isDesktop) {
+      const nextIndex = (currentIndex + 1) % wishes.length;
+      return [wishes[currentIndex], wishes[nextIndex]];
+    }
+
+    return [wishes[currentIndex]];
+  };
+
+  if (loading) return null;
 
   return (
     <section className="relative py-32 md:py-48 bg-secondary/10 overflow-hidden">
-      <style dangerouslySetInnerHTML={{__html: `
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 5px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(212, 175, 55, 0.2);
-          border-radius: 9px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: rgba(212, 175, 55, 0.4);
-        }
-        @keyframes pulseSubtle {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.98; transform: scale(1.005); }
-        }
-        .animate-pulse-subtle {
-          animation: pulseSubtle 3s infinite ease-in-out;
-        }
-      `}} />
-
       <FloatingParticles
         count={24}
         color="#D4AF3780"
@@ -186,7 +205,7 @@ export const Wishes = () => {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-24 relative">
+        <div className="text-center mb-20 relative">
           <GoldSparkle size={20} className="absolute -top-4 left-12" />
           <GoldSparkle size={14} className="absolute top-6 right-14" />
           <div className="absolute left-1/2 top-10 h-2 w-2 rounded-full bg-gold/80 shadow-[0_0_14px_rgba(212,175,55,0.35)] animate-sparkle" />
@@ -199,73 +218,92 @@ export const Wishes = () => {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           {wishes.length > 0 ? (
             <>
-              <div className="max-h-[520px] overflow-y-auto pr-2 md:pr-4 custom-scrollbar mb-12">
-                <div className="grid gap-8 md:grid-cols-2">
-                  <AnimatePresence initial={false}>
-                    {wishes.map((wish, index) => {
+              {/* Carousel Container */}
+              <div className="relative min-h-[380px] md:min-h-[300px] flex items-center justify-center">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentIndex}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -15 }}
+                    transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
+                    className={`grid gap-8 w-full ${
+                      getVisibleWishes().length === 2
+                        ? "grid-cols-1 md:grid-cols-2"
+                        : "grid-cols-1 max-w-xl mx-auto"
+                    }`}
+                  >
+                    {getVisibleWishes().map((wish) => {
                       const { cleanMessage, attendance } = parseMessage(wish);
-                      const isNew = newWishIds.has(wish.id);
-
                       return (
-                        <motion.div
+                        <div
                           key={wish.id}
-                          initial={isNew ? { opacity: 0, y: -25, scale: 0.95 } : { opacity: 0, scale: 0.95 }}
-                          animate={{ opacity: 1, y: 0, scale: 1 }}
-                          exit={{ opacity: 0, scale: 0.95 }}
-                          whileHover={{ y: -3 }}
-                          whileTap={{ scale: 0.98 }}
-                          transition={{
-                            duration: 0.4,
-                            delay: isNew ? 0 : index * 0.05,
-                            ease: "easeOut",
-                          }}
-                          className={`p-6 md:p-8 rounded-[24px] shadow-xl border relative transition-all duration-500 ${
-                            isNew
-                              ? "bg-amber-50/90 border-gold/70 shadow-[0_0_15px_rgba(212,175,55,0.25)] animate-pulse-subtle"
-                              : "bg-white/95 border-gold/10 hover:border-gold/25"
-                          }`}
+                          className="flex flex-col items-center justify-between text-center bg-white/40 border border-gold/10 backdrop-blur-sm p-8 md:p-12 rounded-[32px] shadow-sm relative overflow-hidden flex-1 min-h-[280px]"
                         >
-                          <div className="absolute top-6 right-6 w-1.5 h-1.5 rounded-full bg-gold/70 shadow-[0_0_10px_rgba(212,175,55,0.3)] animate-sparkle" />
-                          <div className="absolute top-4 right-8 opacity-[0.03] font-serif text-6xl pointer-events-none">
+                          {/* Storybook quote decoration */}
+                          <div className="absolute top-0 left-6 text-gold/5 font-serif text-[10rem] leading-none select-none pointer-events-none">
                             &ldquo;
                           </div>
 
-                          <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-                            <h4 className="font-serif text-lg text-dark font-medium truncate max-w-[180px]">
-                              {wish.name}
-                            </h4>
-                            <div className="flex items-center gap-2">
-                              {getBadge(attendance)}
-                              <span className="text-[10px] text-dark/40 font-sans tracking-wide">
-                                {getRelativeTime(wish.created_at)}
-                              </span>
-                            </div>
+                          <div className="flex-1 flex flex-col justify-center items-center z-10 w-full pt-8">
+                            <p className="font-serif text-lg md:text-xl text-dark/80 leading-relaxed italic break-words w-full max-w-md">
+                              &ldquo;{cleanMessage}&rdquo;
+                            </p>
                           </div>
 
-                          <p className="font-sans text-sm text-dark/60 leading-relaxed italic break-words">
-                            &ldquo;{cleanMessage}&rdquo;
-                          </p>
-                        </motion.div>
+                          <div className="w-12 h-[1px] bg-gold/20 my-6 z-10" />
+
+                          <div className="z-10">
+                            <h4 className="font-serif text-base md:text-lg text-gold-dark font-semibold tracking-wide">
+                              {wish.name}
+                            </h4>
+                            <div className="flex items-center justify-center gap-2 mt-2 text-[10px] text-dark/40 font-sans tracking-widest uppercase">
+                              {getBadge(attendance)}
+                              <span>•</span>
+                              <span>{getRelativeTime(wish.created_at)}</span>
+                            </div>
+                          </div>
+                        </div>
                       );
                     })}
-                  </AnimatePresence>
-                </div>
+                  </motion.div>
+                </AnimatePresence>
               </div>
 
-              {hasMore && (
-                <div className="text-center">
+              {/* Navigation Controls */}
+              {wishes.length > getVisibleWishes().length && (
+                <div className="flex justify-center items-center gap-6 mt-12">
                   <button
-                    onClick={() => {
-                      const nextPage = page + 1;
-                      setPage(nextPage);
-                      fetchWishes(nextPage);
-                    }}
-                    className="px-6 py-2.5 rounded-full border border-gold/30 text-gold hover:bg-gold/5 active:scale-95 transition-all duration-500 font-sans text-xs uppercase tracking-widest font-medium"
+                    onClick={handlePrev}
+                    className="p-2 rounded-full border border-gold/20 text-gold/70 hover:text-gold hover:border-gold/50 hover:bg-gold/5 transition-all duration-300 active:scale-90"
+                    aria-label="Previous wish"
                   >
-                    Tampilkan Lebih Banyak
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+
+                  {/* Bullet Indicators (Limited to maximum 6 indicators to keep it minimalist) */}
+                  <div className="flex gap-1.5">
+                    {wishes.slice(0, Math.min(wishes.length, 6)).map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => handleDotClick(idx)}
+                        className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                          currentIndex === idx ? "bg-gold w-3" : "bg-gold/20 hover:bg-gold/40"
+                        }`}
+                        aria-label={`Go to slide ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={handleNext}
+                    className="p-2 rounded-full border border-gold/20 text-gold/70 hover:text-gold hover:border-gold/50 hover:bg-gold/5 transition-all duration-300 active:scale-90"
+                    aria-label="Next wish"
+                  >
+                    <ChevronRight className="w-4 h-4" />
                   </button>
                 </div>
               )}

@@ -2,82 +2,129 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Music, Pause } from 'lucide-react'
 
 export const MusicPlayer = ({ isPlaying: initialPlay = false, url }: { isPlaying?: boolean; url: string }) => {
   const [isPlaying, setIsPlaying] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
+  const fadeIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  const playWithFadeIn = (audio: HTMLAudioElement) => {
+    if (fadeIntervalRef.current) {
+      clearInterval(fadeIntervalRef.current)
+    }
+
+    audio.volume = 0
+    audio.play()
+      .then(() => {
+        setIsPlaying(true)
+        const targetVolume = 0.8
+        const duration = 2000 // 2 seconds
+        const step = targetVolume / (duration / 50)
+
+        fadeIntervalRef.current = setInterval(() => {
+          if (audio.volume < targetVolume) {
+            audio.volume = Math.min(targetVolume, audio.volume + step)
+          } else {
+            if (fadeIntervalRef.current) {
+              clearInterval(fadeIntervalRef.current)
+              fadeIntervalRef.current = null
+            }
+          }
+        }, 50)
+      })
+      .catch((err) => {
+        console.warn("Audio play blocked/failed", err)
+        setIsPlaying(false)
+      })
+  }
 
   useEffect(() => {
     const audio = audioRef.current
-
-    if (!audio) {
-      return
-    }
+    if (!audio) return
 
     if (initialPlay) {
-      audio.play().catch(() => {
-        // Browser may block autoplay until the invitation open click is registered.
-      })
+      playWithFadeIn(audio)
     } else {
+      if (fadeIntervalRef.current) {
+        clearInterval(fadeIntervalRef.current)
+        fadeIntervalRef.current = null
+      }
       audio.pause()
+      setIsPlaying(false)
     }
   }, [initialPlay])
 
+  useEffect(() => {
+    return () => {
+      if (fadeIntervalRef.current) {
+        clearInterval(fadeIntervalRef.current)
+      }
+    }
+  }, [])
+
   const togglePlay = () => {
     const audio = audioRef.current
-
-    if (!audio) {
-      return
-    }
+    if (!audio) return
 
     if (isPlaying) {
+      if (fadeIntervalRef.current) {
+        clearInterval(fadeIntervalRef.current)
+        fadeIntervalRef.current = null
+      }
       audio.pause()
       setIsPlaying(false)
-      return
+    } else {
+      playWithFadeIn(audio)
     }
-
-    audio.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false))
   }
 
   return (
     <div className="fixed bottom-6 right-6 z-[80]">
       <style dangerouslySetInnerHTML={{__html: `
-        @keyframes spinSlow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
+        @keyframes wave-bar-1 {
+          0%, 100% { height: 4px; }
+          50% { height: 16px; }
         }
-        .animate-spin-slow {
-          animation: spinSlow 8s linear infinite;
+        @keyframes wave-bar-2 {
+          0%, 100% { height: 4px; }
+          50% { height: 12px; }
         }
+        @keyframes wave-bar-3 {
+          0%, 100% { height: 4px; }
+          50% { height: 18px; }
+        }
+        @keyframes wave-bar-4 {
+          0%, 100% { height: 4px; }
+          50% { height: 10px; }
+        }
+        .animate-wave-1 { animation: wave-bar-1 1s ease-in-out infinite; }
+        .animate-wave-2 { animation: wave-bar-2 0.8s ease-in-out infinite; }
+        .animate-wave-3 { animation: wave-bar-3 1.2s ease-in-out infinite; }
+        .animate-wave-4 { animation: wave-bar-4 0.9s ease-in-out infinite; }
       `}} />
 
       <audio
         ref={audioRef}
         src={url}
         loop
-        preload="none"
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
-        onEnded={() => setIsPlaying(false)}
+        preload="auto"
         className="hidden"
       />
 
       <motion.button
         type="button"
-        aria-label={isPlaying ? 'Pause music' : 'Play music'}
-        whileHover={{ scale: 1.08 }}
+        aria-label={isPlaying ? 'Mute music' : 'Play music'}
+        whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={togglePlay}
-        className={`relative flex h-12 w-12 items-center justify-center rounded-full shadow-2xl transition-all duration-300 ${
-          isPlaying ? 'bg-gold text-primary animate-spin-slow' : 'border border-gold/30 bg-white text-gold'
-        }`}
+        className="relative flex h-10 w-10 items-center justify-center rounded-full border border-gold/30 bg-primary/20 hover:bg-gold/10 text-gold backdrop-blur-md shadow-lg transition-all duration-300"
       >
-        {isPlaying ? <Pause className="h-5 w-5" /> : <Music className="h-5 w-5" />}
-
-        {isPlaying && (
-          <span className="absolute inset-0 -z-10 rounded-full bg-gold/40 animate-ping" />
-        )}
+        <div className="flex items-end justify-center gap-[3px] h-4 w-5">
+          <span className={`w-[2px] bg-gold rounded-full transition-all duration-300 ${isPlaying ? 'animate-wave-1' : 'h-[4px]'}`} />
+          <span className={`w-[2px] bg-gold rounded-full transition-all duration-300 ${isPlaying ? 'animate-wave-2' : 'h-[4px]'}`} />
+          <span className={`w-[2px] bg-gold rounded-full transition-all duration-300 ${isPlaying ? 'animate-wave-3' : 'h-[4px]'}`} />
+          <span className={`w-[2px] bg-gold rounded-full transition-all duration-300 ${isPlaying ? 'animate-wave-4' : 'h-[4px]'}`} />
+        </div>
       </motion.button>
     </div>
   )

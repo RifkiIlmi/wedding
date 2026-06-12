@@ -19,7 +19,7 @@ export const OpeningScreen = ({
 
   const handleOpen = () => {
     setIsOpen(true);
-    setTimeout(onOpen, 1000); // Delay to allow animation to complete
+    onOpen();
   };
 
   return (
@@ -144,7 +144,7 @@ export const OpeningScreen = ({
             className="absolute bottom-10 flex items-center gap-2 text-dark/40 text-xs tracking-widest font-sans uppercase z-10"
           >
             <Music className="w-3 h-3" />
-            Musik latar akan diputar otomatis
+            Dengan musik latar
           </motion.div>
         </motion.div>
       )}
