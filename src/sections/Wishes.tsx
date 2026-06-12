@@ -19,7 +19,6 @@ export const Wishes = () => {
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
-  const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const ITEMS_TO_LOAD = 15;
 
@@ -68,37 +67,26 @@ export const Wishes = () => {
     };
   }, []);
 
-  // Setup autoplay carousel
+  // Setup autoplay carousel (resets timer on manual navigation)
   useEffect(() => {
     if (wishes.length <= 1) return;
 
-    const startAutoPlay = () => {
-      autoPlayRef.current = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % wishes.length);
-      }, 7000); // Rotate every 7 seconds
-    };
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % wishes.length);
+    }, 7000); // Rotate every 7 seconds
 
-    startAutoPlay();
-
-    return () => {
-      if (autoPlayRef.current) {
-        clearInterval(autoPlayRef.current);
-      }
-    };
-  }, [wishes.length]);
+    return () => clearInterval(timer);
+  }, [wishes.length, currentIndex]);
 
   const handlePrev = () => {
-    if (autoPlayRef.current) clearInterval(autoPlayRef.current);
     setCurrentIndex((prev) => (prev - 1 + wishes.length) % wishes.length);
   };
 
   const handleNext = () => {
-    if (autoPlayRef.current) clearInterval(autoPlayRef.current);
     setCurrentIndex((prev) => (prev + 1) % wishes.length);
   };
 
   const handleDotClick = (index: number) => {
-    if (autoPlayRef.current) clearInterval(autoPlayRef.current);
     setCurrentIndex(index);
   };
 
@@ -284,9 +272,9 @@ export const Wishes = () => {
                     <ChevronLeft className="w-4 h-4" />
                   </button>
 
-                  {/* Bullet Indicators (Limited to maximum 6 indicators to keep it minimalist) */}
+                  {/* Bullet Indicators */}
                   <div className="flex gap-1.5">
-                    {wishes.slice(0, Math.min(wishes.length, 6)).map((_, idx) => (
+                    {wishes.map((_, idx) => (
                       <button
                         key={idx}
                         onClick={() => handleDotClick(idx)}
