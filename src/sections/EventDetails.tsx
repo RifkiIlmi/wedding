@@ -20,7 +20,11 @@ const EventCard = ({
     initial={{ opacity: 0, y: 50, scale: 0.95 }}
     transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
     viewport={{ once: true }}
-    whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.4, ease: "easeOut" } }}
+    whileHover={{
+      y: -8,
+      scale: 1.02,
+      transition: { duration: 0.4, ease: "easeOut" },
+    }}
     className="bg-white p-8 md:p-12 border border-gold/10 shadow-2xl relative overflow-hidden group holo-card"
   >
     {/* Animated ornamental corners */}
@@ -140,17 +144,17 @@ export const EventDetails = () => {
               title="Akad Pernikahan"
               date="Jum'at, 10 Juli 2026"
               time="19:00 PM - 21:00 PM"
-              venue="St. Patrick Cathedral"
-              address="123 Wedding Street, New York, NY 10001"
+              venue="Kediaman Wanita"
+              address="Kayu Ara, Kec. Kerumutan, Kab. Pelalawan, Riau"
               mapUrl="https://maps.google.com"
               isAkad={true}
             />
             <EventCard
               title="Resepsi Pernikahan"
-              date="Minggu, 20 Desember 2026"
-              time="01:00 PM - 04:00 PM"
-              venue="The Grand Ballroom"
-              address="456 Luxury Ave, New York, NY 10002"
+              date="Sabut, 11 Juli 2026"
+              time="09:00 AM - 21:00 PM"
+              venue="Kediaman Wanita"
+              address="Kayu Ara, Kec. Kerumutan, Kab. Pelalawan, Riau"
               mapUrl="https://maps.google.com"
               isAkad={false}
             />

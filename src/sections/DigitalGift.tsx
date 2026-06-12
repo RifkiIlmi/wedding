@@ -106,14 +106,14 @@ export const DigitalGift = () => {
 
         <div className="grid md:grid-cols-2 gap-8">
           <BankCard
-            bank="CHASE BANK"
+            bank="BANK MANDIRI"
             account="1234567890"
-            name="Sarah J. Bride"
+            name="JENI ADHIVA"
           />
           <BankCard
-            bank="WELLS FARGO"
+            bank="BANK MANDIRI"
             account="0987654321"
-            name="Michael K. Groom"
+            name="M. RIFKI ILMI"
           />
         </div>
 

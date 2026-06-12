@@ -13,7 +13,7 @@ import { GoldSparkle } from "@/components/shared/GoldSparkle";
 
 const rsvpSchema = z.object({
   name: z.string().min(2, "Nama wajib diisi"),
-  attendance: z.enum(["attending", "not_attending"]),
+  attendance: z.enum(["attending", "not_attending", "maybe"]),
   guests: z.string().optional(),
   message: z.string().min(5, "Silakan tulis ucapan singkat"),
 });
@@ -44,8 +44,7 @@ export const RSVP = () => {
       const { error } = await supabase.from("wishes").insert([
         {
           name: data.name,
-          message: data.message,
-          // In a real app, we'd also save to a guests table
+          message: `${data.message} |attendance:${data.attendance}`,
         },
       ]);
 
@@ -147,10 +146,10 @@ export const RSVP = () => {
                   <option value="attending" className="bg-dark text-primary">
                     Saya akan hadir
                   </option>
-                  <option
-                    value="not_attending"
-                    className="bg-dark text-primary"
-                  >
+                  <option value="maybe" className="bg-dark text-primary">
+                    Saya masih ragu-ragu
+                  </option>
+                  <option value="not_attending" className="bg-dark text-primary">
                     Saya tidak bisa hadir
                   </option>
                 </select>

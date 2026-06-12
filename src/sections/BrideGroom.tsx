@@ -157,7 +157,7 @@ export const BrideGroom = () => {
             <img
               src="/assets/graphics/Decorative-Mandala.svg"
               alt="floral accent"
-              className="w-[600px] max-w-none opacity-80 animate-[spin_20s_linear_infinite]"
+              className="w-[600px] max-w-none opacity-80 animate-[spin_20s_linear_infinite] will-change-transform transform-gpu"
             />
           </div>
           <p className="max-w-2xl mx-auto font-sans text-dark/70 leading-relaxed tracking-wide">

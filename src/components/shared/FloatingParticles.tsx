@@ -74,13 +74,20 @@ export const FloatingParticles = ({
     particlesRef.current = Array.from({ length: count }, createParticle)
 
     // Distribute particles across different life stages initially
-    particlesRef.current.forEach((p, i) => {
+    particlesRef.current.forEach((p) => {
       p.life = Math.random() * p.maxLife
       p.y = Math.random() * canvas.height
     })
 
+    let isVisible = false
+    let isRunning = false
+
     const animate = () => {
-      if (!ctx || !canvas) return
+      if (!ctx || !canvas || !isVisible) {
+        isRunning = false
+        return
+      }
+      isRunning = true
 
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
@@ -105,25 +112,35 @@ export const FloatingParticles = ({
           p.y = canvas.height + 10
         }
 
-        // Draw particle with glow
-        ctx.save()
+        // Draw particle (Optimized: no save/restore or slow shadowBlur)
         ctx.globalAlpha = p.opacity
-        ctx.shadowBlur = p.size * 3
-        ctx.shadowColor = color
         ctx.fillStyle = color
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
         ctx.fill()
-        ctx.restore()
       })
 
       animationRef.current = requestAnimationFrame(animate)
     }
 
-    animate()
+    // Suspend loop when element is off-screen to save resources
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting
+          if (isVisible && !isRunning) {
+            animate()
+          }
+        })
+      },
+      { threshold: 0.01 }
+    )
+
+    observer.observe(canvas)
 
     return () => {
       window.removeEventListener('resize', resizeCanvas)
+      observer.disconnect()
       cancelAnimationFrame(animationRef.current)
     }
   }, [count, color, speed, maxSize, minSize, opacity])
@@ -136,3 +153,4 @@ export const FloatingParticles = ({
     />
   )
 }
+

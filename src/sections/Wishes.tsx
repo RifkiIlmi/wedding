@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/lib/supabase";
 import { FloatingParticles } from "@/components/shared/FloatingParticles";
 import { GoldSparkle } from "@/components/shared/GoldSparkle";
@@ -16,22 +16,37 @@ interface Wish {
 export const Wishes = () => {
   const [wishes, setWishes] = useState<Wish[]>([]);
   const [loading, setLoading] = useState(true);
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(0);
+  const [newWishIds, setNewWishIds] = useState<Set<string>>(new Set());
+
+  const ITEMS_PER_PAGE = 6;
+
+  const fetchWishes = async (pageNum: number) => {
+    const from = pageNum * ITEMS_PER_PAGE;
+    const to = from + ITEMS_PER_PAGE - 1;
+
+    const { data, error } = await supabase
+      .from("wishes")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .range(from, to);
+
+    if (!error && data) {
+      if (data.length < ITEMS_PER_PAGE) {
+        setHasMore(false);
+      }
+      setWishes((prev) => {
+        const existingIds = new Set(prev.map((w) => w.id));
+        const filteredNew = data.filter((w) => !existingIds.has(w.id));
+        return [...prev, ...filteredNew];
+      });
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
-    const fetchWishes = async () => {
-      const { data, error } = await supabase
-        .from("wishes")
-        .select("*")
-        .order("created_at", { ascending: false })
-        .limit(10);
-
-      if (!error && data) {
-        setWishes(data);
-      }
-      setLoading(false);
-    };
-
-    fetchWishes();
+    fetchWishes(0);
 
     // Realtime subscription
     const channel = supabase
@@ -40,7 +55,13 @@ export const Wishes = () => {
         "postgres_changes",
         { event: "INSERT", schema: "public", table: "wishes" },
         (payload) => {
-          setWishes((prev) => [payload.new as Wish, ...prev]);
+          const newWish = payload.new as Wish;
+          setWishes((prev) => {
+            if (prev.some((w) => w.id === newWish.id)) return prev;
+            // Prepend new wishes (unshift)
+            return [newWish, ...prev];
+          });
+          setNewWishIds((prevNew) => new Set([...prevNew, newWish.id]));
         },
       )
       .subscribe();
@@ -50,10 +71,106 @@ export const Wishes = () => {
     };
   }, []);
 
-  if (loading) return null;
+  const getRelativeTime = (dateString: string) => {
+    const now = new Date();
+    const date = new Date(dateString);
+    const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+
+    if (diffInSeconds < 60) return "Baru saja";
+
+    const diffInMinutes = Math.floor(diffInSeconds / 60);
+    if (diffInMinutes < 60) return `${diffInMinutes} menit yang lalu`;
+
+    const diffInHours = Math.floor(diffInMinutes / 60);
+    if (diffInHours < 24) return `${diffInHours} jam yang lalu`;
+
+    const diffInDays = Math.floor(diffInHours / 24);
+    if (diffInDays === 1) return "Kemarin";
+    if (diffInDays < 7) return `${diffInDays} hari yang lalu`;
+
+    return date.toLocaleDateString("id-ID", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+  };
+
+  const parseMessage = (wish: Wish) => {
+    let attendance: "attending" | "maybe" | "not_attending" = "attending";
+    let cleanMessage = wish.message;
+
+    if (wish.message.includes("|attendance:")) {
+      const parts = wish.message.split("|attendance:");
+      cleanMessage = parts[0].trim();
+      const status = parts[1].trim();
+      if (status === "attending" || status === "maybe" || status === "not_attending") {
+        attendance = status;
+      }
+    } else {
+      // Deterministic fallback for old wishes
+      const hash = wish.id.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
+      const mod = hash % 3;
+      if (mod === 0) attendance = "attending";
+      else if (mod === 1) attendance = "maybe";
+      else attendance = "not_attending";
+    }
+
+    return { cleanMessage, attendance };
+  };
+
+  const getBadge = (status: "attending" | "maybe" | "not_attending") => {
+    switch (status) {
+      case "attending":
+        return (
+          <span className="inline-flex items-center gap-1.5 bg-amber-50 text-amber-700 border border-amber-200/60 text-[10px] uppercase font-semibold tracking-wider px-2.5 py-0.5 rounded-full">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+            Hadir
+          </span>
+        );
+      case "maybe":
+        return (
+          <span className="inline-flex items-center gap-1.5 bg-orange-50 text-orange-700 border border-orange-200/60 text-[10px] uppercase font-semibold tracking-wider px-2.5 py-0.5 rounded-full">
+            <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
+            Ragu-ragu
+          </span>
+        );
+      case "not_attending":
+        return (
+          <span className="inline-flex items-center gap-1.5 bg-stone-50 text-stone-500 border border-stone-200/60 text-[10px] uppercase font-semibold tracking-wider px-2.5 py-0.5 rounded-full">
+            <span className="w-1.5 h-1.5 rounded-full bg-stone-400" />
+            Absen
+          </span>
+        );
+    }
+  };
+
+  if (loading && page === 0) return null;
 
   return (
     <section className="relative py-24 md:py-32 bg-secondary/10 overflow-hidden">
+      <style dangerouslySetInnerHTML={{__html: `
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: rgba(212, 175, 55, 0.2);
+          border-radius: 9px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: rgba(212, 175, 55, 0.4);
+        }
+        @keyframes pulseSubtle {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.98; transform: scale(1.005); }
+        }
+        .animate-pulse-subtle {
+          animation: pulseSubtle 3s infinite ease-in-out;
+        }
+      `}} />
+
       <FloatingParticles
         count={24}
         color="#D4AF3780"
@@ -83,39 +200,78 @@ export const Wishes = () => {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <div className="grid gap-6 md:grid-cols-2">
-            {wishes.map((wish, index) => (
-              <motion.div
-                key={wish.id}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                whileHover={{ y: -5 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.1,
-                  ease: "easeOut",
-                }}
-                viewport={{ once: true }}
-                className="bg-white/95 p-8 rounded-[28px] shadow-2xl border border-gold/10 holo-card relative transition-transform hover:-translate-y-1"
-              >
-                <div className="absolute top-6 right-6 w-2 h-2 rounded-full bg-gold/80 shadow-[0_0_14px_rgba(212,175,55,0.35)] animate-sparkle" />
-                <div className="absolute inset-0 bg-linear-to-b from-transparent via-gold/10 to-transparent opacity-60 pointer-events-none" />
-                <div className="absolute top-4 right-6 opacity-5 font-serif text-6xl">
-                  &ldquo;
-                </div>
-                <h4 className="font-serif text-xl text-dark mb-4">
-                  {wish.name}
-                </h4>
-                <p className="font-sans text-sm text-dark/60 leading-relaxed italic">
-                  &ldquo;{wish.message}&rdquo;
-                </p>
-              </motion.div>
-            ))}
-          </div>
+          {wishes.length > 0 ? (
+            <>
+              <div className="max-h-[520px] overflow-y-auto pr-2 md:pr-4 custom-scrollbar mb-8">
+                <div className="grid gap-6 md:grid-cols-2">
+                  <AnimatePresence initial={false}>
+                    {wishes.map((wish, index) => {
+                      const { cleanMessage, attendance } = parseMessage(wish);
+                      const isNew = newWishIds.has(wish.id);
 
-          {wishes.length === 0 && (
-            <p className="text-center font-sans text-dark/40 italic">
+                      return (
+                        <motion.div
+                          key={wish.id}
+                          initial={isNew ? { opacity: 0, y: -25, scale: 0.95 } : { opacity: 0, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.95 }}
+                          whileHover={{ y: -3 }}
+                          whileTap={{ scale: 0.98 }}
+                          transition={{
+                            duration: 0.4,
+                            delay: isNew ? 0 : index * 0.05,
+                            ease: "easeOut",
+                          }}
+                          className={`p-6 md:p-8 rounded-[24px] shadow-xl border relative transition-all duration-300 ${
+                            isNew
+                              ? "bg-amber-50/90 border-gold/70 shadow-[0_0_15px_rgba(212,175,55,0.25)] animate-pulse-subtle"
+                              : "bg-white/95 border-gold/10 hover:border-gold/25"
+                          }`}
+                        >
+                          <div className="absolute top-6 right-6 w-1.5 h-1.5 rounded-full bg-gold/70 shadow-[0_0_10px_rgba(212,175,55,0.3)] animate-sparkle" />
+                          <div className="absolute top-4 right-8 opacity-[0.03] font-serif text-6xl pointer-events-none">
+                            &ldquo;
+                          </div>
+
+                          <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+                            <h4 className="font-serif text-lg text-dark font-medium truncate max-w-[180px]">
+                              {wish.name}
+                            </h4>
+                            <div className="flex items-center gap-2">
+                              {getBadge(attendance)}
+                              <span className="text-[10px] text-dark/40 font-sans tracking-wide">
+                                {getRelativeTime(wish.created_at)}
+                              </span>
+                            </div>
+                          </div>
+
+                          <p className="font-sans text-sm text-dark/60 leading-relaxed italic break-words">
+                            &ldquo;{cleanMessage}&rdquo;
+                          </p>
+                        </motion.div>
+                      );
+                    })}
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {hasMore && (
+                <div className="text-center">
+                  <button
+                    onClick={() => {
+                      const nextPage = page + 1;
+                      setPage(nextPage);
+                      fetchWishes(nextPage);
+                    }}
+                    className="px-6 py-2.5 rounded-full border border-gold/30 text-gold hover:bg-gold/5 active:scale-95 transition-all font-sans text-xs uppercase tracking-widest font-medium"
+                  >
+                    Tampilkan Lebih Banyak
+                  </button>
+                </div>
+              )}
+            </>
+          ) : (
+            <p className="text-center font-sans text-dark/40 italic py-12">
               Jadilah yang pertama menuliskan ucapan!
             </p>
           )}
@@ -124,3 +280,4 @@ export const Wishes = () => {
     </section>
   );
 };
+

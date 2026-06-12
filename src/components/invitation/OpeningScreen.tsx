@@ -27,9 +27,9 @@ export const OpeningScreen = ({
       {!isOpen && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, y: -100 }}
-          transition={{ duration: 1, ease: [0.43, 0.13, 0.23, 0.96] }}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-primary text-dark overflow-hidden"
+          exit={{ opacity: 0, y: "-100%" }}
+          transition={{ duration: 0.8, ease: [0.43, 0.13, 0.23, 0.96] }}
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-primary text-dark overflow-hidden will-change-transform transform-gpu"
         >
           {/* Floating Particles */}
           <FloatingParticles count={30} speed={0.2} opacity={0.3} maxSize={2} />
@@ -66,13 +66,13 @@ export const OpeningScreen = ({
             </div>
 
             {/* Bokeh glow circles */}
-            <div className="bokeh-circle w-64 h-64 top-10 -left-20 opacity-40" />
+            <div className="bokeh-circle w-64 h-64 top-10 -left-20 opacity-40 will-change-transform transform-gpu" />
             <div
-              className="bokeh-circle w-48 h-48 bottom-20 -right-10 opacity-30"
+              className="bokeh-circle w-48 h-48 bottom-20 -right-10 opacity-30 will-change-transform transform-gpu"
               style={{ animationDelay: "3s" }}
             />
             <div
-              className="bokeh-circle w-32 h-32 top-1/3 right-1/4 opacity-20"
+              className="bokeh-circle w-32 h-32 top-1/3 right-1/4 opacity-20 will-change-transform transform-gpu"
               style={{ animationDelay: "5s" }}
             />
           </div>

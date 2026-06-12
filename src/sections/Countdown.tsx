@@ -69,21 +69,8 @@ export const Countdown = ({ targetDate }: { targetDate: string }) => {
       {/* Animated particles */}
       <FloatingParticles count={15} speed={0.1} opacity={0.12} maxSize={1.5} />
 
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <motion.div
-          animate={{
-            background: [
-              "radial-gradient(ellipse at 20% 50%, rgba(212,175,55,0.05) 0%, transparent 60%)",
-              "radial-gradient(ellipse at 80% 50%, rgba(212,175,55,0.05) 0%, transparent 60%)",
-              "radial-gradient(ellipse at 50% 30%, rgba(212,175,55,0.05) 0%, transparent 60%)",
-              "radial-gradient(ellipse at 20% 50%, rgba(212,175,55,0.05) 0%, transparent 60%)",
-            ],
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-          className="w-full h-full"
-        />
-      </div>
+      {/* Optimized gradient background (layout-paint-free) */}
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.05)_0%,transparent_70%)]" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-12 relative">

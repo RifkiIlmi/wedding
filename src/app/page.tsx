@@ -39,38 +39,44 @@ export default function Home() {
       {/* 1. Opening Screen (Scroll locked) */}
       <OpeningScreen guestName={guestName} onOpen={() => setIsOpened(true)} />
 
-      {/* Main Content (Revealed after opening) */}
-      <div className={`${!isOpened ? "h-screen overflow-hidden" : ""}`}>
-        {/* 2. Hero Section */}
-        <Hero />
+      {/* Main Content (Revealed and mounted after opening) */}
+      {isOpened && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          {/* 2. Hero Section */}
+          <Hero />
 
-        {/* 3. Rifki & Jeni Section */}
-        <BrideGroom />
+          {/* 3. Rifki & Jeni Section */}
+          <BrideGroom />
 
-        {/* 4. Countdown Section */}
-        <Countdown targetDate="2026-07-11T08:00:00" />
+          {/* 4. Countdown Section */}
+          <Countdown targetDate="2026-07-11T08:00:00" />
 
-        {/* 5. Event Details Section */}
-        <EventDetails />
+          {/* 5. Event Details Section */}
+          <EventDetails />
 
-        {/* 6. Love Story Timeline */}
-        <LoveStory />
+          {/* 6. Love Story Timeline */}
+          <LoveStory />
 
-        {/* 7. Gallery Section */}
-        <Gallery />
+          {/* 7. Gallery Section */}
+          <Gallery />
 
-        {/* 8. RSVP Section */}
-        <RSVP />
+          {/* 8. RSVP Section */}
+          <RSVP />
 
-        {/* 9. Digital Gift Section */}
-        <DigitalGift />
+          {/* 9. Digital Gift Section */}
+          <DigitalGift />
 
-        {/* 10. Wishes Section */}
-        <Wishes />
+          {/* 10. Wishes Section */}
+          <Wishes />
 
-        {/* 11. Footer Section */}
-        <Footer />
-      </div>
+          {/* 11. Footer Section */}
+          <Footer />
+        </motion.div>
+      )}
 
       {/* Global Music Player */}
       <MusicPlayer

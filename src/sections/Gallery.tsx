@@ -1,20 +1,70 @@
 "use client";
 
-import Image from "next/image";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { FloatingParticles } from "@/components/shared/FloatingParticles";
 import { GoldSparkle } from "@/components/shared/GoldSparkle";
 
 const images = [
-  "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1519225495810-758b63300051?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1519225495810-758b63300051?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1507504038482-7621c4b8e05a?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80",
 ];
 
 export const Gallery = () => {
+  const [displayImages, setDisplayImages] = useState(images);
+  const [isOpen, setIsOpen] = useState(false);
+  const [photoIndex, setPhotoIndex] = useState(0);
+
+  const handleSwap = (index: number) => {
+    const newImages = [...displayImages];
+    const temp = newImages[0];
+    newImages[0] = newImages[index];
+    newImages[index] = temp;
+    setDisplayImages(newImages);
+  };
+
+  const openLightbox = (index: number) => {
+    setPhotoIndex(index);
+    setIsOpen(true);
+  };
+
+  const nextPhoto = () => {
+    setPhotoIndex((prev) => (prev === displayImages.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevPhoto = () => {
+    setPhotoIndex((prev) => (prev === 0 ? displayImages.length - 1 : prev - 1));
+  };
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        prevPhoto();
+      } else if (e.key === "ArrowRight") {
+        nextPhoto();
+      } else if (e.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, displayImages]);
+
+  const mainImg = displayImages[0];
+  const smallImg1 = displayImages[1];
+  const smallImg2 = displayImages[2];
+  const smallImg3 = displayImages[3];
+  const smallImg4 = displayImages[4];
+
   return (
     <section className="relative py-24 md:py-32 bg-secondary/20 overflow-hidden">
       <FloatingParticles
@@ -26,63 +76,9 @@ export const Gallery = () => {
         opacity={0.35}
         className="opacity-80"
       />
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="bokeh-circle w-40 h-40 left-8 top-16 opacity-60" />
-        <div className="bokeh-circle w-32 h-32 right-8 top-24 opacity-40" />
-        <div className="bokeh-circle w-56 h-56 left-1/2 top-12 -translate-x-1/2 opacity-20" />
-
-        <div className="absolute left-6 bottom-10 opacity-80 scale-[0.95] md:scale-100">
-          <svg
-            width="120"
-            height="120"
-            viewBox="0 0 120 120"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="60" cy="60" r="48" fill="rgba(212,175,55,0.08)" />
-            <path
-              d="M60 16C58 22 50 24 46 30C42 36 46 48 52 54C58 60 74 58 78 52C82 46 82 34 76 28C70 22 62 14 60 16Z"
-              fill="rgba(212,175,55,0.22)"
-            />
-            <path
-              d="M100 60C92 62 86 70 84 78C82 86 88 98 94 98C100 98 106 90 108 82C110 74 108 66 100 60Z"
-              fill="rgba(248,245,242,0.65)"
-            />
-            <path
-              d="M26 58C22 66 22 76 28 84C34 92 48 94 54 88C60 82 58 68 52 62C46 56 30 50 26 58Z"
-              fill="rgba(255,255,255,0.55)"
-            />
-            <circle cx="60" cy="60" r="10" fill="rgba(212,175,55,0.4)" />
-          </svg>
-        </div>
-
-        <div className="absolute right-8 top-6 opacity-70 scale-[0.9] md:scale-100">
-          <svg
-            width="100"
-            height="100"
-            viewBox="0 0 100 100"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="50" cy="50" r="42" fill="rgba(248,245,242,0.14)" />
-            <path
-              d="M50 10C48 16 42 18 38 24C34 30 38 42 44 48C50 54 64 52 68 46C72 40 72 28 66 22C60 16 52 8 50 10Z"
-              fill="rgba(212,175,55,0.2)"
-            />
-            <path
-              d="M24 52C20 58 20 68 26 76C32 84 46 86 52 80C58 74 56 60 50 54C44 48 28 42 24 52Z"
-              fill="rgba(255,255,255,0.55)"
-            />
-            <path
-              d="M74 52C70 58 70 68 76 76C82 84 96 86 102 80C108 74 106 60 100 54C94 48 78 42 74 52Z"
-              fill="rgba(212,175,55,0.14)"
-            />
-          </svg>
-        </div>
-      </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-10 relative">
+        <div className="text-center mb-12 relative">
           <GoldSparkle size={22} className="absolute -top-4 left-12" />
           <GoldSparkle size={16} className="absolute top-8 right-16" />
           <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-dark mb-6 tracking-tight">
@@ -94,51 +90,168 @@ export const Gallery = () => {
           </p>
         </div>
 
-        <div className="relative">
-          <div className="overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex gap-6 py-6 px-2 md:px-0 scroll-smooth">
-            {images.map((img, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 24, scale: 0.96 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                whileHover={{ y: -6, scale: 1.01 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{
-                  duration: 0.45,
-                  delay: index * 0.05,
-                  ease: "easeOut",
-                }}
-                viewport={{ once: true }}
-                className="group relative snap-center shrink-0 w-[80vw] sm:w-[52vw] md:w-[32vw] min-w-67.5 overflow-hidden rounded-4xl shadow-2xl border border-gold/15 bg-dark/5 cursor-grab"
-              >
-                <div className="absolute top-4 right-4 h-2 w-2 rounded-full bg-gold/80 shadow-[0_0_14px_rgba(212,175,55,0.4)] animate-sparkle" />
-                <div className="absolute inset-0 bg-linear-to-b from-transparent via-gold/10 to-transparent opacity-80 pointer-events-none" />
-                <div className="relative w-full h-105 sm:h-115 md:h-130">
-                  <Image
-                    src={img}
-                    alt={`Wedding moment ${index + 1}`}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    unoptimized
-                  />
-                </div>
-                <div className="absolute inset-0 bg-linear-to-t from-dark/70 via-transparent to-transparent opacity-80" />
-                <div className="absolute left-6 bottom-6 right-6 flex items-center justify-between gap-4">
-                  <span className="bg-dark/80 text-primary text-xs uppercase tracking-[0.3em] px-4 py-2 rounded-full backdrop-blur-sm">
-                    Momen {index + 1}
-                  </span>
-                  <span className="h-2 w-2 rounded-full bg-gold animate-pulse" />
-                </div>
-              </motion.div>
-            ))}
+        {/* 5-Card Interactive Collage Picker */}
+        <div className="grid grid-cols-4 md:grid-cols-5 md:grid-rows-2 gap-2 md:gap-4 h-auto md:h-[550px] overflow-hidden rounded-2xl md:rounded-3xl">
+          {/* Card 1: Main Photo */}
+          <div
+            onClick={() => openLightbox(0)}
+            className="col-span-4 md:col-span-3 md:row-span-2 relative overflow-hidden rounded-xl md:rounded-3xl border border-gold/15 cursor-pointer group aspect-[4/3] md:aspect-auto"
+          >
+            <motion.img
+              layoutId={`gallery-img-${mainImg}`}
+              src={mainImg}
+              alt="Momen Utama"
+              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-transparent to-transparent opacity-85 pointer-events-none" />
+            <div className="absolute left-4 bottom-4 md:left-6 md:bottom-6 right-4 md:right-6 flex items-center justify-between gap-4">
+              <span className="bg-dark/80 text-primary text-xs uppercase tracking-[0.2em] px-3 py-1.5 md:px-4 md:py-2 rounded-full backdrop-blur-sm border border-gold/10">
+                Lihat Detail
+              </span>
+              <span className="h-2 w-2 rounded-full bg-gold animate-pulse" />
+            </div>
           </div>
-          <div className="mt-6 flex justify-center gap-3">
-            {images.map((_, index) => (
-              <span key={index} className="h-2 w-2 rounded-full bg-dark/20" />
-            ))}
+
+          {/* Card 2: Small Photo 1 */}
+          <div
+            onClick={() => handleSwap(1)}
+            className="col-span-1 md:col-span-1 md:row-span-1 relative overflow-hidden rounded-lg md:rounded-2xl border border-gold/15 cursor-pointer group aspect-square md:aspect-auto"
+          >
+            <motion.img
+              layoutId={`gallery-img-${smallImg1}`}
+              src={smallImg1}
+              alt="Momen 2"
+              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/0 transition-colors duration-300" />
+          </div>
+
+          {/* Card 3: Small Photo 2 */}
+          <div
+            onClick={() => handleSwap(2)}
+            className="col-span-1 md:col-span-1 md:row-span-1 relative overflow-hidden rounded-lg md:rounded-2xl border border-gold/15 cursor-pointer group aspect-square md:aspect-auto"
+          >
+            <motion.img
+              layoutId={`gallery-img-${smallImg2}`}
+              src={smallImg2}
+              alt="Momen 3"
+              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/0 transition-colors duration-300" />
+          </div>
+
+          {/* Card 4: Small Photo 3 */}
+          <div
+            onClick={() => handleSwap(3)}
+            className="col-span-1 md:col-span-1 md:row-span-1 relative overflow-hidden rounded-lg md:rounded-2xl border border-gold/15 cursor-pointer group aspect-square md:aspect-auto"
+          >
+            <motion.img
+              layoutId={`gallery-img-${smallImg3}`}
+              src={smallImg3}
+              alt="Momen 4"
+              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/0 transition-colors duration-300" />
+          </div>
+
+          {/* Card 5: Small Photo 4 (Overlay "+X foto") */}
+          <div
+            onClick={() => openLightbox(4)}
+            className="col-span-1 md:col-span-1 md:row-span-1 relative overflow-hidden rounded-lg md:rounded-2xl border border-gold/15 cursor-pointer group aspect-square md:aspect-auto"
+          >
+            <motion.img
+              layoutId={`gallery-img-${smallImg4}`}
+              src={smallImg4}
+              alt="Momen 5"
+              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-black/60 group-hover:bg-black/70 transition-colors duration-300 flex flex-col items-center justify-center text-center p-2">
+              <span className="text-primary font-serif text-lg md:text-2xl font-bold tracking-wider">
+                +{displayImages.length - 4}
+              </span>
+              <span className="text-primary/80 text-[10px] md:text-xs uppercase tracking-widest mt-1 hidden sm:inline">
+                Foto
+              </span>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Lightbox / Modal Overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsOpen(false)}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md"
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setIsOpen(false)}
+              className="absolute top-6 right-6 text-white/80 hover:text-white transition-colors p-3 bg-white/10 hover:bg-white/20 rounded-full z-55"
+              aria-label="Tutup"
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Left Control */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                prevPhoto();
+              }}
+              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all z-55"
+              aria-label="Sebelumnya"
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            {/* Main Lightbox Image */}
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-[90vw] max-h-[80vh] flex items-center justify-center select-none"
+            >
+              <img
+                src={displayImages[photoIndex]}
+                alt={`Detail Momen ${photoIndex + 1}`}
+                className="max-w-full max-h-[80vh] rounded-xl object-contain shadow-2xl border border-white/10"
+                loading="lazy"
+              />
+            </div>
+
+            {/* Right Control */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                nextPhoto();
+              }}
+              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all z-55"
+              aria-label="Selanjutnya"
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            {/* Image Indicator Counter */}
+            <div className="absolute bottom-6 bg-white/10 backdrop-blur-sm text-white text-xs md:text-sm tracking-widest px-4 py-2 rounded-full border border-white/10">
+              {photoIndex + 1} / {displayImages.length}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
+

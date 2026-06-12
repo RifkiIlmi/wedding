@@ -1,0 +1,32 @@
+# Mengabaikan folder dependensi (sangat besar dan boros token)
+node_modules/
+bower_components/
+
+# Mengabaikan folder hasil build dan kompilasi
+dist/
+build/
+.next/
+.nuxt/
+out/
+
+# Mengabaikan file log dan cache
+*.log
+.npm
+.eslintcache
+.parcel-cache
+
+# Mengabaikan folder sistem dan IDE lain
+.git/
+.vscode/
+.idea/
+.DS_Store
+
+# Mengabaikan file multimedia dan aset besar (AI tidak perlu membaca ini)
+*.mp4
+*.mp3
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+public/assets/
