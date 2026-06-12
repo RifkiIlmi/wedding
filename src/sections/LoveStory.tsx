@@ -69,7 +69,7 @@ export const LoveStory = () => {
   ];
 
   return (
-    <section className="py-32 md:py-48 bg-primary overflow-hidden relative">
+    <section id="story" className="py-32 md:py-48 bg-primary overflow-hidden relative">
       <FloatingParticles
         count={28}
         color="#D4AF3780"

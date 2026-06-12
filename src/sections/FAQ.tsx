@@ -30,7 +30,7 @@ const FAQ_ITEMS: FAQItem[] = [
 
 export const FAQ = () => {
   return (
-    <section className="py-32 md:py-48 bg-primary overflow-hidden relative border-t border-gold/10">
+    <section id="faq" className="py-32 md:py-48 bg-primary overflow-hidden relative border-t border-gold/10">
       <style dangerouslySetInnerHTML={{ __html: `
         details[open] summary ~ * {
           animation: slideDown 0.4s ease-out;

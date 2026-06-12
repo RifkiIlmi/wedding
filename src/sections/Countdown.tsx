@@ -58,7 +58,7 @@ export const Countdown = ({ targetDate }: { targetDate: string }) => {
   }, [targetDate]);
 
   return (
-    <section className="relative h-[500px] md:h-[650px] flex items-center justify-center overflow-hidden bg-dark">
+    <section id="countdown" className="relative h-[500px] md:h-[650px] flex items-center justify-center overflow-hidden bg-dark">
       {/* Background Grayscale pre-wedding image with slow Ken Burns effect */}
       <div className="absolute inset-0 z-0">
         <style dangerouslySetInnerHTML={{

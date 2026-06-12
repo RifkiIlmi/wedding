@@ -73,7 +73,7 @@ const BankCard = ({ bank, account, name }: BankCardProps) => {
 
 export const DigitalGift = () => {
   return (
-    <section className="relative py-32 md:py-48 bg-primary overflow-hidden">
+    <section id="gift" className="relative py-32 md:py-48 bg-primary overflow-hidden">
       <FloatingParticles
         count={28}
         color="#D4AF3780"

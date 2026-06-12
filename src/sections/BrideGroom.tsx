@@ -115,7 +115,7 @@ const PersonCard = ({
 
 export const BrideGroom = () => {
   return (
-    <section className="py-32 md:py-48 bg-primary overflow-hidden relative border-y border-gold/10">
+    <section id="couple" className="py-32 md:py-48 bg-primary overflow-hidden relative border-y border-gold/10">
       <Image
         src="/assets/graphics/Floral-Corner-Decor.svg"
         alt="corner decor top left"
