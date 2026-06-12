@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { OpeningScreen } from "@/components/invitation/OpeningScreen";
 import { MusicPlayer } from "@/components/shared/MusicPlayer";
 import { Hero } from "@/sections/Hero";
