@@ -79,7 +79,7 @@ export const MusicPlayer = ({ isPlaying: initialPlay = false, url }: { isPlaying
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-[80]">
+    <div className="fixed bottom-24 right-6 sm:bottom-6 sm:right-6 z-[80]">
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes wave-bar-1 {
           0%, 100% { height: 4px; }
