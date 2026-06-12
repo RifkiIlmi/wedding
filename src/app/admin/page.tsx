@@ -5,12 +5,14 @@ import { motion } from "framer-motion";
 import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import { Users, Heart, MessageSquare, LogOut } from "lucide-react";
+import { useToast } from "@/components/shared/Toast";
 
 export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const [stats, setStats] = useState({ wishes: 0, guests: 0 });
   const [wishes, setWishes] = useState<any[]>([]);
+  const { showToast, ToastComponent } = useToast();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,7 +20,7 @@ export default function AdminDashboard() {
     if (password === "admin123") {
       setIsAuthenticated(true);
     } else {
-      alert("Invalid password");
+      showToast("Invalid password", "error");
     }
   };
 
@@ -41,6 +43,7 @@ export default function AdminDashboard() {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-dark flex items-center justify-center p-6">
+        <ToastComponent />
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}

@@ -7,6 +7,7 @@ import { Dice5 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { FloatingParticles } from "@/components/shared/FloatingParticles";
 import { GoldSparkle } from "@/components/shared/GoldSparkle";
+import { useToast } from "@/components/shared/Toast";
 
 const WISH_BANK = [
   "Selamat menempuh hidup baru! Semoga cinta kalian terus mekar dan abadi selamanya.",
@@ -47,6 +48,7 @@ export const RSVP = () => {
   const [isVerifying, setIsVerifying] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [verificationError, setVerificationError] = useState("");
+  const { showToast, ToastComponent } = useToast();
 
   useEffect(() => {
     // Automatically verify guest name if 'to' param exists in URL
@@ -113,7 +115,7 @@ export const RSVP = () => {
       setStep("success");
     } catch (err) {
       console.error(err);
-      alert("Terjadi kesalahan. Silakan coba lagi.");
+      showToast("Terjadi kesalahan. Silakan coba lagi.", "error");
     } finally {
       setIsSubmitting(false);
     }
@@ -121,6 +123,7 @@ export const RSVP = () => {
 
   return (
     <section id="rsvp" className="relative py-32 md:py-48 bg-dark text-primary overflow-hidden">
+      <ToastComponent />
       <FloatingParticles
         count={30}
         color="#D4AF3780"

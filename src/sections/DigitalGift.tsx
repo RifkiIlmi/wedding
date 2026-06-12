@@ -6,22 +6,16 @@ import { Copy, Check, CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FloatingParticles } from "@/components/shared/FloatingParticles";
 import { GoldSparkle } from "@/components/shared/GoldSparkle";
+import { useToast } from "@/components/shared/Toast";
 
 interface BankCardProps {
   bank: string;
   account: string;
   name: string;
+  onCopy: (account: string) => void;
 }
 
-const BankCard = ({ bank, account, name }: BankCardProps) => {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(account);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
+const BankCard = ({ bank, account, name, onCopy }: BankCardProps) => {
   return (
     <motion.div
       whileHover={{ y: -5 }}
@@ -53,27 +47,26 @@ const BankCard = ({ bank, account, name }: BankCardProps) => {
         variant="ghost"
         size="sm"
         className="w-full flex items-center gap-2 border border-gold/20"
-        onClick={handleCopy}
+        onClick={() => onCopy(account)}
       >
-        {copied ? (
-          <>
-            <Check className="w-3 h-3" />
-            Tersalin
-          </>
-        ) : (
-          <>
-            <Copy className="w-3 h-3" />
-            Salin Nomor
-          </>
-        )}
+        <Copy className="w-3 h-3" />
+        Salin Nomor
       </Button>
     </motion.div>
   );
 };
 
 export const DigitalGift = () => {
+  const { showToast, ToastComponent } = useToast();
+
+  const handleCopy = (account: string) => {
+    navigator.clipboard.writeText(account);
+    showToast("Nomor rekening berhasil disalin", "success");
+  };
+
   return (
     <section id="gift" className="relative py-32 md:py-48 bg-primary overflow-hidden">
+      <ToastComponent />
       <FloatingParticles
         count={28}
         color="#D4AF3780"
@@ -109,11 +102,13 @@ export const DigitalGift = () => {
             bank="BANK MANDIRI"
             account="1234567890"
             name="JENI ADHIVA"
+            onCopy={handleCopy}
           />
           <BankCard
             bank="BANK MANDIRI"
             account="0987654321"
             name="M. RIFKI ILMI"
+            onCopy={handleCopy}
           />
         </div>
 
