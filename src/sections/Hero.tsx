@@ -16,26 +16,30 @@ export const Hero = () => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!containerRef.current || !imageRef.current) return;
+    if (!containerRef.current || !imageRef.current || !contentRef.current) return;
 
-    gsap.to(imageRef.current, {
-      yPercent: 30,
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
+    const ctx = gsap.context(() => {
+      gsap.to(imageRef.current, {
+        yPercent: 30,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
 
-    gsap.from(contentRef.current, {
-      opacity: 0,
-      y: 50,
-      duration: 1.5,
-      ease: "power3.out",
-      delay: 0.5,
-    });
+      gsap.from(contentRef.current, {
+        opacity: 0,
+        y: 50,
+        duration: 1.5,
+        ease: "power3.out",
+        delay: 0.5,
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
   }, []);
 
   // Staggered letter animation variants
@@ -56,7 +60,7 @@ export const Hero = () => {
             'url("https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80")',
         }}
       >
-        <div className="absolute inset-0 bg-dark/40" />
+        <div className="absolute inset-0 bg-black/60" />
       </div>
 
       {/* Film grain overlay */}
@@ -190,11 +194,11 @@ export const Hero = () => {
         <br />
         <br />
         <p className="text-[10px] tracking-[0.3em] text-primary">
-          "Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan
+          &quot;Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan
           pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung
           dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa
           kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat
-          tanda-tanda (kebesaran Allah) bagi kaum yang berpikir."
+          tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.&quot;
         </p>
         <br />
 
