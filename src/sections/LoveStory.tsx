@@ -26,6 +26,8 @@ const StoryItem = ({ year, title, description, index }: StoryItemProps) => (
     <div className="relative z-20 flex items-center justify-center w-16 h-16 rounded-full bg-gold/10 border-4 border-gold shadow-[0_0_30px_rgba(212,175,55,0.18)] mb-4 md:mb-0 shrink-0 pulse-glow">
       <span className="text-dark text-xs font-semibold tracking-[0.24em] uppercase">
         {year}
+
+
       </span>
       <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 animate-ping" />
     </div>
@@ -67,7 +69,7 @@ export const LoveStory = () => {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-primary overflow-hidden relative">
+    <section className="py-32 md:py-48 bg-primary overflow-hidden relative">
       <FloatingParticles
         count={28}
         color="#D4AF3780"
@@ -84,7 +86,7 @@ export const LoveStory = () => {
       </div>
 
       <div className="container mx-auto px-6 max-w-5xl relative z-10">
-        <div className="text-center mb-24 relative">
+        <div className="text-center mb-32 relative">
           <GoldSparkle size={24} className="absolute -top-4 left-10" />
           <GoldSparkle size={18} className="absolute top-6 right-12" />
           <h2 className="font-serif text-5xl md:text-6xl text-dark mb-4 tracking-tight text-shadow">

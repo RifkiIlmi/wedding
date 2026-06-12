@@ -6,16 +6,16 @@ import { FloatingParticles } from "@/components/shared/FloatingParticles";
 import { GoldSparkle } from "@/components/shared/GoldSparkle";
 
 const images = [
-  "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80",
-  "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1200&q=80",
-  "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80",
-  "https://images.unsplash.com/photo-1519225495810-758b63300051?auto=format&fit=crop&w=1200&q=80",
-  "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=1200&q=80",
-  "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=1200&q=80",
-  "https://images.unsplash.com/photo-1507504038482-7621c4b8e05a?auto=format&fit=crop&w=1200&q=80",
-  "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1200&q=80",
-  "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=1200&q=80",
-  "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1519225495810-758b63300051?auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1507504038482-7621c4b8e05a?auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop",
 ];
 
 export const Gallery = () => {
@@ -66,7 +66,7 @@ export const Gallery = () => {
   const smallImg4 = displayImages[4];
 
   return (
-    <section className="relative py-24 md:py-32 bg-secondary/20 overflow-hidden">
+    <section className="relative py-32 md:py-48 bg-secondary/20 overflow-hidden">
       <FloatingParticles
         count={20}
         color="#D4AF3780"
@@ -78,7 +78,7 @@ export const Gallery = () => {
       />
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-12 relative">
+        <div className="text-center mb-20 relative">
           <GoldSparkle size={22} className="absolute -top-4 left-12" />
           <GoldSparkle size={16} className="absolute top-8 right-16" />
           <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-dark mb-6 tracking-tight">
@@ -99,9 +99,9 @@ export const Gallery = () => {
           >
             <motion.img
               layoutId={`gallery-img-${mainImg}`}
-              src={mainImg}
+              src={`${mainImg}&w=800&q=80&fm=webp`}
               alt="Momen Utama"
-              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+              className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
               loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-transparent to-transparent opacity-85 pointer-events-none" />
@@ -120,9 +120,9 @@ export const Gallery = () => {
           >
             <motion.img
               layoutId={`gallery-img-${smallImg1}`}
-              src={smallImg1}
+              src={`${smallImg1}&w=300&q=75&fm=webp`}
               alt="Momen 2"
-              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+              className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
               loading="lazy"
             />
             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/0 transition-colors duration-300" />
@@ -135,9 +135,9 @@ export const Gallery = () => {
           >
             <motion.img
               layoutId={`gallery-img-${smallImg2}`}
-              src={smallImg2}
+              src={`${smallImg2}&w=300&q=75&fm=webp`}
               alt="Momen 3"
-              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+              className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
               loading="lazy"
             />
             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/0 transition-colors duration-300" />
@@ -150,9 +150,9 @@ export const Gallery = () => {
           >
             <motion.img
               layoutId={`gallery-img-${smallImg3}`}
-              src={smallImg3}
+              src={`${smallImg3}&w=300&q=75&fm=webp`}
               alt="Momen 4"
-              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+              className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
               loading="lazy"
             />
             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/0 transition-colors duration-300" />
@@ -165,9 +165,9 @@ export const Gallery = () => {
           >
             <motion.img
               layoutId={`gallery-img-${smallImg4}`}
-              src={smallImg4}
+              src={`${smallImg4}&w=300&q=75&fm=webp`}
               alt="Momen 5"
-              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+              className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
               loading="lazy"
             />
             <div className="absolute inset-0 bg-black/60 group-hover:bg-black/70 transition-colors duration-300 flex flex-col items-center justify-center text-center p-2">
@@ -195,7 +195,7 @@ export const Gallery = () => {
             {/* Close Button */}
             <button
               onClick={() => setIsOpen(false)}
-              className="absolute top-6 right-6 text-white/80 hover:text-white transition-colors p-3 bg-white/10 hover:bg-white/20 rounded-full z-55"
+              className="absolute top-6 right-6 text-white/80 hover:text-white transition-all duration-500 p-3 bg-white/10 hover:bg-white/20 rounded-full z-55"
               aria-label="Tutup"
             >
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -209,7 +209,7 @@ export const Gallery = () => {
                 e.stopPropagation();
                 prevPhoto();
               }}
-              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all z-55"
+              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all duration-500 z-55"
               aria-label="Sebelumnya"
             >
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -223,7 +223,7 @@ export const Gallery = () => {
               className="relative max-w-[90vw] max-h-[80vh] flex items-center justify-center select-none"
             >
               <img
-                src={displayImages[photoIndex]}
+                src={`${displayImages[photoIndex]}&w=1200&q=85&fm=webp`}
                 alt={`Detail Momen ${photoIndex + 1}`}
                 className="max-w-full max-h-[80vh] rounded-xl object-contain shadow-2xl border border-white/10"
                 loading="lazy"
@@ -236,7 +236,7 @@ export const Gallery = () => {
                 e.stopPropagation();
                 nextPhoto();
               }}
-              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all z-55"
+              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all duration-500 z-55"
               aria-label="Selanjutnya"
             >
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

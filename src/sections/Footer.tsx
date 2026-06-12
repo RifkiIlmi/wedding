@@ -7,7 +7,7 @@ import { GoldSparkle } from "@/components/shared/GoldSparkle";
 
 export const Footer = () => {
   return (
-    <footer className="relative py-20 bg-dark text-primary border-t border-gold/10 overflow-hidden">
+    <footer className="relative py-28 md:py-36 bg-dark text-primary border-t border-gold/10 overflow-hidden">
       <FloatingParticles
         count={22}
         color="#D4AF3780"
@@ -61,10 +61,10 @@ export const Footer = () => {
               © 2026 Rifki & Jeni Wedding. All Rights Reserved.
             </p>
             <div className="flex items-center gap-6">
-              <span className="text-[10px] uppercase tracking-[0.2em] text-primary/30 hover:text-gold cursor-pointer transition-colors">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-primary/30 hover:text-gold cursor-pointer transition-all duration-500">
                 Privacy Policy
               </span>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-primary/30 hover:text-gold cursor-pointer transition-colors">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-primary/30 hover:text-gold cursor-pointer transition-all duration-500">
                 Digital Invitation
               </span>
             </div>

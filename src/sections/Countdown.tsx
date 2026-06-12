@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FloatingParticles } from "@/components/shared/FloatingParticles";
 import { GoldSparkle } from "@/components/shared/GoldSparkle";
 
-const TimeUnit = ({ value, label }: { value: number; label: string }) => (
+const TimeUnit = ({ value, label, animate = true }: { value: number; label: string; animate?: boolean }) => (
   <div className="flex flex-col items-center">
     <motion.div
       whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(212,175,55,0.4)" }}
@@ -14,18 +14,24 @@ const TimeUnit = ({ value, label }: { value: number; label: string }) => (
       <div className="absolute top-3 right-3 h-2 w-2 rounded-full bg-gold/80 shadow-[0_0_14px_rgba(212,175,55,0.35)] animate-sparkle" />
       {/* Shimmer sweep on the box */}
       <div className="absolute inset-0 shimmer-line pointer-events-none" />
-      <AnimatePresence mode="popLayout">
-        <motion.span
-          key={value}
-          initial={{ y: 20, opacity: 0, scale: 0.8 }}
-          animate={{ y: 0, opacity: 1, scale: 1 }}
-          exit={{ y: -20, opacity: 0, scale: 0.8 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-          className="font-serif text-2xl sm:text-3xl md:text-4xl text-gold"
-        >
+      {animate ? (
+        <AnimatePresence mode="popLayout">
+          <motion.span
+            key={value}
+            initial={{ y: 20, opacity: 0, scale: 0.8 }}
+            animate={{ y: 0, opacity: 1, scale: 1 }}
+            exit={{ y: -20, opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="font-serif text-2xl sm:text-3xl md:text-4xl text-gold"
+          >
+            {value.toString().padStart(2, "0")}
+          </motion.span>
+        </AnimatePresence>
+      ) : (
+        <span className="font-serif text-2xl sm:text-3xl md:text-4xl text-gold">
           {value.toString().padStart(2, "0")}
-        </motion.span>
-      </AnimatePresence>
+        </span>
+      )}
     </motion.div>
     <span className="font-sans text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-dark/60">
       {label}
@@ -65,7 +71,7 @@ export const Countdown = ({ targetDate }: { targetDate: string }) => {
   }, [targetDate]);
 
   return (
-    <section className="py-20 bg-secondary/30 relative overflow-hidden">
+    <section className="py-28 md:py-36 bg-secondary/30 relative overflow-hidden">
       {/* Animated particles */}
       <FloatingParticles count={15} speed={0.1} opacity={0.12} maxSize={1.5} />
 
@@ -73,7 +79,7 @@ export const Countdown = ({ targetDate }: { targetDate: string }) => {
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.05)_0%,transparent_70%)]" />
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-12 relative">
+        <div className="text-center mb-16 relative">
           <GoldSparkle
             size={12}
             className="absolute left-1/2 -translate-x-1/2 top-1 opacity-70"
@@ -94,7 +100,7 @@ export const Countdown = ({ targetDate }: { targetDate: string }) => {
           <TimeUnit value={timeLeft.days} label="Hari" />
           <TimeUnit value={timeLeft.hours} label="Jam" />
           <TimeUnit value={timeLeft.minutes} label="Menit" />
-          <TimeUnit value={timeLeft.seconds} label="Detik" />
+          <TimeUnit value={timeLeft.seconds} label="Detik" animate={false} />
         </div>
       </div>
     </section>

@@ -7,7 +7,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
-import confetti from "canvas-confetti";
 import { FloatingParticles } from "@/components/shared/FloatingParticles";
 import { GoldSparkle } from "@/components/shared/GoldSparkle";
 
@@ -50,13 +49,6 @@ export const RSVP = () => {
 
       if (error) throw error;
 
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ["#D4AF37", "#F8F5F2", "#1C1C1C"],
-      });
-
       setIsSubmitted(true);
     } catch (err) {
       console.error(err);
@@ -67,7 +59,7 @@ export const RSVP = () => {
   };
 
   return (
-    <section className="relative py-24 md:py-32 bg-dark text-primary overflow-hidden">
+    <section className="relative py-32 md:py-48 bg-dark text-primary overflow-hidden">
       <FloatingParticles
         count={30}
         color="#D4AF3780"
@@ -84,7 +76,7 @@ export const RSVP = () => {
       </div>
 
       <div className="container mx-auto px-6 max-w-3xl relative z-10">
-        <div className="text-center mb-16 relative">
+        <div className="text-center mb-24 relative">
           <GoldSparkle size={20} className="absolute -top-4 left-10" />
           <GoldSparkle size={14} className="absolute top-4 right-14" />
           <h2 className="font-serif text-5xl md:text-6xl text-gold mb-6 tracking-tight text-shimmer-gold">
@@ -98,9 +90,10 @@ export const RSVP = () => {
 
         {isSubmitted ? (
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-center p-12 border border-gold/20 bg-primary/5 rounded-4xl shadow-2xl holo-card"
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="text-center p-12 border border-gold/20 bg-primary/5 rounded-4xl shadow-2xl holo-card transition-all duration-500"
           >
             <h3 className="font-serif text-3xl mb-4 text-gold text-shimmer-gold">
               Terima Kasih!
@@ -125,7 +118,7 @@ export const RSVP = () => {
                 </label>
                 <input
                   {...register("name")}
-                  className="w-full bg-transparent border-b border-gold/30 py-3 focus:outline-none focus:border-gold transition-colors font-serif text-xl"
+                  className="w-full bg-transparent border-b border-gold/30 py-3 focus:outline-none focus:border-gold transition-all duration-500 font-serif text-xl"
                   placeholder="Masukkan nama Anda"
                 />
                 {errors.name && (
@@ -141,7 +134,7 @@ export const RSVP = () => {
                 </label>
                 <select
                   {...register("attendance")}
-                  className="w-full bg-transparent border-b border-gold/30 py-3 focus:outline-none focus:border-gold transition-colors font-serif text-xl appearance-none"
+                  className="w-full bg-transparent border-b border-gold/30 py-3 focus:outline-none focus:border-gold transition-all duration-500 font-serif text-xl appearance-none"
                 >
                   <option value="attending" className="bg-dark text-primary">
                     Saya akan hadir
@@ -166,7 +159,7 @@ export const RSVP = () => {
                   type="number"
                   min="1"
                   max="5"
-                  className="w-full bg-transparent border-b border-gold/30 py-3 focus:outline-none focus:border-gold transition-colors font-serif text-xl"
+                  className="w-full bg-transparent border-b border-gold/30 py-3 focus:outline-none focus:border-gold transition-all duration-500 font-serif text-xl"
                   placeholder="Jumlah tamu"
                 />
               </div>
@@ -179,7 +172,7 @@ export const RSVP = () => {
               <textarea
                 {...register("message")}
                 rows={4}
-                className="w-full bg-transparent border-b border-gold/30 py-3 focus:outline-none focus:border-gold transition-colors font-serif text-xl resize-none"
+                className="w-full bg-transparent border-b border-gold/30 py-3 focus:outline-none focus:border-gold transition-all duration-500 font-serif text-xl resize-none"
                 placeholder="Tuliskan ucapan dan doa restu Anda untuk kedua mempelai"
               />
               {errors.message && (

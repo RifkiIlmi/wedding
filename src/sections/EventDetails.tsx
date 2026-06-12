@@ -49,17 +49,17 @@ const EventCard = ({
     <div className="absolute inset-0 shimmer-line opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
     <div className="flex flex-col items-center text-center relative z-10">
-      <div className="w-16 h-16 rounded-full border border-gold flex items-center justify-center mb-8 glow-gold">
+      <div className="w-16 h-16 rounded-full border border-gold flex items-center justify-center mb-10 glow-gold">
         <Calendar className="w-6 h-6 text-gold" />
       </div>
 
-      <h3 className="font-serif text-3xl md:text-4xl mb-6 text-dark tracking-wide">
+      <h3 className="font-serif text-3xl md:text-4xl mb-8 text-dark tracking-wide">
         {title}
       </h3>
 
-      <div className="w-16 h-px bg-linear-to-r from-transparent via-gold/40 to-transparent mb-8" />
+      <div className="w-16 h-px bg-linear-to-r from-transparent via-gold/40 to-transparent mb-10" />
 
-      <div className="space-y-6 mb-10 w-full">
+      <div className="space-y-6 mb-12 w-full">
         <div className="flex items-center justify-center gap-4 text-dark/70">
           <Calendar className="w-5 h-5 text-gold/60" />
           <p className="font-sans text-lg tracking-wide">{date}</p>
@@ -97,7 +97,7 @@ const EventCard = ({
 
 export const EventDetails = () => {
   return (
-    <section className="py-24 md:py-32 bg-primary relative overflow-hidden">
+    <section className="py-32 md:py-48 bg-primary relative overflow-hidden">
       {/* Particles */}
       <FloatingParticles count={18} speed={0.12} opacity={0.12} maxSize={1.8} />
 
@@ -105,7 +105,7 @@ export const EventDetails = () => {
       <div className="absolute inset-0 pattern-ornament pointer-events-none" />
 
       <div className="container mx-auto px-6 max-w-6xl relative z-10">
-        <div className="text-center mb-20 relative">
+        <div className="text-center mb-28 relative">
           <GoldSparkle
             size={14}
             className="absolute left-10 top-8 opacity-70"
@@ -139,7 +139,7 @@ export const EventDetails = () => {
             />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 relative z-10">
+          <div className="grid md:grid-cols-2 gap-16 lg:gap-24 relative z-10">
             <EventCard
               title="Akad Pernikahan"
               date="Jum'at, 10 Juli 2026"
@@ -151,7 +151,7 @@ export const EventDetails = () => {
             />
             <EventCard
               title="Resepsi Pernikahan"
-              date="Sabut, 11 Juli 2026"
+              date="Sabtu, 11 Juli 2026"
               time="09:00 AM - 21:00 PM"
               venue="Kediaman Wanita"
               address="Kayu Ara, Kec. Kerumutan, Kab. Pelalawan, Riau"

@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { OpeningScreen } from "@/components/invitation/OpeningScreen";
 import { MusicPlayer } from "@/components/shared/MusicPlayer";
 import { Hero } from "@/sections/Hero";
@@ -14,6 +14,16 @@ import { RSVP } from "@/sections/RSVP";
 import { DigitalGift } from "@/sections/DigitalGift";
 import { Wishes } from "@/sections/Wishes";
 import { Footer } from "@/sections/Footer";
+
+function LazySection({ children }: { children: React.ReactNode }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "250px" });
+  return (
+    <div ref={ref} className="w-full">
+      {isInView ? children : <div className="h-40" />}
+    </div>
+  );
+}
 
 export default function Home() {
   const [isOpened, setIsOpened] = useState(false);
@@ -60,22 +70,34 @@ export default function Home() {
           <EventDetails />
 
           {/* 6. Love Story Timeline */}
-          <LoveStory />
+          <LazySection>
+            <LoveStory />
+          </LazySection>
 
           {/* 7. Gallery Section */}
-          <Gallery />
+          <LazySection>
+            <Gallery />
+          </LazySection>
 
           {/* 8. RSVP Section */}
-          <RSVP />
+          <LazySection>
+            <RSVP />
+          </LazySection>
 
           {/* 9. Digital Gift Section */}
-          <DigitalGift />
+          <LazySection>
+            <DigitalGift />
+          </LazySection>
 
           {/* 10. Wishes Section */}
-          <Wishes />
+          <LazySection>
+            <Wishes />
+          </LazySection>
 
           {/* 11. Footer Section */}
-          <Footer />
+          <LazySection>
+            <Footer />
+          </LazySection>
         </motion.div>
       )}
 

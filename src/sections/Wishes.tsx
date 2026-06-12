@@ -147,7 +147,7 @@ export const Wishes = () => {
   if (loading && page === 0) return null;
 
   return (
-    <section className="relative py-24 md:py-32 bg-secondary/10 overflow-hidden">
+    <section className="relative py-32 md:py-48 bg-secondary/10 overflow-hidden">
       <style dangerouslySetInnerHTML={{__html: `
         .custom-scrollbar::-webkit-scrollbar {
           width: 5px;
@@ -186,7 +186,7 @@ export const Wishes = () => {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16 relative">
+        <div className="text-center mb-24 relative">
           <GoldSparkle size={20} className="absolute -top-4 left-12" />
           <GoldSparkle size={14} className="absolute top-6 right-14" />
           <div className="absolute left-1/2 top-10 h-2 w-2 rounded-full bg-gold/80 shadow-[0_0_14px_rgba(212,175,55,0.35)] animate-sparkle" />
@@ -202,8 +202,8 @@ export const Wishes = () => {
         <div className="max-w-4xl mx-auto">
           {wishes.length > 0 ? (
             <>
-              <div className="max-h-[520px] overflow-y-auto pr-2 md:pr-4 custom-scrollbar mb-8">
-                <div className="grid gap-6 md:grid-cols-2">
+              <div className="max-h-[520px] overflow-y-auto pr-2 md:pr-4 custom-scrollbar mb-12">
+                <div className="grid gap-8 md:grid-cols-2">
                   <AnimatePresence initial={false}>
                     {wishes.map((wish, index) => {
                       const { cleanMessage, attendance } = parseMessage(wish);
@@ -222,7 +222,7 @@ export const Wishes = () => {
                             delay: isNew ? 0 : index * 0.05,
                             ease: "easeOut",
                           }}
-                          className={`p-6 md:p-8 rounded-[24px] shadow-xl border relative transition-all duration-300 ${
+                          className={`p-6 md:p-8 rounded-[24px] shadow-xl border relative transition-all duration-500 ${
                             isNew
                               ? "bg-amber-50/90 border-gold/70 shadow-[0_0_15px_rgba(212,175,55,0.25)] animate-pulse-subtle"
                               : "bg-white/95 border-gold/10 hover:border-gold/25"
@@ -263,7 +263,7 @@ export const Wishes = () => {
                       setPage(nextPage);
                       fetchWishes(nextPage);
                     }}
-                    className="px-6 py-2.5 rounded-full border border-gold/30 text-gold hover:bg-gold/5 active:scale-95 transition-all font-sans text-xs uppercase tracking-widest font-medium"
+                    className="px-6 py-2.5 rounded-full border border-gold/30 text-gold hover:bg-gold/5 active:scale-95 transition-all duration-500 font-sans text-xs uppercase tracking-widest font-medium"
                   >
                     Tampilkan Lebih Banyak
                   </button>

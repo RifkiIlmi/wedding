@@ -73,7 +73,7 @@ const BankCard = ({ bank, account, name }: BankCardProps) => {
 
 export const DigitalGift = () => {
   return (
-    <section className="relative py-24 md:py-32 bg-primary overflow-hidden">
+    <section className="relative py-32 md:py-48 bg-primary overflow-hidden">
       <FloatingParticles
         count={28}
         color="#D4AF3780"
@@ -89,7 +89,7 @@ export const DigitalGift = () => {
       </div>
 
       <div className="container mx-auto px-6 max-w-4xl relative z-10">
-        <div className="text-center mb-16 relative">
+        <div className="text-center mb-24 relative">
           <GoldSparkle size={20} className="absolute -top-4 left-12" />
           <GoldSparkle size={16} className="absolute top-6 right-12" />
           <div className="absolute left-1/2 top-16 h-2 w-2 rounded-full bg-gold/80 shadow-[0_0_14px_rgba(212,175,55,0.35)] animate-sparkle" />
@@ -104,7 +104,7 @@ export const DigitalGift = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-12">
           <BankCard
             bank="BANK MANDIRI"
             account="1234567890"
@@ -117,7 +117,7 @@ export const DigitalGift = () => {
           />
         </div>
 
-        <div className="mt-16 flex flex-col items-center">
+        <div className="mt-24 flex flex-col items-center">
           <p className="font-sans text-xs uppercase tracking-[0.3em] text-gold mb-6">
             Atau Pindai Kode QR
           </p>

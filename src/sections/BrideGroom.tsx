@@ -44,7 +44,7 @@ const PersonCard = ({
     transition={{ duration: 0.8 }}
     viewport={{ once: true }}
     whileHover={{ y: -10, scale: 1.02, transition: { duration: 0.4, ease: "easeOut" } }}
-    className="relative flex flex-col items-center text-center group bg-white/90 border border-gold/10 rounded-[40px] shadow-[0_24px_80px_rgba(28,28,28,0.12)] p-8 holo-card"
+    className="relative flex flex-col items-center text-center group bg-white/90 border border-gold/10 rounded-[40px] shadow-[0_24px_80px_rgba(28,28,28,0.12)] p-8 md:p-10 holo-card"
   >
     {/* Decorative Gold Flowers */}
     <img
@@ -63,7 +63,7 @@ const PersonCard = ({
       <GlitterSparkle className="right-6 top-20 h-3 w-3 animate-glitter delay-150" />
       <GlitterSparkle className="left-1/2 top-16 h-2 w-2 animate-glitter delay-300" />
     </div>
-    <div className="relative z-10 w-64 h-80 mb-8 overflow-hidden rounded-t-full border-4 border-gold/20 p-2 bg-white/80">
+    <div className="relative z-10 w-64 h-80 mb-10 overflow-hidden rounded-t-full border-4 border-gold/20 p-2 bg-white/80">
       {/* Gold glow behind photo */}
       <div className="absolute inset-0 rounded-t-full bg-gold/10 blur-xl scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
       <div className="relative w-full h-full overflow-hidden rounded-t-full glow-gold">
@@ -84,13 +84,13 @@ const PersonCard = ({
       whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
       transition={{ duration: 1 }}
       viewport={{ once: true }}
-      className="relative z-10 font-sans text-xs uppercase tracking-[0.3em] text-gold mb-3"
+      className="relative z-10 font-sans text-xs uppercase tracking-[0.3em] text-gold mb-4"
     >
       {role}
     </motion.span>
     <h3 className={`relative z-10 font-serif mb-4 text-dark ${nameClassName}`}>{name}</h3>
 
-    <div className="relative z-10 space-y-1 mb-6">
+    <div className="relative z-10 space-y-1 mb-8">
       <p className="font-sans text-sm text-dark/60 italic leading-relaxed">
         {relation}
       </p>
@@ -115,7 +115,7 @@ const PersonCard = ({
 
 export const BrideGroom = () => {
   return (
-    <section className="py-24 md:py-32 bg-primary overflow-hidden relative border-y border-gold/10">
+    <section className="py-32 md:py-48 bg-primary overflow-hidden relative border-y border-gold/10">
       <Image
         src="/assets/graphics/Floral-Corner-Decor.svg"
         alt="corner decor top left"
@@ -143,8 +143,8 @@ export const BrideGroom = () => {
       {/* Background pattern */}
       <div className="absolute inset-0 pattern-ornament pointer-events-none" />
 
-      <div className="container mb-10 mx-auto px-6 relative z-10">
-        <div className="text-center mb-20">
+      <div className="container mb-16 mx-auto px-6 relative z-10">
+        <div className="text-center mb-28">
           <motion.h2
             whileInView={{ opacity: 1, scale: 1 }}
             initial={{ opacity: 0, scale: 0.9 }}
@@ -166,14 +166,14 @@ export const BrideGroom = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-12 md:gap-8 items-start max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-16 md:gap-12 items-start max-w-5xl mx-auto">
           <PersonCard
             name="Jeni Adhiva, S.Kom., M.Kom"
             nameClassName="text-3xl leading-tight"
             role="Mempelai Wanita"
             relation="Putri tercinta dari"
             parents={{ father: "Zamri", mother: "Desliana" }}
-            image="https://images.unsplash.com/photo-1549333341-a1288c387f65?auto=format&fit=crop&q=80"
+            image="https://images.unsplash.com/photo-1549333341-a1288c387f65?auto=format&fit=crop&w=600&q=75&fm=webp"
             ig="sarah_bride"
           />
 
@@ -203,7 +203,7 @@ export const BrideGroom = () => {
             role="Mempelai Pria"
             relation="Putra tercinta dari"
             parents={{ father: "Raflizar", mother: "Jusnaini, S.Pd.I" }}
-            image="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80"
+            image="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=75&fm=webp"
             ig="michael_groom"
           />
         </div>
