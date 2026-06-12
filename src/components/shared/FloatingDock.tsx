@@ -32,7 +32,7 @@ const navItems: NavItem[] = [
   { id: "rsvp", label: "RSVP", icon: <Mail className="w-4 h-4" /> },
   { id: "gift", label: "Hadiah", icon: <Gift className="w-4 h-4" /> },
   { id: "wishes", label: "Ucapan", icon: <Heart className="w-4 h-4" /> },
-  { id: "faq", label: "Tanya Jawab", icon: <HelpCircle className="w-4 h-4" /> },
+  { id: "faq", label: "FAQ", icon: <HelpCircle className="w-4 h-4" /> },
 ];
 
 export const FloatingDock = () => {
@@ -43,8 +43,36 @@ export const FloatingDock = () => {
   const isScrollingTo = useRef(false);
   const scrollingTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const observedSections = useRef<Set<string>>(new Set());
+  const observersRef = useRef<IntersectionObserver[]>([]);
+
+  // Function to register IntersectionObservers for sections dynamically as they mount
+  const registerObservers = useCallback(() => {
+    navItems.forEach(({ id }) => {
+      if (observedSections.current.has(id)) return;
+
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting && !isScrollingTo.current) {
+            setActiveSection(id);
+          }
+        },
+        { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+      );
+
+      observer.observe(el);
+      observersRef.current.push(observer);
+      observedSections.current.add(id);
+    });
+  }, []);
 
   const handleScroll = useCallback(() => {
+    // Check and register observers for newly lazy-loaded sections on scroll
+    registerObservers();
+
     if (isScrollingTo.current) return;
 
     const currentScrollY = window.scrollY;
@@ -62,31 +90,20 @@ export const FloatingDock = () => {
 
     if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
     scrollTimeout.current = setTimeout(() => setIsVisible(true), 1200);
-  }, []);
+  }, [registerObservers]);
 
-  // Active section tracking
+  // Active section tracking (mount setup)
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
+    registerObservers();
+    const interval = setInterval(registerObservers, 1000);
 
-    navItems.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting && !isScrollingTo.current) {
-            setActiveSection(id);
-          }
-        },
-        { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
-      );
-
-      observer.observe(el);
-      observers.push(observer);
-    });
-
-    return () => observers.forEach((o) => o.disconnect());
-  }, []);
+    return () => {
+      clearInterval(interval);
+      observersRef.current.forEach((o) => o.disconnect());
+      observersRef.current = [];
+      observedSections.current.clear();
+    };
+  }, [registerObservers]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
