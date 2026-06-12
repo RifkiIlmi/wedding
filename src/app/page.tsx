@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { OpeningScreen } from "@/components/invitation/OpeningScreen";
 import { MusicPlayer } from "@/components/shared/MusicPlayer";
+import { FloatingDock } from "@/components/shared/FloatingDock";
 import { Hero } from "@/sections/Hero";
 import { BrideGroom } from "@/sections/BrideGroom";
 import { Countdown } from "@/sections/Countdown";
@@ -104,6 +105,8 @@ export default function Home() {
           <LazySection>
             <Footer />
           </LazySection>
+          {/* Floating Dock Navigation */}
+          <FloatingDock />
         </motion.div>
       )}
 

@@ -120,7 +120,7 @@ export const RSVP = () => {
   };
 
   return (
-    <section className="relative py-32 md:py-48 bg-dark text-primary overflow-hidden">
+    <section id="rsvp" className="relative py-32 md:py-48 bg-dark text-primary overflow-hidden">
       <FloatingParticles
         count={30}
         color="#D4AF3780"

@@ -66,7 +66,7 @@ export const Gallery = () => {
   const smallImg4 = displayImages[4];
 
   return (
-    <section className="relative py-32 md:py-48 bg-secondary/20 overflow-hidden">
+    <section id="gallery" className="relative py-32 md:py-48 bg-secondary/20 overflow-hidden">
       <FloatingParticles
         count={20}
         color="#D4AF3780"

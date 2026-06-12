@@ -189,7 +189,7 @@ export const Wishes = () => {
   if (loading) return null;
 
   return (
-    <section className="relative py-32 md:py-48 bg-secondary/10 overflow-hidden">
+    <section id="wishes" className="relative py-32 md:py-48 bg-secondary/10 overflow-hidden">
       <FloatingParticles
         count={24}
         color="#D4AF3780"

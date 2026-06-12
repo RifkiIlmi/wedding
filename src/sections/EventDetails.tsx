@@ -97,7 +97,7 @@ const EventCard = ({
 
 export const EventDetails = () => {
   return (
-    <section className="py-32 md:py-48 bg-primary relative overflow-hidden">
+    <section id="event" className="py-32 md:py-48 bg-primary relative overflow-hidden">
       {/* Particles */}
       <FloatingParticles count={18} speed={0.12} opacity={0.12} maxSize={1.8} />
 
