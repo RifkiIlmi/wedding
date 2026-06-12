@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Copy, Check, CreditCard } from "lucide-react";
+import { Copy, CreditCard, QrCode, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FloatingParticles } from "@/components/shared/FloatingParticles";
 import { GoldSparkle } from "@/components/shared/GoldSparkle";
@@ -16,43 +16,97 @@ interface BankCardProps {
 }
 
 const BankCard = ({ bank, account, name, onCopy }: BankCardProps) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+
   return (
-    <motion.div
-      whileHover={{ y: -5 }}
-      whileTap={{ scale: 0.98 }}
-      className="bg-white/95 p-8 rounded-[28px] border border-gold/10 shadow-2xl holo-card relative overflow-hidden"
-    >
-      <div className="absolute top-6 right-6 h-2 w-2 rounded-full bg-gold/80 shadow-[0_0_14px_rgba(212,175,55,0.35)] animate-sparkle" />
-      <div className="absolute inset-0 bg-linear-to-b from-transparent via-gold/10 to-transparent opacity-70 pointer-events-none" />
-      <div className="relative flex items-center justify-between mb-8">
-        <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center">
-          <CreditCard className="w-6 h-6 text-gold" />
-        </div>
-        <span className="font-sans text-xs font-bold uppercase tracking-widest text-dark/40">
-          {bank}
-        </span>
-      </div>
-
-      <div className="mb-8">
-        <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-dark/40 mb-1">
-          Nomor Rekening
-        </p>
-        <p className="font-serif text-2xl text-dark tracking-wider">
-          {account}
-        </p>
-        <p className="font-sans text-sm text-dark/60 mt-2 italic">a.n {name}</p>
-      </div>
-
-      <Button
-        variant="ghost"
-        size="sm"
-        className="w-full flex items-center gap-2 border border-gold/20"
-        onClick={() => onCopy(account)}
+    <div className="relative w-full h-[340px]" style={{ perspective: "1000px" }}>
+      <motion.div
+        className="w-full h-full relative"
+        style={{ transformStyle: "preserve-3d" }}
+        animate={{ rotateY: isFlipped ? 180 : 0 }}
+        transition={{ type: "spring", stiffness: 260, damping: 20 }}
       >
-        <Copy className="w-3 h-3" />
-        Salin Nomor
-      </Button>
-    </motion.div>
+        {/* Front Side */}
+        <div
+          className="absolute inset-0 bg-white/95 p-8 rounded-[28px] border border-gold/10 shadow-2xl holo-card flex flex-col"
+          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+        >
+          <div className="absolute top-6 right-6 h-2 w-2 rounded-full bg-gold/80 shadow-[0_0_14px_rgba(212,175,55,0.35)] animate-sparkle" />
+          <div className="absolute inset-0 bg-linear-to-b from-transparent via-gold/10 to-transparent opacity-70 pointer-events-none rounded-[28px]" />
+          
+          <div className="relative flex items-center justify-between mb-8">
+            <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center">
+              <CreditCard className="w-6 h-6 text-gold" />
+            </div>
+            <span className="font-sans text-xs font-bold uppercase tracking-widest text-dark/40">
+              {bank}
+            </span>
+          </div>
+
+          <div className="mb-auto">
+            <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-dark/40 mb-1">
+              Nomor Rekening
+            </p>
+            <p className="font-serif text-2xl text-dark tracking-wider">
+              {account}
+            </p>
+            <p className="font-sans text-sm text-dark/60 mt-2 italic">a.n {name}</p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 mt-6">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="flex-1 flex items-center gap-2 border border-gold/20 hover:bg-gold/5"
+              onClick={() => onCopy(account)}
+            >
+              <Copy className="w-3 h-3" />
+              Salin Nomor
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="flex-1 flex items-center gap-2 border-gold/30 text-dark/70 hover:bg-gold/5 hover:text-dark"
+              onClick={() => setIsFlipped(true)}
+            >
+              <QrCode className="w-3 h-3" />
+              Tampilkan QRIS
+            </Button>
+          </div>
+        </div>
+
+        {/* Back Side */}
+        <div
+          className="absolute inset-0 bg-white/95 p-8 rounded-[28px] border border-gold/10 shadow-2xl holo-card flex flex-col items-center justify-center text-center"
+          style={{
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+            transform: "rotateY(180deg)",
+          }}
+        >
+          <div className="absolute top-6 left-6 h-2 w-2 rounded-full bg-gold/80 shadow-[0_0_14px_rgba(212,175,55,0.35)] animate-sparkle" />
+          <div className="absolute inset-0 bg-linear-to-b from-transparent via-gold/10 to-transparent opacity-70 pointer-events-none rounded-[28px]" />
+          
+          <p className="font-sans text-xs uppercase tracking-[0.2em] text-gold mb-6">
+            Pindai QRIS
+          </p>
+          
+          <div className="w-32 h-32 bg-dark/5 flex items-center justify-center border-2 border-dashed border-gold/30 rounded-2xl mb-8 relative">
+            <span className="font-serif italic text-dark/40">QRIS</span>
+          </div>
+
+          <Button
+            variant="ghost"
+            size="sm"
+            className="w-full flex items-center justify-center gap-2 border border-gold/20 hover:bg-gold/5 text-dark/60"
+            onClick={() => setIsFlipped(false)}
+          >
+            <ArrowLeft className="w-3 h-3" />
+            Kembali
+          </Button>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 
@@ -110,20 +164,6 @@ export const DigitalGift = () => {
             name="M. RIFKI ILMI"
             onCopy={handleCopy}
           />
-        </div>
-
-        <div className="mt-24 flex flex-col items-center">
-          <p className="font-sans text-xs uppercase tracking-[0.3em] text-gold mb-6">
-            Atau Pindai Kode QR
-          </p>
-          <div className="w-48 h-48 bg-white/95 p-4 rounded-[28px] shadow-2xl border border-gold/10 holo-card relative overflow-hidden">
-            <div className="absolute top-4 right-4 h-2 w-2 rounded-full bg-gold/80 shadow-[0_0_14px_rgba(212,175,55,0.35)] animate-sparkle" />
-            <div className="absolute inset-0 bg-linear-to-b from-transparent via-gold/10 to-transparent opacity-60 pointer-events-none" />
-            {/* Placeholder for QR code */}
-            <div className="relative w-full h-full bg-dark/5 flex items-center justify-center border-2 border-dashed border-gold/20 rounded-3xl">
-              <span className="font-serif italic text-dark/40">QRIS</span>
-            </div>
-          </div>
         </div>
       </div>
     </section>
