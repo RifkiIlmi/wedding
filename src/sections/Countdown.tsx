@@ -72,7 +72,7 @@ export const Countdown = ({ targetDate }: { targetDate: string }) => {
           }
         `}} />
         <img
-          src="/assets/images/pre_wedding_grayscale.png"
+          src="/assets/images/count.jpg"
           alt="Wedding Pre-wedding"
           className="w-full h-full object-cover filter grayscale contrast-[1.1] brightness-[0.35] animate-ken-burns"
         />

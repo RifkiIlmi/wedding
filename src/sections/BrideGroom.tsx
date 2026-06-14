@@ -173,8 +173,8 @@ export const BrideGroom = () => {
             role="Mempelai Wanita"
             relation="Putri tercinta dari"
             parents={{ father: "Zamri", mother: "Desliana" }}
-            image="https://images.unsplash.com/photo-1549333341-a1288c387f65?auto=format&fit=crop&w=600&q=75&fm=webp"
-            ig="sarah_bride"
+            image="/assets/images/bride1.jpg"
+            ig="jeniadhiva"
           />
 
           <div className="relative flex justify-center md:pt-40">
@@ -203,8 +203,8 @@ export const BrideGroom = () => {
             role="Mempelai Pria"
             relation="Putra tercinta dari"
             parents={{ father: "Raflizar", mother: "Jusnaini, S.Pd.I" }}
-            image="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=75&fm=webp"
-            ig="michael_groom"
+            image="/assets/images/groom1.jpg"
+            ig="xzxzmril"
           />
         </div>
       </div>
