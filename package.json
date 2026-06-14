@@ -7,7 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "generate-icons": "node scripts/generate-icons.js"
+    "generate-icons": "node scripts/generate-icons.js",
+    "pm2:start": "pm2 start ecosystem.config.js",
+    "pm2:stop": "pm2 delete wedding-app",
+    "pm2:restart": "pm2 restart wedding-app",
+    "pm2:status": "pm2 status",
+    "pm2:logs": "pm2 logs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
