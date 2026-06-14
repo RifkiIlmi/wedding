@@ -25,13 +25,12 @@ const StoryItem = ({ year, title, description, image, index }: StoryItemProps) =
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 * index }}
       viewport={{ once: true, margin: "-100px" }}
-      className={`relative flex flex-col md:flex-row items-center justify-between w-full mb-16 md:mb-24 group ${
-        index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-      } `}
+      className={`relative flex flex-col md:flex-row items-center justify-between w-full mb-16 md:mb-24 group ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+        } `}
     >
       <div className="absolute left-0 top-8 w-3 h-3 rounded-full bg-gold/90 shadow-[0_0_18px_rgba(212,175,55,0.35)] animate-sparkle" />
       <div className="absolute right-10 bottom-8 w-2 h-2 rounded-full bg-gold/80 shadow-[0_0_14px_rgba(212,175,55,0.3)] animate-sparkle delay-150" />
-      
+
       {/* Empty space for the alternating layout */}
       <div className="hidden md:block w-5/12" />
 
@@ -46,15 +45,14 @@ const StoryItem = ({ year, title, description, image, index }: StoryItemProps) =
       {/* Card Content */}
       <div className="w-full md:w-5/12 bg-white/90 p-4 md:p-6 rounded-[32px] shadow-2xl border border-gold/10 hover:border-gold/30 transition-colors duration-700 relative overflow-hidden holo-card flex flex-col gap-4">
         <div className="absolute inset-0 bg-linear-to-b from-transparent via-gold/5 to-transparent opacity-80 pointer-events-none" />
-        
+
         {/* Image Container */}
         <div className="relative w-full h-56 md:h-64 rounded-2xl overflow-hidden shadow-inner shrink-0 bg-dark/5">
           <img
             src={image}
             alt={title}
-            className={`w-full h-full object-cover transition-all duration-700 ease-in-out transform group-hover:scale-105 ${
-              isInCenter ? "grayscale-0" : "grayscale"
-            } md:grayscale md:group-hover:grayscale-0`}
+            className={`w-full h-full object-cover transition-all duration-700 ease-in-out transform group-hover:scale-105 ${isInCenter ? "grayscale-0" : "grayscale"
+              } md:grayscale md:group-hover:grayscale-0`}
           />
           <div className="absolute inset-0 ring-1 ring-inset ring-gold/20 rounded-2xl pointer-events-none" />
         </div>
@@ -75,7 +73,7 @@ const StoryItem = ({ year, title, description, image, index }: StoryItemProps) =
 
 export const LoveStory = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start center", "end center"],
@@ -140,9 +138,9 @@ export const LoveStory = () => {
         <div ref={containerRef} className="relative wrap overflow-hidden p-8 md:p-10 min-h-[500px]">
           {/* Static background line */}
           <div className="absolute top-0 left-1/2 h-full w-[2px] bg-gold/10 -translate-x-1/2" />
-          
+
           {/* Animated drawing line */}
-          <motion.div 
+          <motion.div
             className="absolute top-0 left-1/2 w-[2px] bg-linear-to-b from-gold/40 via-gold to-gold/40 -translate-x-1/2 shadow-[0_0_8px_rgba(212,175,55,0.8)]"
             style={{ height: lineHeight }}
           />
@@ -150,6 +148,48 @@ export const LoveStory = () => {
           {stories.map((story, index) => (
             <StoryItem key={story.year} {...story} index={index} />
           ))}
+
+          {/* Final Reveal: Overlapping Rings & Quote */}
+          <div className="relative z-30 mt-16 md:mt-24 flex flex-col items-center justify-center pb-12">
+            <div className="relative flex items-center justify-center w-full h-20">
+              {/* Left Ring */}
+              <motion.div
+                initial={{ x: -60, opacity: 0 }}
+                whileInView={{ x: -14, opacity: 1 }}
+                transition={{ duration: 1.2, ease: "easeInOut" }}
+                viewport={{ once: true, margin: "-20% 0px" }}
+                className="absolute"
+              >
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="30" cy="30" r="28" stroke="#D4AF37" strokeWidth="1.5" className="drop-shadow-sm" />
+                </svg>
+              </motion.div>
+
+              {/* Right Ring */}
+              <motion.div
+                initial={{ x: 60, opacity: 0 }}
+                whileInView={{ x: 14, opacity: 1 }}
+                transition={{ duration: 1.2, ease: "easeInOut" }}
+                viewport={{ once: true, margin: "-20% 0px" }}
+                className="absolute"
+              >
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="30" cy="30" r="28" stroke="#D4AF37" strokeWidth="1.5" className="drop-shadow-sm" />
+                </svg>
+              </motion.div>
+            </div>
+
+            {/* Quote */}
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, delay: 1.2, ease: "easeInOut" }}
+              viewport={{ once: true, margin: "-20% 0px" }}
+              className="mt-8 font-serif text-2xl md:text-3xl text-dark/80 italic tracking-wide text-center drop-shadow-sm"
+            >
+              &quot;And so their forever begins...&quot;
+            </motion.p>
+          </div>
         </div>
       </div>
     </section>
