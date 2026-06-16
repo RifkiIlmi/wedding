@@ -25,7 +25,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://wedding.example.com"),
+  metadataBase: new URL("https://wedding.mrilseven.tech"),
   title: "The Wedding of Rifki & Jeni | Official Invitation",
   description:
     "Join us in celebrating the love and union of Rifki & Jeni. A premium cinematic wedding experience.",
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     title: "The Wedding of Rifki & Jeni",
     description: "You are cordially invited to our wedding celebration.",
     type: "website",
-    url: "https://wedding.example.com",
+    url: "https://wedding.mrilseven.tech",
     images: [
       {
         url: openingImage,
