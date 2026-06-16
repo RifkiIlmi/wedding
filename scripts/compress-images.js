@@ -6,9 +6,7 @@ const imagesDir = path.resolve(__dirname, "..", "public", "assets", "images");
 
 async function compress() {
   const files = [
-    { name: "bride1.jpg", width: 600, quality: 80 },
-    { name: "groom1.jpg", width: 600, quality: 80 },
-    { name: "count.jpg", width: 1200, quality: 75 }
+    { name: "opening.jpeg", width: 1200, quality: 75 }
   ];
 
   for (const file of files) {
@@ -18,7 +16,7 @@ async function compress() {
     if (fs.existsSync(filePath)) {
       const oldSize = fs.statSync(filePath).size;
       console.log(`Compressing ${file.name} (Original size: ${(oldSize / 1024 / 1024).toFixed(2)} MB)...`);
-      
+
       await sharp(filePath)
         .resize({ width: file.width, withoutEnlargement: true })
         .jpeg({ quality: file.quality, progressive: true })
@@ -26,7 +24,7 @@ async function compress() {
 
       fs.unlinkSync(filePath);
       fs.renameSync(tempPath, filePath);
-      
+
       const newSize = fs.statSync(filePath).size;
       console.log(`Compressed ${file.name} successfully to ${(newSize / 1024).toFixed(2)} KB (Saved: ${((oldSize - newSize) / 1024 / 1024).toFixed(2)} MB).`);
     } else {
