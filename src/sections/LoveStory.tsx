@@ -70,7 +70,7 @@ const StoryItem = ({ year, title, description, image, index }: StoryItemProps) =
           </div>
 
           {/* Image Container */}
-          <div className="relative w-full h-40 md:h-44 rounded-xl overflow-hidden shadow-inner shrink-0 bg-dark/5">
+          <div className="relative w-full aspect-[3/2] rounded-xl overflow-hidden shadow-inner shrink-0 bg-dark/5">
             <Image
               src={image}
               alt={title}
@@ -113,35 +113,35 @@ export const LoveStory = () => {
       title: "First Meeting",
       description:
         "Kami pertama kali bertemu di organisasi kampus Puzzle Research Data Technology. Sebuah pertemuan sederhana yang menjadi awal kisah kami.",
-      image: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=800&auto=format&fit=crop",
+      image: "/assets/images/lv1.jpeg",
     },
     {
       year: "2022",
       title: "A Beautiful Beginning",
       description:
         "Takdir kembali mempertemukan kami melalui kantor yang berdekatan di Jalan Sudirman, Pekanbaru, Riau. Dari makan siang bersama hingga berbagi cerita, kedekatan itu tumbuh menjadi cinta.",
-      image: "https://images.unsplash.com/photo-1445116572660-236099ec97a0?q=80&w=800&auto=format&fit=crop",
+      image: "/assets/images/lv2.jpeg",
     },
     {
       year: "2024",
       title: "Growing Through Distance",
       description:
         "Jarak dan kesibukan membawa kami menempuh jalan masing-masing. Meski sempat kehilangan kontak, takdir masih menyimpan cerita untuk kami.",
-      image: "https://images.unsplash.com/photo-1500964757637-c85e8a162699?q=80&w=800&auto=format&fit=crop",
+      image: "/assets/images/lv3.jpeg",
     },
     {
       year: "February 2026",
       title: "Engagement",
       description:
-        "SSetelah perjalanan panjang, kami dipertemukan kembali dan memutuskan untuk melangkah bersama menuju masa depan.",
-      image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop",
+        "Setelah perjalanan panjang, kami dipertemukan kembali dan memutuskan untuk melangkah bersama menuju masa depan.",
+      image: "/assets/images/lv4.jpeg",
     },
     {
       year: "July 2026",
       title: "Wedding Day",
       description:
         "Dengan penuh syukur, kami siap mengikat janji suci pernikahan dan memulai babak baru sebagai pasangan seumur hidup.",
-      image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop",
+      image: "/assets/images/lv5.jpeg",
     },
   ];
 

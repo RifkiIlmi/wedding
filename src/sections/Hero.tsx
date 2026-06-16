@@ -58,7 +58,7 @@ export const Hero = () => {
         className="absolute inset-0 z-0 bg-cover bg-center scale-110"
         style={{
           backgroundImage:
-            'url("https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1920&q=75&fm=webp")',
+            'url("/assets/images/hero.jpeg")',
         }}
       >
         <div className="absolute inset-0 bg-black/60" />

@@ -179,7 +179,7 @@ export const BrideGroom = () => {
             role="Mempelai Wanita"
             relation="Putri tercinta dari"
             parents={{ father: "Zamri", mother: "Desliana" }}
-            image="/assets/images/bride1.jpg"
+            image="/assets/images/bride1.jpeg"
             ig="jeniadhiva"
           />
 
@@ -209,7 +209,7 @@ export const BrideGroom = () => {
             role="Mempelai Pria"
             relation="Putra tercinta dari"
             parents={{ father: "Raflizar", mother: "Jusnaini, S.Pd.I" }}
-            image="/assets/images/groom1.jpg"
+            image="/assets/images/groom1.jpeg"
             ig="xzxzmril"
           />
         </div>

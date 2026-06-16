@@ -16,6 +16,7 @@ const eventsData = [
     time: "19:00 - 21:00 WIB",
     venue: "Kediaman Wanita",
     address: "Kayu Ara, Kec. Kerumutan, Kab. Pelalawan, Riau",
+    coordinate: "-0.061144881064984176, 102.30936620709",
     startUtc: "20260710T120000Z",
     endUtc: "20260710T140000Z"
   },
@@ -27,6 +28,7 @@ const eventsData = [
     time: "09:00 - 21:00 WIB",
     venue: "Kediaman Wanita",
     address: "Kayu Ara, Kec. Kerumutan, Kab. Pelalawan, Riau",
+    coordinate: "-0.061144881064984176, 102.30936620709",
     startUtc: "20260711T020000Z",
     endUtc: "20260711T140000Z"
   },

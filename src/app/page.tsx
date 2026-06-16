@@ -7,7 +7,7 @@ import { MusicPlayer } from "@/components/shared/MusicPlayer";
 import { FloatingDock } from "@/components/shared/FloatingDock";
 import dynamic from "next/dynamic";
 
-const Hero = dynamic(() => import("@/sections/Hero").then((mod) => mod.Hero), { ssr: false });
+const Hero = dynamic(() => import("@/sections/Hero").then((mod) => mod.Hero), { ssr: true });
 const BrideGroom = dynamic(() => import("@/sections/BrideGroom").then((mod) => mod.BrideGroom), { ssr: false });
 const Countdown = dynamic(() => import("@/sections/Countdown").then((mod) => mod.Countdown), { ssr: false });
 const EventDetails = dynamic(() => import("@/sections/EventDetails").then((mod) => mod.EventDetails), { ssr: false });
@@ -50,7 +50,7 @@ export default function Home() {
   }, [isOpened]);
 
   return (
-    <main className="relative min-h-screen bg-primary">
+    <main className="relative min-h-screen bg-dark">
       {/* 1. Opening Screen (Scroll locked) */}
       <OpeningScreen guestName={guestName} onOpen={() => setIsOpened(true)} />
 
