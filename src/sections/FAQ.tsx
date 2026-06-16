@@ -11,6 +11,10 @@ interface FAQItem {
 
 const FAQ_ITEMS: FAQItem[] = [
   {
+    question: "Pakaian Pengantin",
+    answer: "Pengantin menggunakan 4 busana, akad (putih), resepsi (Melayu, Minang, dan Modern)",
+  },
+  {
     question: "Dress Code & Panduan Busana?",
     answer: "Bebas. Sopan & Rapi",
   },

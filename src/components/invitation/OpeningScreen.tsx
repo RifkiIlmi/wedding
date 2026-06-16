@@ -55,7 +55,8 @@ export const OpeningScreen = ({
               alt="Rifki & Jeni logo"
               width={128}
               height={128}
-              // Sedikit penyesuaian ukuran jika diperlukan, tapi ini tetap sama
+              priority
+              loading="eager"
               className="w-32 h-32 md:w-32 md:h-32 object-contain"
             />
           </div>

@@ -44,17 +44,18 @@ const PersonCard = ({
     transition={{ duration: 0.8 }}
     viewport={{ once: true }}
     whileHover={{ y: -10, scale: 1.02, transition: { duration: 0.4, ease: "easeOut" } }}
+    whileTap={{ y: -10, scale: 1.02, transition: { duration: 0.3, ease: "easeOut" } }}
     className="relative flex flex-col items-center text-center group bg-white/90 border border-gold/10 rounded-[40px] shadow-[0_24px_80px_rgba(28,28,28,0.12)] p-8 md:p-10 holo-card"
   >
     {/* Decorative Gold Flowers */}
-    <img
+    <Image
       src="/assets/graphics/Gold-Flower.svg"
       alt="gold flower decor"
       width={112}
       height={112}
       className="absolute -top-10 -right-10 w-28 h-28 pointer-events-none opacity-90 animate-float z-20 drop-shadow-md"
     />
-    <img
+    <Image
       src="/assets/graphics/Gold-Flower.svg"
       alt="gold flower decor"
       width={96}
@@ -141,7 +142,7 @@ export const BrideGroom = () => {
 
       {/* Decorative ornamental divider top */}
       <div className="absolute top-[-45px] left-0 right-0 flex justify-center pointer-events-none z-10 h-24 items-center overflow-hidden">
-        <img src="/assets/graphics/Wedding-Invitation-separator.svg" alt="separator top" width={400} height={40} className="w-[400px] max-w-none opacity-80 rotate-90" />
+        <Image src="/assets/graphics/Wedding-Invitation-separator.svg" alt="separator top" width={400} height={40} className="w-[400px] max-w-none opacity-80 rotate-90" />
       </div>
 
       {/* Background pattern */}
@@ -153,28 +154,34 @@ export const BrideGroom = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             initial={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 1 }}
-            className="font-serif text-5xl md:text-6xl text-dark mb-6 tracking-[0.04em]"
+            className="font-serif text-3xl md:text-4xl text-dark mb-6 tracking-[0.04em]"
           >
-            Pasangan Pengantin
+            بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
           </motion.h2>
           <div className="flex justify-center mb-6 pointer-events-none h-30 items-center overflow-hidden">
-            <img
-              src="/assets/graphics/Decorative-Mandala.svg"
+            <Image
+              src="/assets/graphics/RJ-Logo-Fix.svg"
               alt="floral accent"
-              width={600}
-              height={600}
-              className="w-[600px] max-w-none opacity-80 animate-[spin_20s_linear_infinite] will-change-transform transform-gpu"
+              width={300}
+              height={300}
+              className="w-[100px] max-w-none opacity-80 animate-[spin_20s_linear_infinite] will-change-transform transform-gpu"
             />
           </div>
           <p className="max-w-2xl mx-auto font-sans text-dark/70 leading-relaxed tracking-wide">
-            Assalamu&lsquo;alaikum Warahmatullahi Wabarakatuh. Dengan rahmat
-            Allah SWT, kami mengundang Anda untuk menghadiri pernikahan dari:
+            &quot;Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan
+            pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung
+            dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa
+            kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat
+            tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.&quot; </p>
+          <br />
+          <p className="max-w-2xl mx-auto font-sans text-dark/70 leading-relaxed tracking-wide">
+            (Q.S Ar-Rum:21)
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-16 md:gap-12 items-start max-w-5xl mx-auto">
           <PersonCard
-            name="Jeni Adhiva, S.Kom., M.Kom"
+            name="Jeni Adhiva, M.Kom"
             nameClassName="text-3xl leading-tight"
             role="Mempelai Wanita"
             relation="Putri tercinta dari"
@@ -217,7 +224,7 @@ export const BrideGroom = () => {
 
       {/* Decorative ornamental divider bottom */}
       <div className="absolute bottom-[-30px] left-0 right-0 flex justify-center pointer-events-none z-10 h-24 items-center overflow-hidden">
-        <img src="/assets/graphics/Wedding-Invitation-separator.svg" alt="separator bottom" width={400} height={40} className="w-[400px] max-w-none opacity-80 rotate-90" />
+        <Image src="/assets/graphics/Wedding-Invitation-separator.svg" alt="separator bottom" width={400} height={40} className="w-[400px] max-w-none opacity-80 rotate-90" />
       </div>
     </section>
   );

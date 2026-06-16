@@ -192,20 +192,7 @@ export const Hero = () => {
             className="h-px bg-gold/50"
           />
         </div>
-        <br />
-        <br />
-        <p className="text-[10px] tracking-[0.3em] text-primary">
-          &quot;Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan
-          pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung
-          dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa
-          kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat
-          tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.&quot;
-        </p>
-        <br />
 
-        <p className="text-[10px] tracking-[0.3em] text-primary">
-          (Q.S Ar-Rum:21)
-        </p>
       </div>
 
       <motion.div

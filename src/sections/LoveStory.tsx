@@ -134,7 +134,7 @@ export const LoveStory = () => {
       title: "Engagement",
       description:
         "Setelah perjalanan panjang, kami dipertemukan kembali dan memutuskan untuk melangkah bersama menuju masa depan.",
-      image: "/assets/images/lv4.jpeg",
+      image: "/assets/images/lv3.jpeg",
     },
     {
       year: "July 2026",

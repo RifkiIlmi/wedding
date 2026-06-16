@@ -6,11 +6,7 @@ const imagesDir = path.resolve(__dirname, "..", "public", "assets", "images");
 
 async function compress() {
   const files = [
-    { name: "lv1.jpeg", width: 600, quality: 80 },
-    { name: "lv2.jpeg", width: 600, quality: 80 },
-    { name: "lv3.jpeg", width: 600, quality: 80 },
-    { name: "lv4.jpeg", width: 600, quality: 80 },
-    { name: "lv5.jpeg", width: 600, quality: 80 },
+    { name: "lv5.jpeg", width: 600, quality: 80 }
   ];
 
   for (const file of files) {
