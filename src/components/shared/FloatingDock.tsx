@@ -196,7 +196,7 @@ export const FloatingDock = () => {
       >
         <div
           ref={containerRef}
-          className="no-scrollbar flex items-center gap-1.5 px-3 py-1.5 overflow-x-auto scroll-smooth w-full rounded-full"
+          className="relative no-scrollbar flex items-center gap-1.5 px-3 py-1.5 overflow-x-auto scroll-smooth w-full rounded-full"
           style={{
             WebkitOverflowScrolling: "touch",
             maskImage:

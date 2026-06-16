@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { GoldSparkle } from "@/components/shared/GoldSparkle";
 
@@ -71,10 +72,13 @@ export const Countdown = ({ targetDate }: { targetDate: string }) => {
             animation: kenBurns 20s ease-in-out infinite alternate;
           }
         `}} />
-        <img
+        <Image
           src="/assets/images/count.jpg"
           alt="Wedding Pre-wedding"
-          className="w-full h-full object-cover filter grayscale contrast-[1.1] brightness-[0.35] animate-ken-burns"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover filter grayscale contrast-[1.1] brightness-[0.35] animate-ken-burns"
         />
         {/* Vignette Overlay */}
         <div className="absolute inset-0 bg-radial-to-c from-transparent via-black/20 to-black/60 pointer-events-none" />

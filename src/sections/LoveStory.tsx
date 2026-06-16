@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { FloatingParticles } from "@/components/shared/FloatingParticles";
 import { GoldSparkle } from "@/components/shared/GoldSparkle";
@@ -48,10 +49,12 @@ const StoryItem = ({ year, title, description, image, index }: StoryItemProps) =
 
         {/* Image Container */}
         <div className="relative w-full h-56 md:h-64 rounded-2xl overflow-hidden shadow-inner shrink-0 bg-dark/5">
-          <img
+          <Image
             src={image}
             alt={title}
-            className={`w-full h-full object-cover transition-all duration-700 ease-in-out transform group-hover:scale-105 ${isInCenter ? "grayscale-0" : "grayscale"
+            fill
+            sizes="(max-width: 768px) 100vw, 40vw"
+            className={`object-cover transition-all duration-700 ease-in-out transform group-hover:scale-105 ${isInCenter ? "grayscale-0" : "grayscale"
               } md:grayscale md:group-hover:grayscale-0`}
           />
           <div className="absolute inset-0 ring-1 ring-inset ring-gold/20 rounded-2xl pointer-events-none" />

@@ -5,17 +5,19 @@ import { motion, useInView } from "framer-motion";
 import { OpeningScreen } from "@/components/invitation/OpeningScreen";
 import { MusicPlayer } from "@/components/shared/MusicPlayer";
 import { FloatingDock } from "@/components/shared/FloatingDock";
-import { Hero } from "@/sections/Hero";
-import { BrideGroom } from "@/sections/BrideGroom";
-import { Countdown } from "@/sections/Countdown";
-import { EventDetails } from "@/sections/EventDetails";
-import { LoveStory } from "@/sections/LoveStory";
-import { Gallery } from "@/sections/Gallery";
-import { RSVP } from "@/sections/RSVP";
-import { DigitalGift } from "@/sections/DigitalGift";
-import { Wishes } from "@/sections/Wishes";
-import { FAQ } from "@/sections/FAQ";
-import { Footer } from "@/sections/Footer";
+import dynamic from "next/dynamic";
+
+const Hero = dynamic(() => import("@/sections/Hero").then((mod) => mod.Hero), { ssr: false });
+const BrideGroom = dynamic(() => import("@/sections/BrideGroom").then((mod) => mod.BrideGroom), { ssr: false });
+const Countdown = dynamic(() => import("@/sections/Countdown").then((mod) => mod.Countdown), { ssr: false });
+const EventDetails = dynamic(() => import("@/sections/EventDetails").then((mod) => mod.EventDetails), { ssr: false });
+const LoveStory = dynamic(() => import("@/sections/LoveStory").then((mod) => mod.LoveStory), { ssr: false });
+const Gallery = dynamic(() => import("@/sections/Gallery").then((mod) => mod.Gallery), { ssr: false });
+const RSVP = dynamic(() => import("@/sections/RSVP").then((mod) => mod.RSVP), { ssr: false });
+const DigitalGift = dynamic(() => import("@/sections/DigitalGift").then((mod) => mod.DigitalGift), { ssr: false });
+const Wishes = dynamic(() => import("@/sections/Wishes").then((mod) => mod.Wishes), { ssr: false });
+const FAQ = dynamic(() => import("@/sections/FAQ").then((mod) => mod.FAQ), { ssr: false });
+const Footer = dynamic(() => import("@/sections/Footer").then((mod) => mod.Footer), { ssr: false });
 
 function LazySection({ children }: { children: React.ReactNode }) {
   const ref = useRef(null);

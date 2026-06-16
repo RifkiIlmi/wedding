@@ -107,7 +107,7 @@ export const MusicPlayer = ({ isPlaying: initialPlay = false, url }: { isPlaying
         ref={audioRef}
         src={url}
         loop
-        preload="auto"
+        preload="none"
         className="hidden"
       />
 

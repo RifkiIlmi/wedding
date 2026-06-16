@@ -50,11 +50,15 @@ const PersonCard = ({
     <img
       src="/assets/graphics/Gold-Flower.svg"
       alt="gold flower decor"
+      width={112}
+      height={112}
       className="absolute -top-10 -right-10 w-28 h-28 pointer-events-none opacity-90 animate-float z-20 drop-shadow-md"
     />
     <img
       src="/assets/graphics/Gold-Flower.svg"
       alt="gold flower decor"
+      width={96}
+      height={96}
       className="absolute -bottom-8 -left-8 w-24 h-24 pointer-events-none opacity-90 animate-float delay-300 z-20 rotate-180 drop-shadow-md"
     />
     <div className="absolute inset-x-8 -top-6 h-14 bg-linear-to-b from-gold/20 to-transparent rounded-b-full opacity-70 pointer-events-none" />
@@ -71,8 +75,8 @@ const PersonCard = ({
           src={image}
           alt={name}
           fill
+          sizes="256px"
           className="object-cover transition-transform duration-700 group-hover:scale-110"
-          unoptimized
         />
         {/* Subtle golden overlay on hover */}
         <div className="absolute inset-0 bg-linear-to-t from-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -137,7 +141,7 @@ export const BrideGroom = () => {
 
       {/* Decorative ornamental divider top */}
       <div className="absolute top-[-45px] left-0 right-0 flex justify-center pointer-events-none z-10 h-24 items-center overflow-hidden">
-        <img src="/assets/graphics/Wedding-Invitation-separator.svg" alt="separator top" className="w-[400px] max-w-none opacity-80 rotate-90" />
+        <img src="/assets/graphics/Wedding-Invitation-separator.svg" alt="separator top" width={400} height={40} className="w-[400px] max-w-none opacity-80 rotate-90" />
       </div>
 
       {/* Background pattern */}
@@ -157,6 +161,8 @@ export const BrideGroom = () => {
             <img
               src="/assets/graphics/Decorative-Mandala.svg"
               alt="floral accent"
+              width={600}
+              height={600}
               className="w-[600px] max-w-none opacity-80 animate-[spin_20s_linear_infinite] will-change-transform transform-gpu"
             />
           </div>
@@ -211,7 +217,7 @@ export const BrideGroom = () => {
 
       {/* Decorative ornamental divider bottom */}
       <div className="absolute bottom-[-30px] left-0 right-0 flex justify-center pointer-events-none z-10 h-24 items-center overflow-hidden">
-        <img src="/assets/graphics/Wedding-Invitation-separator.svg" alt="separator bottom" className="w-[400px] max-w-none opacity-80 rotate-90" />
+        <img src="/assets/graphics/Wedding-Invitation-separator.svg" alt="separator bottom" width={400} height={40} className="w-[400px] max-w-none opacity-80 rotate-90" />
       </div>
     </section>
   );

@@ -101,6 +101,8 @@ export const Gallery = () => {
               layoutId={`gallery-img-${mainImg}`}
               src={`${mainImg}&w=800&q=80&fm=webp`}
               alt="Momen Utama"
+              width={800}
+              height={600}
               className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
               loading="lazy"
             />
@@ -122,6 +124,8 @@ export const Gallery = () => {
               layoutId={`gallery-img-${smallImg1}`}
               src={`${smallImg1}&w=300&q=75&fm=webp`}
               alt="Momen 2"
+              width={300}
+              height={300}
               className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
               loading="lazy"
             />
@@ -137,6 +141,8 @@ export const Gallery = () => {
               layoutId={`gallery-img-${smallImg2}`}
               src={`${smallImg2}&w=300&q=75&fm=webp`}
               alt="Momen 3"
+              width={300}
+              height={300}
               className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
               loading="lazy"
             />
@@ -152,6 +158,8 @@ export const Gallery = () => {
               layoutId={`gallery-img-${smallImg3}`}
               src={`${smallImg3}&w=300&q=75&fm=webp`}
               alt="Momen 4"
+              width={300}
+              height={300}
               className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
               loading="lazy"
             />
@@ -167,6 +175,8 @@ export const Gallery = () => {
               layoutId={`gallery-img-${smallImg4}`}
               src={`${smallImg4}&w=300&q=75&fm=webp`}
               alt="Momen 5"
+              width={300}
+              height={300}
               className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
               loading="lazy"
             />
@@ -225,6 +235,8 @@ export const Gallery = () => {
               <img
                 src={`${displayImages[photoIndex]}&w=1200&q=85&fm=webp`}
                 alt={`Detail Momen ${photoIndex + 1}`}
+                width={1200}
+                height={800}
                 className="max-w-full max-h-[80vh] rounded-xl object-contain shadow-2xl border border-white/10"
                 loading="lazy"
               />

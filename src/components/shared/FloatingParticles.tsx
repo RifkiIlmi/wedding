@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface FloatingParticlesProps {
   count?: number
@@ -33,9 +33,14 @@ export const FloatingParticles = ({
   opacity = 0.6,
   className = '',
 }: FloatingParticlesProps) => {
+  const [isMobile, setIsMobile] = useState(false)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animationRef = useRef<number>(0)
   const particlesRef = useRef<Particle[]>([])
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768)
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -144,6 +149,8 @@ export const FloatingParticles = ({
       cancelAnimationFrame(animationRef.current)
     }
   }, [count, color, speed, maxSize, minSize, opacity])
+
+  if (isMobile) return null
 
   return (
     <canvas
