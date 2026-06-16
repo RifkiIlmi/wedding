@@ -14,6 +14,7 @@ const inter = Inter({
 });
 
 const rjLogo = "/assets/graphics/RJ-Logo-Fix.svg";
+const openingImage = "/assets/images/opening.jpeg";
 const rjIconVersion = "rj-logo-fill";
 
 export const viewport: Viewport = {
@@ -72,10 +73,10 @@ export const metadata: Metadata = {
     url: "https://wedding.example.com",
     images: [
       {
-        url: rjLogo,
-        width: 1440,
-        height: 810,
-        alt: "Rifki & Jeni Wedding Logo",
+        url: openingImage,
+        width: 1200,
+        height: 800,
+        alt: "The Wedding of Rifki & Jeni",
       },
     ],
   },
@@ -83,7 +84,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "The Wedding of Rifki & Jeni",
     description: "Join us in celebrating our special day.",
-    images: [rjLogo],
+    images: [openingImage],
   },
 };
 

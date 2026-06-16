@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Music, Play } from "lucide-react";
@@ -29,15 +30,27 @@ export const OpeningScreen = ({
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, y: "-100%" }}
           transition={{ duration: 0.8, ease: [0.43, 0.13, 0.23, 0.96] }}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-primary text-dark overflow-hidden will-change-transform transform-gpu"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-dark text-primary overflow-hidden will-change-transform transform-gpu"
         >
+          {/* Background Image */}
+          <div className="absolute inset-0 z-0 overflow-hidden">
+            <Image
+              src="/assets/images/opening.jpeg"
+              alt="Wedding Background"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover brightness-[0.35]"
+            />
+          </div>
+
           {/* Floating Particles */}
           <FloatingParticles count={30} speed={0.2} opacity={0.3} maxSize={2} />
 
           {/* PERUBAHAN DI SINI: Top-middle logo */}
           {/* Menggunakan inset-x-0 mx-auto untuk menengahkan secara horizontal */}
           <div className="absolute top-16 inset-x-0 mx-auto z-20 flex justify-center">
-            <img
+            <Image
               src="/assets/graphics/RJ-Logo-Fix.svg"
               alt="Rifki & Jeni logo"
               width={128}
@@ -93,26 +106,26 @@ export const OpeningScreen = ({
               initial={{ opacity: 0, letterSpacing: "0.1em" }}
               animate={{ opacity: 1, letterSpacing: "0.3em" }}
               transition={{ delay: 0.3, duration: 1.5 }}
-              className="font-sans uppercase text-xs mb-8 text-gold-dark"
+              className="font-sans uppercase text-xs mb-8 text-gold"
             >
               Undangan Pernikahan
             </motion.p>
 
-            <h1 className="font-serif text-5xl md:text-7xl mb-6 text-dark leading-tight">
+            <h1 className="font-serif text-5xl md:text-7xl mb-6 text-primary leading-tight">
               Rifki <span className="text-shimmer-gold">&</span> Jeni
             </h1>
 
             <div className="w-24 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent mx-auto mb-8" />
 
             <div className="mt-12 mb-8">
-              <p className="font-sans text-sm tracking-widest text-dark/60 mb-2 italic">
+              <p className="font-sans text-sm tracking-widest text-primary/70 mb-2 italic">
                 Kepada Yth. Bapak/Ibu/Saudara/i
               </p>
               <motion.h2
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1, duration: 0.8 }}
-                className="font-serif text-3xl md:text-4xl text-dark"
+                className="font-serif text-3xl md:text-4xl text-primary"
               >
                 {guestName}
               </motion.h2>
@@ -143,7 +156,7 @@ export const OpeningScreen = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 1 }}
-            className="absolute bottom-10 flex items-center gap-2 text-dark/40 text-xs tracking-widest font-sans uppercase z-10"
+            className="absolute bottom-10 flex items-center gap-2 text-primary/50 text-xs tracking-widest font-sans uppercase z-10"
           >
             <Music className="w-3 h-3" />
             Dengan musik latar
