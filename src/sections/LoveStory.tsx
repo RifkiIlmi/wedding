@@ -113,35 +113,35 @@ export const LoveStory = () => {
       title: "First Meeting",
       description:
         "Kami pertama kali bertemu di organisasi kampus Puzzle Research Data Technology. Sebuah pertemuan sederhana yang menjadi awal kisah kami.",
-      image: "/assets/images/lv1.jpeg",
+      image: "/assets/images/c1.jpeg",
     },
     {
       year: "2022",
       title: "A Beautiful Beginning",
       description:
         "Takdir kembali mempertemukan kami melalui kantor yang berdekatan di Jalan Sudirman, Pekanbaru, Riau. Dari makan siang bersama hingga berbagi cerita, kedekatan itu tumbuh menjadi cinta.",
-      image: "/assets/images/lv2.jpeg",
+      image: "/assets/images/c2.jpeg",
     },
     {
       year: "2024",
       title: "Growing Through Distance",
       description:
         "Jarak dan kesibukan membawa kami menempuh jalan masing-masing. Meski sempat kehilangan kontak, takdir masih menyimpan cerita untuk kami.",
-      image: "/assets/images/lv3.jpeg",
+      image: "/assets/images/c3.jpeg",
     },
     {
       year: "February 2026",
       title: "Engagement",
       description:
         "Setelah perjalanan panjang, kami dipertemukan kembali dan memutuskan untuk melangkah bersama menuju masa depan.",
-      image: "/assets/images/lv3.jpeg",
+      image: "/assets/images/c4.jpeg",
     },
     {
       year: "July 2026",
       title: "Wedding Day",
       description:
         "Dengan penuh syukur, kami siap mengikat janji suci pernikahan dan memulai babak baru sebagai pasangan seumur hidup.",
-      image: "/assets/images/lv5.jpeg",
+      image: "/assets/images/c55.jpeg",
     },
   ];
 
