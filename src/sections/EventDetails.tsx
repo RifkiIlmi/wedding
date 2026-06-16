@@ -95,14 +95,14 @@ END:VCALENDAR`;
       <div className="space-y-8 mb-16 w-full">
         <div className="flex flex-col items-center gap-3">
           <p className="font-sans text-xl md:text-2xl font-light text-dark/80 tracking-widest">{event.date}</p>
-          <p className="font-sans text-sm md:text-base font-light text-dark/50 tracking-[0.2em]">{event.time}</p>
+          <p className="font-sans text-sm md:text-base font-light text-dark/65 tracking-[0.2em]">{event.time}</p>
         </div>
 
         <div className="w-px h-12 bg-linear-to-b from-transparent via-gold/40 to-transparent mx-auto my-8" />
 
         <div className="flex flex-col items-center gap-3">
           <p className="font-serif text-2xl text-dark tracking-wide">{event.venue}</p>
-          <p className="font-sans text-sm font-light text-dark/50 tracking-wider max-w-sm leading-relaxed">{event.address}</p>
+          <p className="font-sans text-sm font-light text-dark/65 tracking-wider max-w-sm leading-relaxed">{event.address}</p>
         </div>
       </div>
 

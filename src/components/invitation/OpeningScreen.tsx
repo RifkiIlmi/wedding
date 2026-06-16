@@ -108,7 +108,7 @@ export const OpeningScreen = ({
               transition={{ delay: 0.3, duration: 1.5 }}
               className="font-sans uppercase text-xs mb-8 text-gold"
             >
-              Undangan Pernikahan
+              The Wedding Of
             </motion.p>
 
             <h1 className="font-serif text-5xl md:text-7xl mb-6 text-primary leading-tight">
@@ -156,10 +156,10 @@ export const OpeningScreen = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 1 }}
-            className="absolute bottom-10 flex items-center gap-2 text-primary/50 text-xs tracking-widest font-sans uppercase z-10"
+            className="absolute bottom-10 flex items-center gap-2 text-primary/70 text-xs tracking-widest font-sans z-10"
           >
             <Music className="w-3 h-3" />
-            Dengan musik latar
+            <i>PayungTeduh - Akad </i>
           </motion.div>
         </motion.div>
       )}

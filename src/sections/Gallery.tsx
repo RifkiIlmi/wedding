@@ -9,7 +9,7 @@ const images = [
   "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop",
   "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop",
   "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1519225495810-758b63300051?auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop",
   "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop",
   "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop",
   "https://images.unsplash.com/photo-1507504038482-7621c4b8e05a?auto=format&fit=crop",
@@ -66,7 +66,7 @@ export const Gallery = () => {
   const smallImg4 = displayImages[4];
 
   return (
-    <section id="gallery" className="relative py-32 md:py-48 bg-secondary/20 overflow-hidden">
+    <section id="gallery" className="relative py-32 md:py-48 bg-dark overflow-hidden">
       <FloatingParticles
         count={20}
         color="#D4AF3780"
@@ -81,11 +81,11 @@ export const Gallery = () => {
         <div className="text-center mb-20 relative">
           <GoldSparkle size={22} className="absolute -top-4 left-12" />
           <GoldSparkle size={16} className="absolute top-8 right-16" />
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-dark mb-6 tracking-tight">
+          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl mb-6 tracking-tight text-shimmer-gold">
             Gallery
           </h2>
           <div className="w-24 h-px bg-gold mx-auto mb-8 shimmer-line" />
-          <p className="font-sans text-sm uppercase tracking-[0.3em] text-gold/60">
+          <p className="font-sans text-sm uppercase tracking-[0.3em] text-gold/80">
             Momen Bahagia
           </p>
         </div>

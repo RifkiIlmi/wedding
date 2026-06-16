@@ -140,21 +140,21 @@ export const Wishes = () => {
     switch (status) {
       case "attending":
         return (
-          <span className="inline-flex items-center gap-1.5 bg-amber-50/80 text-amber-700 border border-amber-200/40 text-[9px] uppercase font-semibold tracking-wider px-2 py-0.5 rounded-full">
-            <span className="w-1 h-1 rounded-full bg-amber-500 animate-pulse" />
+          <span className="inline-flex items-center gap-1.5 bg-amber-500/10 text-amber-300 border border-gold/20 text-[9px] uppercase font-semibold tracking-wider px-2 py-0.5 rounded-full">
+            <span className="w-1 h-1 rounded-full bg-amber-400 animate-pulse" />
             Hadir
           </span>
         );
       case "maybe":
         return (
-          <span className="inline-flex items-center gap-1.5 bg-orange-50/80 text-orange-700 border border-orange-200/40 text-[9px] uppercase font-semibold tracking-wider px-2 py-0.5 rounded-full">
+          <span className="inline-flex items-center gap-1.5 bg-orange-500/10 text-orange-300 border border-orange-500/20 text-[9px] uppercase font-semibold tracking-wider px-2 py-0.5 rounded-full">
             <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
             Ragu-ragu
           </span>
         );
       case "not_attending":
         return (
-          <span className="inline-flex items-center gap-1.5 bg-stone-50/80 text-stone-500 border border-stone-200/40 text-[9px] uppercase font-semibold tracking-wider px-2 py-0.5 rounded-full">
+          <span className="inline-flex items-center gap-1.5 bg-stone-500/10 text-stone-300 border border-stone-500/20 text-[9px] uppercase font-semibold tracking-wider px-2 py-0.5 rounded-full">
             <span className="w-1.5 h-1.5 rounded-full bg-stone-400" />
             Absen
           </span>
@@ -177,7 +177,7 @@ export const Wishes = () => {
   if (loading) return null;
 
   return (
-    <section id="wishes" className="relative py-32 md:py-48 bg-secondary/10 overflow-hidden">
+    <section id="wishes" className="relative py-32 md:py-48 bg-dark overflow-hidden">
       <FloatingParticles
         count={24}
         color="#D4AF3780"
@@ -197,11 +197,11 @@ export const Wishes = () => {
           <GoldSparkle size={20} className="absolute -top-4 left-12" />
           <GoldSparkle size={14} className="absolute top-6 right-14" />
           <div className="absolute left-1/2 top-10 h-2 w-2 rounded-full bg-gold/80 shadow-[0_0_14px_rgba(212,175,55,0.35)] animate-sparkle" />
-          <h2 className="font-serif text-5xl md:text-6xl text-dark mb-6 tracking-tight text-shimmer-gold">
+          <h2 className="font-serif text-5xl md:text-6xl text-primary mb-6 tracking-tight text-shimmer-gold">
             Ucapan & Doa
           </h2>
           <div className="w-24 h-px bg-gold mx-auto mb-8 shimmer-line" />
-          <p className="font-sans text-sm uppercase tracking-[0.3em] text-gold/60 italic">
+          <p className="font-sans text-sm uppercase tracking-[0.3em] text-gold/80 italic">
             Doa restu tulus dari keluarga & kerabat
           </p>
         </div>
@@ -229,15 +229,15 @@ export const Wishes = () => {
                       return (
                         <div
                           key={wish.id}
-                          className="flex flex-col items-center justify-between text-center bg-white/40 border border-gold/10 backdrop-blur-sm p-8 md:p-12 rounded-[32px] shadow-sm relative overflow-hidden flex-1 min-h-[280px]"
+                          className="flex flex-col items-center justify-between text-center bg-white/5 border border-gold/10 backdrop-blur-md p-8 md:p-12 rounded-[32px] shadow-sm relative overflow-hidden flex-1 min-h-[280px] holo-card"
                         >
                           {/* Storybook quote decoration */}
-                          <div className="absolute top-0 left-6 text-gold/5 font-serif text-[10rem] leading-none select-none pointer-events-none">
+                          <div className="absolute top-0 left-6 text-gold/10 font-serif text-[10rem] leading-none select-none pointer-events-none">
                             &ldquo;
                           </div>
 
                           <div className="flex-1 flex flex-col justify-center items-center z-10 w-full pt-8">
-                            <p className="font-serif text-lg md:text-xl text-dark/80 leading-relaxed italic break-words w-full max-w-md">
+                            <p className="font-serif text-lg md:text-xl text-primary/90 leading-relaxed italic break-words w-full max-w-md">
                               &ldquo;{cleanMessage}&rdquo;
                             </p>
                           </div>
@@ -245,10 +245,10 @@ export const Wishes = () => {
                           <div className="w-12 h-[1px] bg-gold/20 my-6 z-10" />
 
                           <div className="z-10">
-                            <h4 className="font-serif text-base md:text-lg text-gold-dark font-semibold tracking-wide">
+                            <h4 className="font-serif text-base md:text-lg text-gold font-semibold tracking-wide">
                               {wish.name}
                             </h4>
-                            <div className="flex items-center justify-center gap-2 mt-2 text-[10px] text-dark/40 font-sans tracking-widest uppercase">
+                            <div className="flex items-center justify-center gap-2 mt-2 text-[10px] text-primary/40 font-sans tracking-widest uppercase">
                               {getBadge(attendance)}
                               <span>•</span>
                               <span>{getRelativeTime(wish.created_at)}</span>

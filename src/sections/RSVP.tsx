@@ -180,7 +180,7 @@ export const RSVP = () => {
                         if (e.key === "Enter") handleVerify();
                       }}
                       placeholder="Masukkan nama Anda..."
-                      className="w-full bg-transparent text-center font-serif text-xl focus:outline-none placeholder:text-primary/25 text-primary py-1"
+                      className="w-full bg-transparent text-center font-serif text-xl focus:outline-none placeholder:text-primary/45 text-primary py-1"
                     />
                   </div>
                   {verificationError && (
@@ -268,7 +268,7 @@ export const RSVP = () => {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="Tuliskan ucapan selamat..."
-                      className="w-full bg-transparent text-center font-serif text-lg focus:outline-none placeholder:text-primary/20 text-primary py-1 pr-10 pl-10"
+                      className="w-full bg-transparent text-center font-serif text-lg focus:outline-none placeholder:text-primary/40 text-primary py-1 pr-10 pl-10"
                     />
                     <button
                       type="button"
