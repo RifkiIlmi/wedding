@@ -115,7 +115,7 @@ export default function Home() {
       {/* Global Music Player */}
       <MusicPlayer
         isPlaying={isOpened}
-        url="https://archive.org/download/payung-teduh-akad-official-music-video-payung-teduh-official/Payung%20Teduh%20-%20Akad%20%28Official%20Music%20Video%29%20-%20Payung%20Teduh%20Official.mp3"
+        url="/assets/audio/bg-music.mp3"
       />
     </main>
   );

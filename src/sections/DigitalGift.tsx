@@ -86,11 +86,11 @@ const CardFace = ({
       <Button
         variant="outline"
         size="sm"
-        className="w-full flex items-center justify-center gap-2 border-gold/30 text-dark/70 hover:bg-gold/5 hover:text-dark"
+        className="w-full h-auto py-2.5 px-3 flex items-center justify-center gap-2 border-gold/30 text-dark/70 hover:bg-gold/5 hover:text-dark whitespace-normal text-center text-[10px] sm:text-xs tracking-wider"
         onClick={onFlip}
       >
-        <RefreshCw className="w-3 h-3" />
-        {flipLabel}
+        <RefreshCw className="w-3 h-3 shrink-0" />
+        <span className="leading-tight">{flipLabel}</span>
       </Button>
     </div>
   </div>

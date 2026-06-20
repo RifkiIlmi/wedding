@@ -6,16 +6,16 @@ import { FloatingParticles } from "@/components/shared/FloatingParticles";
 import { GoldSparkle } from "@/components/shared/GoldSparkle";
 
 const images = [
-  "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1507504038482-7621c4b8e05a?auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop",
+  "/assets/images/g1.jpeg",
+  "/assets/images/g2.jpeg",
+  "/assets/images/g3.jpeg",
+  "/assets/images/g4.jpeg",
+  "/assets/images/g5.jpeg",
+  "/assets/images/g6.jpeg",
+  "/assets/images/g7.jpeg",
+  "/assets/images/g8.jpeg",
+  "/assets/images/g9.jpeg",
+  "/assets/images/g10.jpeg",
 ];
 
 export const Gallery = () => {
@@ -91,7 +91,7 @@ export const Gallery = () => {
         </div>
 
         {/* 5-Card Interactive Collage Picker */}
-        <div className="grid grid-cols-4 md:grid-cols-5 md:grid-rows-2 gap-2 md:gap-4 h-auto md:h-[550px] overflow-hidden rounded-2xl md:rounded-3xl">
+        <div className="relative grid grid-cols-4 md:grid-cols-5 md:grid-rows-2 gap-2 md:gap-4 h-auto md:h-[550px] overflow-hidden rounded-2xl md:rounded-3xl">
           {/* Card 1: Main Photo */}
           <div
             onClick={() => openLightbox(0)}
@@ -99,7 +99,7 @@ export const Gallery = () => {
           >
             <motion.img
               layoutId={`gallery-img-${mainImg}`}
-              src={`${mainImg}&w=800&q=80&fm=webp`}
+              src={`${mainImg}?w=800&q=80&fm=webp`}
               alt="Momen Utama"
               width={800}
               height={600}
@@ -122,7 +122,7 @@ export const Gallery = () => {
           >
             <motion.img
               layoutId={`gallery-img-${smallImg1}`}
-              src={`${smallImg1}&w=300&q=75&fm=webp`}
+              src={`${smallImg1}?w=300&q=75&fm=webp`}
               alt="Momen 2"
               width={300}
               height={300}
@@ -139,7 +139,7 @@ export const Gallery = () => {
           >
             <motion.img
               layoutId={`gallery-img-${smallImg2}`}
-              src={`${smallImg2}&w=300&q=75&fm=webp`}
+              src={`${smallImg2}?w=300&q=75&fm=webp`}
               alt="Momen 3"
               width={300}
               height={300}
@@ -156,7 +156,7 @@ export const Gallery = () => {
           >
             <motion.img
               layoutId={`gallery-img-${smallImg3}`}
-              src={`${smallImg3}&w=300&q=75&fm=webp`}
+              src={`${smallImg3}?w=300&q=75&fm=webp`}
               alt="Momen 4"
               width={300}
               height={300}
@@ -173,7 +173,7 @@ export const Gallery = () => {
           >
             <motion.img
               layoutId={`gallery-img-${smallImg4}`}
-              src={`${smallImg4}&w=300&q=75&fm=webp`}
+              src={`${smallImg4}?w=300&q=75&fm=webp`}
               alt="Momen 5"
               width={300}
               height={300}
@@ -233,7 +233,7 @@ export const Gallery = () => {
               className="relative max-w-[90vw] max-h-[80vh] flex items-center justify-center select-none"
             >
               <img
-                src={`${displayImages[photoIndex]}&w=1200&q=85&fm=webp`}
+                src={`${displayImages[photoIndex]}?w=1200&q=85&fm=webp`}
                 alt={`Detail Momen ${photoIndex + 1}`}
                 width={1200}
                 height={800}

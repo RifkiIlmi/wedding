@@ -142,7 +142,7 @@ export const BrideGroom = () => {
 
       {/* Decorative ornamental divider top */}
       <div className="absolute top-[-45px] left-0 right-0 flex justify-center pointer-events-none z-10 h-24 items-center overflow-hidden">
-        <Image src="/assets/graphics/Wedding-Invitation-separator.svg" alt="separator top" width={400} height={40} className="w-[400px] max-w-none opacity-80 rotate-90" />
+        <Image src="/assets/graphics/Wedding-Invitation-separator.svg" alt="separator top" width={400} height={40} className="w-[400px] h-auto max-w-none opacity-80 rotate-90" />
       </div>
 
       {/* Background pattern */}
@@ -154,19 +154,11 @@ export const BrideGroom = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             initial={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 1 }}
-            className="font-serif text-3xl md:text-4xl text-dark mb-6 tracking-[0.04em]"
+            className="font-serif text-3xl md:text-4xl text-shimmer-gold mb-6 tracking-[0.04em]"
           >
             بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
           </motion.h2>
-          <div className="flex justify-center mb-6 pointer-events-none h-30 items-center overflow-hidden">
-            <Image
-              src="/assets/graphics/RJ-Logo-Fix.svg"
-              alt="floral accent"
-              width={300}
-              height={300}
-              className="w-[100px] max-w-none opacity-80 animate-[spin_20s_linear_infinite] will-change-transform transform-gpu"
-            />
-          </div>
+
           <p className="max-w-2xl mx-auto font-sans text-dark/70 leading-relaxed tracking-wide">
             &quot;Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan
             pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung
@@ -224,7 +216,7 @@ export const BrideGroom = () => {
 
       {/* Decorative ornamental divider bottom */}
       <div className="absolute bottom-[-30px] left-0 right-0 flex justify-center pointer-events-none z-10 h-24 items-center overflow-hidden">
-        <Image src="/assets/graphics/Wedding-Invitation-separator.svg" alt="separator bottom" width={400} height={40} className="w-[400px] max-w-none opacity-80 rotate-90" />
+        <Image src="/assets/graphics/Wedding-Invitation-separator.svg" alt="separator bottom" width={400} height={40} className="w-[400px] h-auto max-w-none opacity-80 rotate-90" />
       </div>
     </section>
   );
