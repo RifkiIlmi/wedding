@@ -160,7 +160,7 @@ export const OpeningScreen = ({
             className="absolute bottom-10 flex items-center gap-2 text-primary/70 text-xs tracking-widest font-sans z-10"
           >
             <Music className="w-3 h-3" />
-            <i>PayungTeduh - Akad </i>
+            <i>Instrumental Music </i>
           </motion.div>
         </motion.div>
       )}
