@@ -119,7 +119,7 @@ export const LoveStory = () => {
       year: "2022",
       title: "A Beautiful Beginning",
       description:
-        "Takdir kembali mempertemukan kami melalui kantor yang berdekatan di Jalan Sudirman, Pekanbaru, Riau. Dari makan siang bersama hingga berbagi cerita, kedekatan itu tumbuh menjadi cinta.",
+        "Takdir kembali mempertemukan kami melalui kantor yang berdekatan di Jalan Sudirman, Pekanbaru, Riau. Dari saat itulah saling berbagi cerita dan kebersamaan, hingga kedekatan itu tumbuh menjadi cinta.",
       image: "/assets/images/c2.jpeg",
     },
     {
