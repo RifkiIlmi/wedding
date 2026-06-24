@@ -115,7 +115,7 @@ export default function Home() {
       {/* Global Music Player */}
       <MusicPlayer
         isPlaying={isOpened}
-        url="/assets/audio/bg-music.mp3"
+        url="/assets/audio/bg-music.m4a"
       />
     </main>
   );
