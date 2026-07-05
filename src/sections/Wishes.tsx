@@ -20,7 +20,7 @@ export const Wishes = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
 
-  const ITEMS_TO_LOAD = 15;
+  const ITEMS_TO_LOAD = 50;
 
   const fetchWishes = async () => {
     const { data, error } = await supabase
@@ -218,11 +218,10 @@ export const Wishes = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -15 }}
                     transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
-                    className={`grid gap-8 w-full ${
-                      getVisibleWishes().length === 2
+                    className={`grid gap-8 w-full ${getVisibleWishes().length === 2
                         ? "grid-cols-1 md:grid-cols-2"
                         : "grid-cols-1 max-w-xl mx-auto"
-                    }`}
+                      }`}
                   >
                     {getVisibleWishes().map((wish) => {
                       const { cleanMessage, attendance } = parseMessage(wish);
@@ -278,9 +277,8 @@ export const Wishes = () => {
                       <button
                         key={idx}
                         onClick={() => handleDotClick(idx)}
-                        className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                          currentIndex === idx ? "bg-gold w-3" : "bg-gold/20 hover:bg-gold/40"
-                        }`}
+                        className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${currentIndex === idx ? "bg-gold w-3" : "bg-gold/20 hover:bg-gold/40"
+                          }`}
                         aria-label={`Go to slide ${idx + 1}`}
                       />
                     ))}
